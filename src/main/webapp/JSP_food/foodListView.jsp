@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>음식 목록</title>
 <script type="text/javascript" src="./js/foodView.js"></script> 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <style type="text/css">
 
 	.dietContent_title {
@@ -36,7 +37,7 @@
 </div>
    <br/>
    <!-- 4 -->
-   <form>
+   <form id="myForm" action="foodWrite.jsp" method="POST">
    <table  width="1000" align="center" border="1" cellpadding="7" cellspacing="0">
 	   <tr>
 	      <th class="text-center">
@@ -44,6 +45,7 @@
 	      </th>
 	      <th class="text-center">
 	         <label for="memo">음식이름</label>
+	          <input type="text" id="foodName" name="foodName" style="width: 95%;" />
 	      </th>
 	      <th class="text-center">
 	         <label for="memo">칼로리(kcal)</label>

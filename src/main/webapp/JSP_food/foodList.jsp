@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>음식 넣기</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <style type="text/css">
 
 	.dietContent_title {
@@ -55,8 +56,6 @@
 	request.setAttribute("foodList", foodList);
 	request.setAttribute("currentPage", currentPage);
 	pageContext.forward("foodListView.jsp");
-	out.println(foodList);
-	out.println("currentPage: " + currentPage);
 %>
 
 </body>

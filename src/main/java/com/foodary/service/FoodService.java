@@ -20,20 +20,18 @@ public class FoodService {
 	    }
 	    
 	    public FoodList selectList(int currentPage) {
-			System.out.println("FreeboardService의 selectList()");
+			System.out.println("FoodService의 selectList()");
 			SqlSession mapper = MySession.getSession();
 			FoodDAO dao = FoodDAO.getInstance();
 			
 			int pageSize = 10;
 			int totalCount = dao.selectCount(mapper);
-			System.out.println(totalCount);
 			
 			FoodList foodList = new FoodList(pageSize, totalCount, currentPage);
 			HashMap<String, Integer> hmap = new HashMap<>();
 			hmap.put("startNo", foodList.getStartNo());
 			hmap.put("endNo", foodList.getEndNo());
 			foodList.setList(dao.selectList(mapper, hmap));
-			System.out.println(foodList);
 			
 			mapper.close();
 			return foodList;
