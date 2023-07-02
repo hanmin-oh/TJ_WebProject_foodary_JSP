@@ -8,7 +8,8 @@
 	
 	<typeAliases>
 		<!-- 별명 설정 (리스트)-->
-		<typeAlias type="com.foodary.vo.FoodVO" alias="vo" />
+		<typeAlias type="com.foodary.vo.FoodVO" alias="fvo" />
+		<typeAlias type="com.foodary.vo.UserRegisterVO" alias="rvo" />
 	</typeAliases>
 	
 	<environments default="development">
@@ -26,6 +27,7 @@
 	<mappers>
 		<!-- 실행할 sql 명령이 저장된 파일의 위치(리스트) -->
 		<mapper resource="com/foodary/mybatis/food.xml" />
+		<mapper resource="com/foodary/mybatis/userRegister.xml" />
 	</mappers>
 	
 </configuration>

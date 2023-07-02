@@ -7,16 +7,16 @@ function checkAgreement() {
     alert('안내 사항에 동의하셔야 합니다.');
   }
 }
+
 //	회원 탈퇴 시 비밀번호가 맞으면 넘어가는 함수
 function unregisterChk() {
 	let password = $('#password').val();
 	let passwordChk = $('#passwordChk').val();
-	console.log(password);
-	console.log(passwordChk);
 	if(password != passwordChk) {
 		 alert('비밀번호가 일치하지 않습니다.');
 	} else {
 		location.href = 'unregisterChk2.jsp';
+	
 	}
 }
 

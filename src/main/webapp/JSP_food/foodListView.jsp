@@ -45,7 +45,6 @@
 	      </th>
 	      <th class="text-center">
 	         <label for="memo">음식이름</label>
-	          <input type="text" id="foodName" name="foodName" style="width: 95%;" />
 	      </th>
 	      <th class="text-center">
 	         <label for="memo">칼로리(kcal)</label>

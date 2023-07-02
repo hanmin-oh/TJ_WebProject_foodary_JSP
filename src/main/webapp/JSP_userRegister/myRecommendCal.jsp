@@ -13,15 +13,21 @@
 
 </style>
 </head>
+<script type="text/javascript" src="./js/updateMyCal.js" defer="defer"></script>
 <body>
 
 <h2>마이페이지 - 권장 영양소</h2>
-<form method="post">
+<form method="post" name="updateMyCal()">
 	<div>
-	키: <input type="text" name="height" style="width: 50px;">&nbsp;cm
-	체중: <input type="text" name="weight" style="width: 50px;">&nbsp;kg
-	나이: <input type="text" name="age" style="width: 50px;" readonly="readonly"> <!-- 수정 불가 -->
-	
+	키: <input id="height" type="text" name="height" style="width: 50px;">&nbsp;cm
+	체중: <input id="currentWeight" type="text" name="currentWeight" style="width: 50px;">&nbsp;kg
+	나이: <input id="age" type="text" name="age" style="width: 50px;"/>&nbsp;&nbsp;
+	<input 
+			type="button" 
+			value="수정하기"
+			name="updateBtn"
+			onclick="updateMyCal();"/>
+			
 	<br/><label><br/>
 		Mode: <input id="general" type="radio" name="general" checked="checked"/>일반
 			  <input id="diet" type="radio" name="diet"/>다이어트
@@ -60,12 +66,6 @@
 			</td>
 		</tr>
 		
-		
- 	 <tr>
-   		 <td colspan="5" align="center">
-      		<input type="submit" value="정보 수정"/> 
-   		 </td>
- 	 </tr>
 </table>
 	
 

@@ -9,7 +9,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script> 
+<!--   <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script>  -->
   <script type="text/javascript" src="./js/foodView.js" defer="defer"></script> 
 <style>
 	.dietContent_title {
@@ -35,11 +35,12 @@
 </style>
 </head>
 <body>
+
 <%
-    String data2 = request.getParameter("foodName");
-    // 다른 데이터도 필요한 경우에는 추가로 받아옵니다.
-    out.println(data2);
+  String data2 = request.getParameter("data2");
+  // data2를 원하는 위치에 출력하거나 사용합니다.
 %>
+
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
@@ -50,7 +51,7 @@
 	      <td colspan="2" class="text-center">
 	         <label for="ateDate">일시</label>
 	      </td>
-	      <td colspan="11">
+	      <td colspan="12">
 	         <input type="text" id="ateDate" name="ateDate" style="width: 98%; height: 90%;"/>
 		      </td>
 		   </tr>
@@ -59,22 +60,19 @@
 	      <td colspan="3" class="text-center" style="font-size: 13px;">
 	         <label for="food">음식 검색</label>
 	      </td>
-	      <td colspan="1" align="center">
-	         <input type="text" name="food"/>      
+	      <td colspan="6" align="center">
+	         <input type="text" name="food" style="width:95%;"/>      
 	      </td>
 	      <td colspan="2" align="center">
 		      <button  type="button" onclick="location.href='./foodList.jsp'">검색</button> 
 	      </td>
-	      <td colspan="1" class="text-center">
-	         <label for="food">직접 넣기</label>
-	      </td>
-	      <td colspan="6" align="center">
-	         <input type="text" name="food"/>      
-	      </td>
-	      <td colspan="1" align="center">
-	          <button  type="button" onclick="location.href='./foodListDirect.jsp'">선택</button> 
+	      <td colspan="3" align="center">
+	          <button  type="button" onclick="foodPlus()">음식추가</button> 
 	      </td>
 	   </tr>
+	   </table>
+	   <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
+	   <tbody id="tableBody">
      <tr>
       <td colspan="2" class="text-center">
          <label for="foodName">음식이름</label>
@@ -82,7 +80,8 @@
       
       <td colspan="2" class="text-center">
 		<!-- <h5 id="foodName" style="color: red; font-weight: bold;"></h5> -->
-    	 <input type="text" id="foodName" name="foodName" style="width: 95%;" /> 
+    	 <!-- <input type="text" id="foodName" name="wfoodName" style="width: 95%;" />  -->
+    	   <input type="text" name="food" value="<%= data2 %>"/>   
       </td>
       
       <td colspan="1" class="text-center">
@@ -120,12 +119,15 @@
           <button  type="button" onclick="location.href='./foodListDirect.jsp'">확인</button> 
       </td>
    </tr>
+    </tbody>
+    </table>
+    <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
    <!-- 4 -->
    <tr>
       <td colspan="2" class="text-center">
          <label for="memo">메모</label>
       </td>
-      <td colspan="9">
+      <td colspan="12">
          <textarea 
             id="memo"
             rows="10" 
@@ -146,7 +148,7 @@
       <td colspan="3" class="text-center">
          <label for="totalcalorie">사진첨부</label>
       </td>
-      <td colspan="6" align="center">
+      <td colspan="10" align="center">
          <input type="text" id="province" name="province" placeholder="사진파일명" style="width: 95%;"/>   
       </td>
       <td align="center">
@@ -201,6 +203,7 @@
           <input type="button" value="저장" onclick="location.href='showDiet.jsp'"/>
        </td>
     </tr>
+   
    </table>
 </body>
 </html>

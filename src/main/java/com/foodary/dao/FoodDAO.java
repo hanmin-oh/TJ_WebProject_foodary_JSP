@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 
 import com.foodary.vo.FoodVO;
+import com.foodary.vo.UserRegisterVO;
 
 public class FoodDAO {
 	

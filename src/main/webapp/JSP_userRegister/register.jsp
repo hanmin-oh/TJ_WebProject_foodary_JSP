@@ -5,25 +5,27 @@
 <meta charset="UTF-8">
 <title>푸드어리 회원가입</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!-- <link rel="stylesheet" href="./css/bootstrap.css"/> -->
+<link rel="stylesheet" href="./css/bootstrap.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<!-- <script type="text/javascript" src="./js/jquery-3.7.0.js"></script>
-<script type="text/javascript" src="./js/bootstrap.js"></script> -->
+<script type="text/javascript" src="./js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
 <script type="text/javascript" src="./js/userRegister.js"></script> 
 </head>
 <body>
 
+
 <div>
-<form>
+<form action="registerOK.jsp" method="post">
    <table width="1000" border="1" border-bottom="none" cellpadding="5" cellspacing="0">
-      <thead>
-         <tr class="info">
-            <th colspan="3" style="text-align: center;">
-               <h3>회원 가입</h3>
-            </th>
-         </tr>
-      </thead>
-       <tr>
+		
+		<thead>
+			<tr class="info">
+				<th colspan="3" style="text-align: center;">
+					<h3>회원 가입</h3>
+				</th>
+			</tr>
+		</thead>
+		 <tr>
          <th>
             <label for="username">이름</label>
          </th>   
@@ -39,18 +41,18 @@
             <label><input id="id" type="text" name="id" autocomplete="off"/></label>
          </td>
          <td>
-            <input class="btn btn-primary" type="button" value="중복검사" onclick="idCheckFunction()"/> 
-         </td>
+         	<input class="btn btn-primary" type="button" value="중복검사" onclick="idCheckFunction()"/> 
+     	 </td>
       </tr>
       <tr>
-         <td colspan="3" style="text-align: center;">
-            <!-- 아이디 중복 검사 결과 메시지를 출력하는 영역 -->
-            <h5 id="idCheckMessage" style="color: purple; font-weight: bold;"></h5>
-            <!-- 에러 메시지 결과를 출력하는 영역 -->
-            <h5 id="errorMessage" style="color: red; font-weight: bold;">
-            </h5>
-         </td>
-     </tr>
+			<td colspan="3" style="text-align: center;">
+				<!-- 아이디 중복 검사 결과 메시지를 출력하는 영역 -->
+				<h5 id="idCheckMessage" style="color: purple; font-weight: bold;"></h5>
+				<!-- 에러 메시지 결과를 출력하는 영역 -->
+				<h5 id="errorMessage" style="color: red; font-weight: bold;">
+				</h5>
+			</td>
+	  </tr>
       <tr>
          <th>
             <label for="password">비밀번호</label>
@@ -74,11 +76,9 @@
       <tr>
          <th>
             <label for="email">이메일</label>
-         </th>
-         <td colspan="2">
-            <label>
-               <input id="email" type="email" name="email" autocomplete="off" style="width: 130px;"/>
-            </label>
+        </th>
+      	<td>
+            <label><input id="email" type="email" name="email" autocomplete="off"/></label>
          </td>
       </tr>
       <tr>
@@ -141,8 +141,8 @@
       </tr>
       <tr>
          <td colspan="2" align="center">
-            <input class="btn btn-primary" type="button" value="회원가입" onclick="userRegister()"/> 
-            <input class="btn btn-primary" type="reset" value="다시쓰기"/> 
+	         <button class="btn btn-primary" type="submit" value="회원가입"></button>
+	         <input class="btn btn-primary" type="reset" value="다시쓰기"/> 
          </td>
       </tr>
    </table>
@@ -153,34 +153,34 @@
 </div>
 
 <div id="messageModal" class="modal fade" role="dialog" aria-hidden="true">
-   <div class="vertical-alignment-helper">
-      <div class="modal-dialog vertical-align-center">
-         <!-- 모달 창의 종류(색상)를 설정한다. -->
-         <!-- messageCheck라는 id를 추가하고 class를 제거한다. -->
-         <div id="messageCheck">
-            <!-- 헤더 -->
-            <div class="modal-header panel-heading">
-               <button class="close" type="button" data-dismiss="modal">
-                  <span aria-hidden="true">&times;</span>
-                  <span class="sr-only">Close</span>
-               </button>
-               <!-- messageType이라는 id를 추가한다. -->
-               <h4 id="messageType" class="modal-title">
-                  <%-- ${messageType} --%>
-               </h4>
-            </div>
-            <!-- 바디 -->
-            <!-- messageContent이라는 id를 추가한다. -->
-            <div id="messageContent" class="modal-body">
-               <%-- ${messageContent} --%>
-            </div>
-            <!-- 풋터 -->
-            <div class="modal-footer">
-               <button class="btn btn-primary" type="button" data-dismiss="modal">닫기</button>
-            </div>
-         </div>
-      </div>
-   </div>
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog vertical-align-center">
+			<!-- 모달 창의 종류(색상)를 설정한다. -->
+			<!-- messageCheck라는 id를 추가하고 class를 제거한다. -->
+			<div id="messageCheck">
+				<!-- 헤더 -->
+				<div class="modal-header panel-heading">
+					<button class="close" type="button" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<!-- messageType이라는 id를 추가한다. -->
+					<h4 id="messageType" class="modal-title">
+						<%-- ${messageType} --%>
+					</h4>
+				</div>
+				<!-- 바디 -->
+				<!-- messageContent이라는 id를 추가한다. -->
+				<div id="messageContent" class="modal-body">
+					<%-- ${messageContent} --%>
+				</div>
+				<!-- 풋터 -->
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
