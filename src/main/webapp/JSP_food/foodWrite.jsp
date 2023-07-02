@@ -9,8 +9,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!--   <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script>  -->
-  <script type="text/javascript" src="./js/foodView.js" defer="defer"></script> 
+<script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script> 
+  <!-- <script type="text/javascript" src="./js/foodView.js" defer="defer"></script>  -->
 <style>
 	.dietContent_title {
 		float: left;
@@ -37,8 +37,11 @@
 <body>
 
 <%
-  String data2 = request.getParameter("data2");
-  // data2를 원하는 위치에 출력하거나 사용합니다.
+  String foodName = request.getParameter("foodName");
+  String kcal = request.getParameter("kcal");
+  String carbs = request.getParameter("carbs");
+  String protein = request.getParameter("protein");
+  String fat = request.getParameter("fat");
 %>
 
 <div class="dietContent_title">
@@ -79,17 +82,15 @@
       </td>
       
       <td colspan="2" class="text-center">
-		<!-- <h5 id="foodName" style="color: red; font-weight: bold;"></h5> -->
-    	 <!-- <input type="text" id="foodName" name="wfoodName" style="width: 95%;" />  -->
-    	   <input type="text" name="food" value="<%= data2 %>"/>   
+    	   <input type="text" name="food" value="<%= foodName %>"/>   
       </td>
       
       <td colspan="1" class="text-center">
          <label for="totalcalorie">칼로리</label>
       </td>
       
-      <td colspan="2" class="text-center" id="totalcalorie">
-         <input type="text" id="totalcalorie" name="totalcalorie" style="width: 95%;"/>      
+      <td colspan="2" class="text-center" id="kcal">
+         <input type="text" name="kcal" value="<%= kcal %>"/>      
       </td>
       
       <td colspan="1">
@@ -97,7 +98,7 @@
       </td>
       
       <td colspan="1"class="text-center">
-         <input type="text" name="carbo" style="width: 95%;"/>   
+         <input type="text" name="carbs" value="<%= carbs %>"/>      
       </td>
       
       <td colspan="1">
@@ -105,7 +106,7 @@
       </td>
       
       <td colspan="1">
-         <input type="text" id="protein" name="" style="width: 95%;"/>   
+        <input type="text" name="protein" value="<%= protein %>"/>       
       </td>
       
       <td colspan="1" class="text-center">
@@ -113,7 +114,7 @@
       </td>
       
       <td colspan="1" align="center">
-         <input type="text" id="province" name="province" style="width: 95%;"/>   
+         <input type="text" name="fat" value="<%= fat %>"/>      
       </td>
       <td colspan="1" align="center">
           <button  type="button" onclick="location.href='./foodListDirect.jsp'">확인</button> 
