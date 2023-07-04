@@ -18,3 +18,19 @@ $('.carbo').click(function changeWidth() {
   var myDiv = document.getElementById("carbo");
   myDiv.style.width = "50%"; // 너비 값을 변경
 });*/
+
+$(document).ready(function() {
+    var foodName = "<%= foodName %>";
+    if (foodName === null) {
+      $("#dietFoodName").val("");
+    }
+  });
+  
+/*  window.onload = function() {
+    var foodNameInput = document.getElementById("dietFoodName");
+    
+    // foodName 값이 null이면 value를 빈 문자열로 설정
+    if (foodNameInput.value === "null") {
+      foodNameInput.value = "";
+    }
+  }*/

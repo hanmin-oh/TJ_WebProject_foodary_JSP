@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script> 
-  <!-- <script type="text/javascript" src="./js/foodView.js" defer="defer"></script>  -->
+<script type="text/javascript" src="./js/foodView.js" defer="defer"></script>
 <style>
 	.dietContent_title {
 		float: left;
@@ -47,6 +47,7 @@
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
+<form action="/foodary/JSP_diet/dietList.jsp" method="post">
 <div class="diet">
 	<table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <!-- 1 -->
@@ -54,9 +55,10 @@
 	      <td colspan="2" class="text-center">
 	         <label for="ateDate">일시</label>
 	      </td>
-	      <td colspan="12">
-	         <input type="text" id="ateDate" name="ateDate" style="width: 98%; height: 90%;"/>
-		      </td>
+	      	<td colspan="12">
+	         	 <input type="date" id="dietWriteDate" name="dietWriteDate" style="width: 48%; height: 90%;"/>
+        	 <input type="time" id="dietWriteTime" name="dietWriteTime" style="width: 48%; height: 90%;"/>
+	        </td>
 		   </tr>
 		    <!-- 2 -->
 		   <tr>
@@ -74,6 +76,7 @@
 	      </td>
 	   </tr>
 	   </table>
+	   <!-- 3 -->
 	   <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
 	   <tbody id="tableBody">
      <tr>
@@ -82,7 +85,7 @@
       </td>
       
       <td colspan="2" class="text-center">
-    	   <input type="text" name="food" value="<%= foodName %>"/>   
+    	   <input type="text" name="dietFoodName" value="<%= foodName %>"/>   
       </td>
       
       <td colspan="1" class="text-center">
@@ -90,7 +93,7 @@
       </td>
       
       <td colspan="2" class="text-center" id="kcal">
-         <input type="text" name="kcal" value="<%= kcal %>"/>      
+         <input type="text" name="dietKcal" value="<%= kcal %>"/>      
       </td>
       
       <td colspan="1">
@@ -98,7 +101,7 @@
       </td>
       
       <td colspan="1"class="text-center">
-         <input type="text" name="carbs" value="<%= carbs %>"/>      
+         <input type="text" name="dietCarbs" value="<%= carbs %>"/>      
       </td>
       
       <td colspan="1">
@@ -106,7 +109,7 @@
       </td>
       
       <td colspan="1">
-        <input type="text" name="protein" value="<%= protein %>"/>       
+        <input type="text" name="dietProtein" value="<%= protein %>"/>       
       </td>
       
       <td colspan="1" class="text-center">
@@ -114,7 +117,7 @@
       </td>
       
       <td colspan="1" align="center">
-         <input type="text" name="fat" value="<%= fat %>"/>      
+         <input type="text" name="dietFat" value="<%= fat %>"/>      
       </td>
       <td colspan="1" align="center">
           <button  type="button" onclick="location.href='./foodListDirect.jsp'">확인</button> 
@@ -132,19 +135,12 @@
          <textarea 
             id="memo"
             rows="10" 
-            name="memo" 
+            name="dietMemo" 
             style="resize: none; width: 97%; height: 75%; vertical-align: middle;"
             ></textarea>
-         <!-- 
-            <textarea 
-               id="content" 
-               class="form-control form-control-sm" 
-               rows="10" 
-               name="content"
-               style="resize: none;"></textarea> 
-         -->
       </td>
    </tr>
+   <!-- 5 -->
    <tr>
       <td colspan="3" class="text-center">
          <label for="totalcalorie">사진첨부</label>
@@ -156,7 +152,6 @@
         <input type="button" value="파일선택" onclick="location.href='showDiet.jsp'"/>
       </td>
    </tr>
-   <!-- 5 -->
     </table>
     <!-- 6 -->
 </div>
@@ -171,6 +166,7 @@
            </div>
          </td>   
       </tr>
+     <!-- 7 -->
       <tr>
        <td style="width: 33.3%;">
           <div class="progress" style="height: 40px;">
@@ -197,14 +193,16 @@
              </div>
        </td>      
     </tr>
+    <!-- 8 -->
     <tr>
        <td colspan="3" class="text-center">
-          <input type="button" value="식단보기" onclick="location.href='showDiet.jsp'"/>
+          <input type="button" value="식단보기" onclick="location.href='/foodary/JSP_diet/showDiet.jsp'"/>
           <input type="button" value="이벤트테스트" onclick="changeWidth()"/>
-          <input type="button" value="저장" onclick="location.href='showDiet.jsp'"/>
+          <input type="submit" value="저장"/>
        </td>
     </tr>
    
    </table>
+   </form>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foodary.vo.DietVO">
+
+	<insert id="dietInsert" parameterType="dvo">
+		insert into diet (idx, dietFoodName, dietKcal, dietCarbs, dietProtein, dietFat, dietMemo, dietWriteDate, dietWriteTime) 
+		values (diet_idx_seq.nextval, #{dietFoodName}, #{dietKcal}, #{dietCarbs}, #{dietProtein}, #{dietFat}, #{dietMemo}, #{dietWriteDate}, #{dietWriteTime})
+	</insert>
+	
+	<select id="selectDiet" parameterType="String" resultType="dvo">
+		select * from diet where dietWriteDate = #{date} order by dietWriteTime asc
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,9 @@
-function dayCheck(day) {
+function dayCheck() {
 //	let year = getyear;
 /*	let month = getmonth; */
-	let getday = day;
-	console.log(getday);
+	
+	console.log('테스트');
+	window.location.href = 'selectDiet.jsp';
 //	$('#sendYear').val() = year;
 //	$('#sendMonth').val() = month;
 //	$('#sendDay').val() = day;

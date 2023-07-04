@@ -113,7 +113,7 @@
 	<!-- 5 -->
 	<tr>
 		<th colspan="10">
-			<input type="button" value="수정하기" onclick="location.href='foodWrite.jsp'" style="width: 100px; height: 30px;"/>&nbsp;&nbsp;	
+			<input type="button" value="수정하기" onclick="location.href='/foodary/JSP_food/foodWrite.jsp'" style="width: 100px; height: 30px;"/>&nbsp;&nbsp;	
 			<input type="button" value="삭제하기" style="width: 100px; height: 30px;"/>&nbsp;&nbsp;
 			<input type="button" value="목록보기" style="width: 100px; height: 30px;"/>&nbsp;&nbsp;
 			<input type="button" value="이미지로 저장" style="width: 100px; height: 30px;"/>			

@@ -1,42 +1,25 @@
 <%@page import="com.foodary.myCalendar.MyCalendar"%>
 <%@page import="java.util.Calendar"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>달력</title>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <link rel="stylesheet" href="css/calendar_css.css"/>
-<script src="./js/foodCalendar.js"></script>
+<script type="text/javascript" src="./js/jquery-3.7.0.js"></script>
+<script src="./js/dietCalendar.js"></script>
 </head>
 <body>
 
 <%
-//	달력 메소드 테스트
-//	out.println(MyCalendar.isLeapYear(2023));
-//	out.println(MyCalendar.lastDay(2023, 5));
-//	out.println(MyCalendar.totalDay(2023, 5, 1));
-//	out.println(MyCalendar.weekDay(2023, 5, 1));
-
-//	컴퓨터 시스템의 년, 월을 얻어온다.
-//	Date date = new Date();
-//	int year = date.getYear() + 1900;
-//	int month = date.getMonth() + 1;	
+	request.setCharacterEncoding("UTF-8"); 
 
 	Calendar calendar = Calendar.getInstance();
 	int year = calendar.get(Calendar.YEAR);
 	int month = calendar.get(Calendar.MONTH) + 1;
 	int day = calendar.get(Calendar.DATE);
-//	out.println(year + "년 " + month + "월");
 
-//	이전달, 다음달 하이퍼링크 또는 버튼을 클릭하면 get 방식으로 넘어오는 달력을 출력할 년, 월을 받는다.
-//	달력이 최초로 실행되면 이전 페이지가 존재하지 않기 때문에 넘어오는 데이터가 없으므로 year와 month가
-//	null이므로 NumberFormatException 이 발생된다. => 예외 처리를 해야한다.
 	try {
 		year = Integer.parseInt(request.getParameter("year"));
 		month = Integer.parseInt(request.getParameter("month"));
@@ -60,15 +43,7 @@
 <table width="700" border="1" align="center" cellpadding="5" cellspacing="2">
 	<tr>
 		<th>
-			<!-- 
-			<a> 태그가 설정된 문자열을 클릭하면 href 속성에 지정된 곳으로 이동한다.
-			href 속성에 "#" 뒤에 id(해시)를 지정하면 현재 문서에서 id가 지정된 요소로 이동(책갈피)하고
-			url(주소)이 지정되면 지정된 url로 페이지를 이동한다.
-			"?" 뒤에 이동하는 페이지로 전달할 데이터를 넘겨주는데 이 때 넘겨줄 데이터가 2건 이상이라면
-			데이터와 데이터 사이에 "&"를 넣어서 구분한다.
-			"?" 뒤에는 절대로 띄어쓰기를 하면 안된다.
-			-->
-			<%-- <a href="?year=<%=year%>&month=<%=month - 1%>">이전달</a> --%>
+
 			<button class="button button1"
 				type="button" 
 				onclick="location.href='?year=<%=year%>&month=<%=month - 1%>'">이전달</button>
@@ -79,7 +54,6 @@
 		</th>
 	
  		<th>
-			<%-- <a href="?year=<%=year%>&month=<%=month + 1%>">다음달</a> --%>
 			<button type="button"
 				class="button button2" 
 				onclick="location.href='?year=<%=year%>&month=<%=month + 1%>'">다음달</button>
@@ -99,17 +73,11 @@
 	
 <%
 	int week = MyCalendar.weekDay(year, month, 1);
-	
-//	1일이 출력될 위치(요일)을 맞추기 위해 달력을 출력할 달 1일의 요일만큼 반복하며 빈 칸을 출력한다.
-//	for(int i=0; i<week; i++) {
-//		out.println("<td>&nbsp;</td>");
-//	}
 
 //	빈 칸에 출력할 전달 날짜의 시작일
 	int start = 0;
 
 	if(month == 1) {
-	//	start =	MyCalendar.lastDay(year - 1, 12) - week;
 		start = 31 - week;
 	}else {
 		start = MyCalendar.lastDay(year, month - 1) - week; // 2 ~ 12월
@@ -124,9 +92,7 @@
 			out.println("<td><button class='before'>" + (month == 1? 12 : (month-1)) + "/" + ++start + "</button></td>");						
 		}
 	}
-%>
-<input type="hidden" name="day" onclick="dayCheck()" value="${i}" />
-<%
+
 //	1일부터 달력을 출력할 달의 마지막 날짜까지 반복하며 날짜를 출력한다.
 	for(int i=1; i<=MyCalendar.lastDay(year, month); i++) {
 		
@@ -188,70 +154,75 @@
 		
 		// 양력 공휴일
 		if(month == 1 && i == 1) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>신정</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>신정</span></button></a></td>");
 		}else if(month == 3 && i == 1) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>삼일절</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>삼일절</span></button></a></td>");
 		}else if(month == 5 && i == 1) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>근로자의날</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>근로자의날</span></button></a></td>");
 		}else if(month == 5 && i == 5) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>어린이날</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>어린이날</span></button></a></td>");
 		}else if(month == 6 && i == 6) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>현충일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>현충일</span></button></a></td>");
 		}else if(month == 8 && i == 15) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>광복절</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>광복절</span></button></a></td>");
 		}else if(month == 10 && i == 3) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>개천절</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>개천절</span></button></a></td>");
 		}else if(month == 10 && i == 9) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>한글날</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>한글날</span></button></a></td>");
 		}else if(month == 12 && i == 25) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>성탄절</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>성탄절</span></button></a></td>");
 		}
 		
 		
 		
 		// 대체 공휴일
 		else if(flag0301 && month == 3 && i == subHoliday0301) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>대체공휴일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag0505 && month == 5 && i == subHoliday0505) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>대체공휴일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag0815 && month == 8 && i == subHoliday0815) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>대체공휴일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag1003 && month == 10 && i == subHoliday1003) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>대체공휴일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag1009 && month == 10 && i == subHoliday1009) {
-			out.println("<td><button class='holiday'>" + i + "<br><span>대체공휴일</span></button></td>");
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}
 		
 		// 공휴일을 제외한 나머지 날짜
 		else {
-			// <td> 태그에 요일에 따른 class 속성을 지정한다.
-			/*
-			if(MyCalendar.weekDay(year, month, i) == 0) { // 일요일
-				out.println("<td class='sun'>" + i + "</td>");
-			} else if(MyCalendar.weekDay(year, month, i) == 6) { // 토요일
-				out.println("<td class='sat'>" + i + "</td>");
-			} else {  // 평일
-				out.println("<td>" + i + "</td>");			
-			}
-			*/
-
  			
 			switch(MyCalendar.weekDay(year, month, i) % 7) {
 				
 				case 0:  // 일요일
-					out.println("<td><button class='sun' onclick='dayCheck()'>" + i + "</button></td>");
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
+							"<button id='day' onclick='dayCheck(" + year + "," + month + "," + i +")'>" +
+										 + i + "</button></a></td>");
 					break;
 				case 6:  // 토요일
-					out.println("<td><button class='sat' onclick='dayCheck(' + i + ')'>" + i + "</button></td>");
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
+						"<button id='day' onclick='dayCheck(" + year + "," + month + "," + i +")'>" +
+									 + i + "</button></a></td>");
 					break;
-					
-					
-					
-					
 				default:  // 평일
-					out.println("<td><button id='day' onclick=\"dayCheck('" + i + "')\">" + i + "</button></td>");
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
+							"<button id='day' onclick='dayCheck()'>" +
+										 + i + "</button></a></td>");
 					break;
-			}
+			} 
 		
 		}
 		
@@ -282,27 +253,24 @@
 			}
 		}
 	}
-/* 		
-	out.println("<input id='sendYear' type='text' name='year'/>");
-		out.println("<input id='sendMonth' type='text' name='month'/>");
-		out.println("<input id='sendDay' type='text' name='day'/>");
- 	out.println("<form action='foodList.jsp' method='post'>");
- */
+
 %>
-
-
-
-<form action='?' method='post'>
-	<input id='sendYear' type='text' name='year'/>
-	<input id='sendMonth' type='text' name='month'/>
-	<input id='sendDay' type='text' name='day'/>
+<!-- 값 불러오는 거 확인 -->
+<form action="?" method="post">
+	<input type='hidden' name='sendYear' value=""/>
+	<input type='hidden' name='sendMonth' value=""/>
+	<input type='hidden' name='sendDay' value=""/>
 </form>
+
+<% /* dietList.jsp로 날짜 데이터 넘기기 */
+//	response.sendRedirect("dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + day);
+%>
 	
 	</tr>
-	<!-- 년, 월을 선택하고 보기 버튼을 클릭하면 선택된 달의 달력으로 한번에 넘어가게 한다. -->
+	<!-- 년, 월을 선택된 년도와 달의 달력으로 한번에 넘어가게 한다. -->
 	<tr>
 		<td id="choice" colspan="7">
-		<form action="?" method="post">
+	<form action="dietListView.jsp" method="post">
 		<fieldset>
 			<legend>년</legend>
 			<select class="select" name="year">
@@ -314,7 +282,7 @@
 						out.println("<option>" + i + "</option>");							
 					}
 				}
-%>				
+%>						
 			</select>
 			</fieldset>
 		<fieldset >
@@ -328,28 +296,16 @@
 						out.println("<option>" + i + "</option>");					
 					}
 				}
-%>				
-			</select>
-			</fieldset>
-		<fieldset >
-			<legend>일</legend>
-			<select class="select" name="day">
-<%
-				for(int i=1; i<=MyCalendar.lastDay(year, month); i++) {
-					if(calendar.get(Calendar.DATE) == i) {
-						out.println("<option selected='selected'>" + i + "</option>");	
-					}else {
-						out.println("<option>" + i + "</option>");					
-					}
-				}
-%>				
+%>							
 			</select>
 			</fieldset>
 			<input class="select" type="submit" value="날짜 지정"/>
-			</form>
+		</form> 
+		
 		</td>
 	</tr>
 </table>
+
 
 </body>
 </html>
