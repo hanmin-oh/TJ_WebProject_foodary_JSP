@@ -30,7 +30,7 @@ ${vo}
 
 <%
 //	register.jsp에서 넘어온 메인글을 테이블에 저장하는 메소드를 실행한다.
-	UserRegisterService.getInstance().insert(vo);
+	UserRegisterService.getInstance().insertregister(vo);
 %>
 	
 	

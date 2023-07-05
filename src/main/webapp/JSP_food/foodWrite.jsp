@@ -10,7 +10,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script> 
-<script type="text/javascript" src="./js/foodView.js" defer="defer"></script>
 <style>
 	.dietContent_title {
 		float: left;
@@ -42,6 +41,7 @@
   String carbs = request.getParameter("carbs");
   String protein = request.getParameter("protein");
   String fat = request.getParameter("fat");
+  out.println(foodName);
 %>
 
 <div class="dietContent_title">
@@ -76,53 +76,102 @@
 	      </td>
 	   </tr>
 	   </table>
-	   <!-- 3 -->
-	   <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
+	  <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
 	   <tbody id="tableBody">
-     <tr>
-      <td colspan="2" class="text-center">
-         <label for="foodName">음식이름</label>
-      </td>
-      
-      <td colspan="2" class="text-center">
-    	   <input type="text" name="dietFoodName" value="<%= foodName %>"/>   
-      </td>
-      
-      <td colspan="1" class="text-center">
-         <label for="totalcalorie">칼로리</label>
-      </td>
-      
-      <td colspan="2" class="text-center" id="kcal">
-         <input type="text" name="dietKcal" value="<%= kcal %>"/>      
-      </td>
-      
-      <td colspan="1">
-         <label for="carbo">탄수화물</label>
-      </td>
-      
-      <td colspan="1"class="text-center">
-         <input type="text" name="dietCarbs" value="<%= carbs %>"/>      
-      </td>
-      
-      <td colspan="1">
-         <label for="protein">단백질</label>
-      </td>
-      
-      <td colspan="1">
-        <input type="text" name="dietProtein" value="<%= protein %>"/>       
-      </td>
-      
-      <td colspan="1" class="text-center">
-         <label for="province">지방</label>
-      </td>
-      
-      <td colspan="1" align="center">
-         <input type="text" name="dietFat" value="<%= fat %>"/>      
-      </td>
-      <td colspan="1" align="center">
-          <button  type="button" onclick="location.href='./foodListDirect.jsp'">확인</button> 
-      </td>
-   </tr>
+	     <tr>
+	      <td colspan="2" class="text-center">
+	         <label for="foodName">음식이름</label>
+	      </td>
+	      <td colspan="2" class="text-center">
+	    	   <input type="text" name="dietFoodName" value="<%= foodName %>"/>   
+	      </td>
+	      
+	      <td colspan="1" class="text-center">
+	         <label for="totalcalorie">칼로리</label>
+	      </td>
+	      
+	      <td colspan="2" class="text-center" id="kcal">
+	         <input type="text" name="dietKcal" value="<%= kcal %>"/>      
+	      </td>
+	      
+	      <td colspan="1">
+	         <label for="carbo">탄수화물</label>
+	      </td>
+	      
+	      <td colspan="1"class="text-center">
+	         <input type="text" name="dietCarbs" value="<%= carbs %>"/>      
+	      </td>
+	      
+	      <td colspan="1">
+	         <label for="protein">단백질</label>
+	      </td>
+	      
+	      <td colspan="1">
+	        <input type="text" name="dietProtein" value="<%= protein %>"/>       
+	      </td>
+	      
+	      <td colspan="1" class="text-center">
+	         <label for="province">지방</label>
+	      </td>
+	      
+	      <td colspan="1" align="center">
+	         <input type="text" name="dietFat" value="<%= fat %>"/>      
+	      </td>
+	      <td colspan="1" align="center">
+	          <input type="button" value="테스트" onclick="updateVOValues()"/>
+	      </td>
+	   </tr>
+    </tbody>
+    </table>
+	  <table width="1400" align="center" border="1" cellpadding="11" cellspacing="0">
+	   <tbody id="tableBody">
+	     <tr>
+	     <td colspan="1" align="center">
+	          내 식단
+	      </td>
+	      <td colspan="2" class="text-center">
+	         <label for="foodName">음식이름</label>
+	      </td>
+	      <td colspan="2" class="text-center">
+	    	   <input type="text" name="dietFoodName" value="<%= foodName %>"/>   
+	      </td>
+	      
+	      <td colspan="1" class="text-center">
+	         <label for="totalcalorie">칼로리</label>
+	      </td>
+	      
+	      <td colspan="2" class="text-center" id="kcal">
+	         <input type="text" name="dietKcal" value="<%= kcal %>"/>      
+	      </td>
+	      
+	      <td colspan="1">
+	         <label for="carbo">탄수화물</label>
+	      </td>
+	      
+	      <td colspan="1"class="text-center">
+	         <input type="text" name="dietCarbs" value="<%= carbs %>"/>      
+	      </td>
+	      
+	      <td colspan="1">
+	         <label for="protein">단백질</label>
+	      </td>
+	      
+	      <td colspan="1">
+	        <input type="text" name="dietProtein" value="<%= protein %>"/>       
+	      </td>
+	      
+	      <td colspan="1" class="text-center">
+	         <label for="province">지방</label>
+	      </td>
+	      
+	      <td colspan="1" align="center">
+	         <input type="text" name="dietFat" value="<%= fat %>"/>      
+	      </td>
+	      <td colspan="1" align="center">
+	         <input type="button" value="수정" onclick="location.href='updateFood.jsp'"/>
+	         <input type="button" value="삭제" onclick="location.href='deleteFood.jsp'"/>
+	      </td>
+	   </tr>
     </tbody>
     </table>
     <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
@@ -160,7 +209,7 @@
         <td colspan="3" style="height: 40px;">
            <div class="progress" style="height: 40px;">
              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-             aria-valuemin="0" aria-valuemax="100" style="width:90%; height: 40px;">
+             aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                칼로리
              </div>
            </div>
@@ -171,15 +220,15 @@
        <td style="width: 33.3%;">
           <div class="progress" style="height: 40px;">
             <div id="carbo" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-            aria-valuemin="0" aria-valuemax="100" style="width:80%; height: 40px;">
-              탄수화물&nbsp;15%
+            aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
+              탄수화물
                </div>
           </div>
        </td>
        <td style="width: 33.3%;">
           <div class="progress" style="height: 40px;">
                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-                  aria-valuemin="0" aria-valuemax="100" style="width:90%; height: 40px;">
+                  aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                  지방
                </div>
           </div>
@@ -187,7 +236,7 @@
        <td style="width: 33.3%;">
              <div class="progress" style="height: 40px;">   
                   <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-                     aria-valuemin="0" aria-valuemax="100" style="width:90%; height: 40px;">
+                     aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                     단백질
                   </div>
              </div>

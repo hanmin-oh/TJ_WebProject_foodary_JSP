@@ -1,4 +1,3 @@
-
 <%@page import="com.foodary.vo.DietList"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.time.LocalTime"%>

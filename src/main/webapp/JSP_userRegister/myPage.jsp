@@ -33,8 +33,6 @@
 %>
 
    <c:set var="vo" value="${UserRegisterVO.vo}"/>
-      ${vo}
-      ${vo.username}
 <h2>마이페이지 - 회원정보</h2>
 <table width="500" border="1" cellpadding="5" cellspacing="0">
       <tr>

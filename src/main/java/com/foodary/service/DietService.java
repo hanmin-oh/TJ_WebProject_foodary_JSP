@@ -33,7 +33,6 @@ public class DietService {
 		SqlSession mapper = MySession.getSession();
 		System.out.println(mapper);
 		System.out.println(date);
-		date = "2023-07-03";
 		DietList dietList = new DietList();
 		dietList.setList(DietDAO.getInstance().selectDiet(mapper, date));
 		System.out.println(dietList);

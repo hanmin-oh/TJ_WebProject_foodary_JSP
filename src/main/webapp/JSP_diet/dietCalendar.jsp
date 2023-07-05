@@ -1,4 +1,4 @@
-<%@page import="com.foodary.myCalendar.MyCalendar"%>
+<%@page import="com.foodary.calendar.MyCalendar"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

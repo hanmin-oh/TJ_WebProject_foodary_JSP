@@ -19,6 +19,14 @@
 		]]>
 	</select>
 	
+	<insert id="insertFood" parameterType="wvo">
+		insert into writefood (idx, writeFoodName, writeKcal, writeCarbs, writeProtein, writeFat, writeFoodTime , writeFoodDate) 
+		values (writefood_idx_seq.nextval, #{writeFoodName} ,#{writeKcal}, #{writeCarbs}, #{writeProtein}, #{writeFat}, #{writeFoodTime} , #{writeFoodDate})
+	</insert>
+	
+	<select id="writeSelectList" parameterType="String" resultType="dvo">
+		SELECT * FROM WRITEFOOD WHERE writeFoodDate = #{writeFoodDate} AND writeFoodTime = #{writeFoodTime} ORDER BY idx DESC
+	</select>
 </mapper>
 
 

@@ -1,4 +1,4 @@
-package com.foodary.myCalendar;
+package com.foodary.calendar;
 
 import java.util.Calendar;
 

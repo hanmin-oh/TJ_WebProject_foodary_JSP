@@ -16,12 +16,12 @@ public class UserRegisterService {
         return instance;
     }
     
-    public void insert(UserRegisterVO vo) {
+    public void insertregister(UserRegisterVO vo) {
     	System.out.println("UserRegisterService의 insert()");
 		SqlSession mapper = MySession.getSession();
 		System.out.println(mapper);
 		System.out.println(vo);
-		UserRegisterDAO.getInstance().insertregister(mapper, vo);
+		UserRegisterDAO.getInstance().insertRegister(mapper, vo);
 		mapper.commit();
 		mapper.close();
 	}

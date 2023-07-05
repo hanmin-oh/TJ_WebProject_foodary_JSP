@@ -66,7 +66,7 @@
 //	foodWrite.jsp에서 넘어온 메인글 테이블에 저장하는 메소드 실행
 		DietService.getInstance().insert(dvo);
 		
-		dietList = DietService.getInstance().selectList(dietWriteDate);
+		dietList = DietService.getInstance().selectDiet(dietWriteDate);
 	}
 
 //	String dietWriteDate = request.getParameter("dietWriteDate");

@@ -46,7 +46,7 @@
 	} catch (NumberFormatException e) {
 		
 	}
-
+	
 	FoodService service = FoodService.getInstance();
 	
 //	1페이지 분량의 메인글을 얻어온다.

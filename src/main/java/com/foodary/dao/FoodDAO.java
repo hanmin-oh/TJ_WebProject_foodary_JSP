@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.foodary.vo.DietVO;
 import com.foodary.vo.FoodVO;
 import com.foodary.vo.UserRegisterVO;
+import com.foodary.vo.WriteFoodVO;
 
 public class FoodDAO {
 	
@@ -19,13 +21,24 @@ public class FoodDAO {
 	    }
 
 		public int selectCount(SqlSession mapper) {
-			System.out.println("FreeboardDAO의 selectCount()");
+			System.out.println("FoodDAO의 selectCount()");
 			return (int) mapper.selectOne("selectCount");
 		}
 		
 		public ArrayList<FoodVO> selectList(SqlSession mapper, HashMap<String, Integer> hmap) {
-			System.out.println("FreeboardDAO의 selectList()");
+			System.out.println("FoodDAO의 selectList()");
 			return (ArrayList<FoodVO>) mapper.selectList("selectList", hmap);
+		}
+
+		public void insertFood(SqlSession mapper, WriteFoodVO vo) {
+			System.out.println("FoodDAO의 insertFood()");
+			System.out.println(vo);
+			mapper.insert("insertFood", vo);
+		}
+
+		public ArrayList<WriteFoodVO> writeSelectList(SqlSession mapper, WriteFoodVO vo) {
+			System.out.println("FoodDAO 클래스의 writeSelectList()");		
+			return (ArrayList<WriteFoodVO>) mapper.selectList("writeSelectList", vo);
 		}
 		
 }

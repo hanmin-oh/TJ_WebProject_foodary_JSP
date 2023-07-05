@@ -14,8 +14,8 @@ public class UserRegisterDAO {
         return instance;
     }
 
-	public void insertregister(SqlSession mapper, UserRegisterVO vo) {
-		System.out.println("UserRegisterDAO의 insertregister()");
+	public void insertRegister(SqlSession mapper, UserRegisterVO vo) {
+		System.out.println("UserRegisterDAO의 insertRegister()");
 		System.out.println(vo);
 		mapper.insert("insertRegister", vo);
 	}
