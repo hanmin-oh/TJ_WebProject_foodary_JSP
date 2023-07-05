@@ -23,9 +23,14 @@ public class DietDAO {
 		mapper.insert("dietInsert", dietvo);
 	}
 	
-	public ArrayList<DietVO> selectDiet(SqlSession mapper, String date) {
-		System.out.println("DietDAO 클래스의 selectDiet()");		
-		return (ArrayList<DietVO>) mapper.selectList("selectDiet", date);
+	public ArrayList<DietVO> selectDiet(SqlSession mapper, String d) {
+		System.out.println("DietDAO 클래스의 selectDiet()");
+		return (ArrayList<DietVO>) mapper.selectList("selectDiet", d);
+	}
+	
+	public ArrayList<DietVO> selectDietList(SqlSession mapper, String dietWriteDate) {
+		System.out.println("DietDAO 클래스의 selectDietList()");
+		return (ArrayList<DietVO>) mapper.selectList("selectDietList", dietWriteDate);
 	}
 	
 	

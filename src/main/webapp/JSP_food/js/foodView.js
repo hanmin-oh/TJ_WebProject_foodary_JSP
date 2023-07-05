@@ -1,3 +1,9 @@
+/*  $('#foodName').val(data2);
+  // form 제출
+  //document.getElementById('myForm').submit();
+  document.getElementById('wfoodName').value();*/
+	  
+
 function addData() {
   var selectedRadio = document.querySelector('input[name="food"]:checked');
   if (selectedRadio) {
@@ -17,7 +23,9 @@ function addData() {
   }
 }
 
-    /*  $('#foodName').val(data2);
-      // form 제출
-      //document.getElementById('myForm').submit();
-	  document.getElementById('wfoodName').value();*/
+const searchRequest = new XMLHttpRequest();
+//ajax 검색 요청 함수
+function searchFunction() {
+	
+}
+

@@ -4,14 +4,11 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.foodary.dao.DietDAO;
 import com.foodary.dao.FoodDAO;
 import com.foodary.mybatis.MySession;
-import com.foodary.vo.DietList;
 import com.foodary.vo.FoodList;
-import com.foodary.vo.FoodVO;
-import com.foodary.vo.WriteFoodList;
-import com.foodary.vo.WriteFoodVO;
+import com.foodary.vo.UserFoodList;
+import com.foodary.vo.UserFoodVO;
 
 
 public class FoodService {
@@ -42,7 +39,7 @@ public class FoodService {
 			return foodList;
 		}
 	    
-	    public void insertFood(WriteFoodVO vo) {
+	    public void insertFood(UserFoodVO vo) {
 	    	System.out.println("UserRegisterService의 insert()");
 			SqlSession mapper = MySession.getSession();
 			System.out.println(mapper);
@@ -52,12 +49,12 @@ public class FoodService {
 			mapper.close();
 		}
 	    
-	    public WriteFoodList writeSelectList(WriteFoodVO vo) {
+	    public UserFoodList userSelectList(UserFoodVO vo) {
 	    	System.out.println("FoodService의 writeSelectList()");
 	    	System.out.println(vo);
 	    	SqlSession mapper = MySession.getSession();
-	    	WriteFoodList writeFoodList  = new WriteFoodList();
-	    	writeFoodList.setList(FoodDAO.getInstance().writeSelectList(mapper,vo));
+	    	UserFoodList writeFoodList  = new UserFoodList();
+	    	writeFoodList.setList(FoodDAO.getInstance().userSelectList(mapper,vo));
 			System.out.println(writeFoodList);
 			mapper.close();
 			return writeFoodList;

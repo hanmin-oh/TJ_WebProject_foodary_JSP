@@ -11,7 +11,7 @@
 		<typeAlias type="com.foodary.vo.FoodVO" alias="fvo" />
 		<typeAlias type="com.foodary.vo.UserRegisterVO" alias="rvo" />
 		<typeAlias type="com.foodary.vo.DietVO" alias="dvo" />
-		<typeAlias type="com.foodary.vo.WriteFoodVO" alias="wvo" />
+		<typeAlias type="com.foodary.vo.UserFoodVO" alias="uvo" />
 	</typeAliases>
 	
 	<environments default="development">

@@ -1,4 +1,4 @@
-<%@page import="com.foodary.vo.WriteFoodList"%>
+<%@page import="com.foodary.vo.UserFoodList"%>
 <%@page import="com.foodary.vo.FoodList"%>
 <%@page import="com.foodary.service.FoodService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -28,7 +28,8 @@
 
 	table {
 		margin: 0 auto;
-	}
+	}" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 	
 	td, th {
 		height: 50px;
@@ -45,16 +46,17 @@
 	
 %>
 
-<jsp:useBean id="vo" class="com.foodary.vo.WriteFoodVO">
+<jsp:useBean id="vo" class="com.foodary.vo.UserFoodVO">
 	<jsp:setProperty property="*" name="vo"/>
 </jsp:useBean>
 <%
 	out.println(vo);
-	out.println(vo.getWriteFoodTime());
+	out.println(vo.getuserFoodName());
 //	register.jsp에서 넘어온 메인글을 테이블에 저장하는 메소드를 실행한다.
 	FoodService.getInstance().insertFood(vo);
-	WriteFoodList writeFoodList = FoodService.getInstance().writeSelectList(vo.getWriteFoodTime() , vo.getWriteFoodDate());
-	request.setAttribute("writeFoodList", writeFoodList);
+	UserFoodList userFoodList = FoodService.getInstance().userSelectList(vo);
+	out.println(vo);
+	request.setAttribute("userFoodList", userFoodList);
 	pageContext.forward("foodWrite.jsp");
 %>
 </body>

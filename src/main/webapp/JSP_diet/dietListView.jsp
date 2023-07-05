@@ -1,3 +1,4 @@
+
 <%@page import="com.foodary.vo.DietList"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.time.LocalTime"%>
@@ -52,95 +53,40 @@
 </head>
 <body>
 
-
 <%
-		
-	
-//	DietService.getInstance().insert(dietvo);
-
-//	int year_list = LocalDate.now().getYear();
-//	int month_list = LocalDate.now().getMonthValue();
-//	int day_list = LocalDate.now().getDayOfMonth();
-
-/*
-	int	year_list = Integer.parseInt(request.getParameter("sendYear"));
-	int	month_list = Integer.parseInt(request.getParameter("sendMonth"));
-	int	day_list = Integer.parseInt(request.getParameter("sendDay"));
-
-
-	
-	try {
-		year_list = Integer.parseInt(request.getParameter("sendYear"));
-		month_list = Integer.parseInt(request.getParameter("sendMonth"));
-		day_list = Integer.parseInt(request.getParameter("sendDay"));
-		
-	}catch(NumberFormatException e) {
-		
-	}
-*/
-%>
-
-<%
-//	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//	LocalDate localdate = LocalDate.parse(date);
-//	Date dietWriteDate = java.sql.Date.valueOf(localdate);
-			
-//	String time = request.getParameter("dietWriteTime");
-//	SimpleDateFormat format2 = new SimpleDateFormat("hh:mm");
-//	LocalTime localtime = LocalTime.parse(time);
-//	Time dietWriteTime = java.sql.Time.valueOf(localtime);
-
 
 	request.setCharacterEncoding("UTF-8");
 	String date = request.getParameter("dietWriteDate");
 	String dietWriteTime = request.getParameter("dietWriteTime");
-	out.println(date);
+
 	DietList dietList = DietService.getInstance().selectDiet(date);
-	out.println(dietList);
+	pageContext.setAttribute("dietList", dietList);
 
 %>
 
 <div class="content" style="position: relative;">
 	<div class="calendar">
-		<%@ include file="dietCalendar.jsp" %>
+		<jsp:include page="dietCalendar.jsp" />
+
 	</div>
-	
+		<form action="showDietOK.jsp" method="post">
 	<div class="diet-table">
-	<c:if test="<%= date != null %>">
 		<h2><%=date%> 식단 목록</h2><br/><br/>
 		<table width="400" border="1" align="center">
-		 <c:set var="list" value="${dietList.list}"/>
+		<c:set var="list" value="${dietList.list}"/>
+		<c:forEach var="dvo" items="${list}">
 			<tr>
-				<th>${list}</th>
-				<td>테스트</td>
+				<th>${dvo.dietWriteTime}</th>
+				<td>${dvo.dietFoodName}</td>
 			</tr>
-	</c:if>
-	<c:if test="<%= date == null %>">
-		<h2> 식단 목록</h2><br/><br/>
-		<table width="400" border="1" align="center">
-			<%-- <c:set var="list" value="${DietList.list}"/>
-	   		<c:forEach var="vo" items="${list}"> --%>
-	   			<%--  <c:set var="vo" value="${DietVO.vo}"/> --%>
-			<tr>
-				<td>${vo}</td>
-			</tr>
-			<%-- </c:forEach> --%>
-	</c:if>
-			<%-- <tr>
-				<th>시간2</th>
-				<td>${dietList.}</td>
-			</tr>
-			<tr>
-				<th>시간2</th>
-				<td>식사 메뉴2</td>
-			</tr> --%>
-		</table><br/>
-			<input type="button" value="목록 보기" style="width: 100px; height: 30px; position: absolute; right: 10px;"
-				onclick="location.href='dietView.jsp'"/>
-	</div>
+			<input type="hidden" name="dietWriteDate" value="${dietVO.dietWriteDate}" />
+			<input type="hidden" name="dietWriteTime" value="${dietVO.dietWriteTime}" />
+		</c:forEach>
+			</table><br/>
+		<input type="submit" value="목록 보기"/>
+		</div>
+	</form>
 </div>
-
-
 
 
 </body>

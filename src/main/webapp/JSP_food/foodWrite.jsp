@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +50,7 @@
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
-<form action="/foodary/JSP_diet/dietList.jsp" method="post">
+<form action="#" method="post">
 <div class="diet">
 	<table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <!-- 1 -->
@@ -66,18 +69,23 @@
 	         <label for="food">음식 검색</label>
 	      </td>
 	      <td colspan="6" align="center">
-	         <input type="text" name="food" style="width:95%;"/>      
+	         <input type="text" id="food" name="food" style="width:95%;" onkeyup="searchFunction()"/>      
 	      </td>
 	      <td colspan="2" align="center">
-		      <button  type="button" onclick="location.href='./foodList.jsp'">검색</button> 
+		     <!--  <button  type="button" onclick="location.href='./foodList.jsp'">검색</button>  -->
+		      <button  type="button" onclick="searchFunction()">검색</button> 
 	      </td>
 	      <td colspan="3" align="center">
 	          <button  type="button" onclick="foodPlus()">음식추가</button> 
 	      </td>
 	   </tr>
+	   <thead id="ajaxTable">
+	   		<tr></tr>
+	   </thead>
 	   </table>
 	  <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
 	   <tbody id="tableBody">
+	   <!-- 3 -->
 	     <tr>
 	      <td colspan="2" class="text-center">
 	         <label for="foodName">음식이름</label>
@@ -118,13 +126,18 @@
 	         <input type="text" name="dietFat" value="<%= fat %>"/>      
 	      </td>
 	      <td colspan="1" align="center">
-	          <input type="button" value="테스트" onclick="updateVOValues()"/>
+	          <input type="button" value="추가" onclick="updateVOValues()"/>
 	      </td>
 	   </tr>
     </tbody>
     </table>
 	  <table width="1400" align="center" border="1" cellpadding="11" cellspacing="0">
 	   <tbody id="tableBody">
+     <fmt:requestEncoding value="UTF-8"/>
+	   <!-- foodWriteInsert.jsp에서 request 영역에 저장한 foodList에서 1페이지 분량의 글을 꺼내온다. -->
+       	<c:set var="list" value="${userFoodList.list}"/>
+	   <c:forEach var="uvo" items="${list}">
+  		<!-- 4 -->
 	     <tr>
 	     <td colspan="1" align="center">
 	          내 식단
@@ -133,7 +146,7 @@
 	         <label for="foodName">음식이름</label>
 	      </td>
 	      <td colspan="2" class="text-center">
-	    	   <input type="text" name="dietFoodName" value="<%= foodName %>"/>   
+	    	   <input type="text" name="dietFoodName" value="${uvo.userFoodName}"/>   
 	      </td>
 	      
 	      <td colspan="1" class="text-center">
@@ -141,7 +154,7 @@
 	      </td>
 	      
 	      <td colspan="2" class="text-center" id="kcal">
-	         <input type="text" name="dietKcal" value="<%= kcal %>"/>      
+	         <input type="text" name="dietKcal" value="${uvo.userKcal}"/>      
 	      </td>
 	      
 	      <td colspan="1">
@@ -149,7 +162,7 @@
 	      </td>
 	      
 	      <td colspan="1"class="text-center">
-	         <input type="text" name="dietCarbs" value="<%= carbs %>"/>      
+	         <input type="text" name="dietCarbs" value="${uvo.userCarbs}"/>      
 	      </td>
 	      
 	      <td colspan="1">
@@ -157,7 +170,7 @@
 	      </td>
 	      
 	      <td colspan="1">
-	        <input type="text" name="dietProtein" value="<%= protein %>"/>       
+	        <input type="text" name="dietProtein" value="${uvo.userProtein}"/>       
 	      </td>
 	      
 	      <td colspan="1" class="text-center">
@@ -165,13 +178,14 @@
 	      </td>
 	      
 	      <td colspan="1" align="center">
-	         <input type="text" name="dietFat" value="<%= fat %>"/>      
+	         <input type="text" name="dietFat" value="${uvo.userFat}"/>      
 	      </td>
 	      <td colspan="1" align="center">
 	         <input type="button" value="수정" onclick="location.href='updateFood.jsp'"/>
 	         <input type="button" value="삭제" onclick="location.href='deleteFood.jsp'"/>
 	      </td>
 	   </tr>
+    </c:forEach>
     </tbody>
     </table>
     <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
@@ -196,7 +210,7 @@
       </td>
       <td colspan="10" align="center">
          <input type="text" id="province" name="province" placeholder="사진파일명" style="width: 95%;"/>   
-      </td>
+      </td>	
       <td align="center">
         <input type="button" value="파일선택" onclick="location.href='showDiet.jsp'"/>
       </td>
@@ -208,7 +222,7 @@
      <tr>
         <td colspan="3" style="height: 40px;">
            <div class="progress" style="height: 40px;">
-             <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+             <div id="kcalGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
              aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                칼로리
              </div>
@@ -219,7 +233,7 @@
       <tr>
        <td style="width: 33.3%;">
           <div class="progress" style="height: 40px;">
-            <div id="carbo" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+            <div id="carbsGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
             aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
               탄수화물
                </div>
@@ -227,7 +241,7 @@
        </td>
        <td style="width: 33.3%;">
           <div class="progress" style="height: 40px;">
-               <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+               <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
                   aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                  지방
                </div>
@@ -235,7 +249,7 @@
        </td>   
        <td style="width: 33.3%;">
              <div class="progress" style="height: 40px;">   
-                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                  <div id="proteinGraph" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
                      aria-valuemin="0" aria-valuemax="100" style="width:0%; height: 40px;">
                     단백질
                   </div>
@@ -245,8 +259,7 @@
     <!-- 8 -->
     <tr>
        <td colspan="3" class="text-center">
-          <input type="button" value="식단보기" onclick="location.href='/foodary/JSP_diet/showDiet.jsp'"/>
-          <input type="button" value="이벤트테스트" onclick="changeWidth()"/>
+          <input type="button" value="식단보기" onclick="location.href='/foodary/JSP_diet/dietList.jsp'"/>
           <input type="submit" value="저장"/>
        </td>
     </tr>

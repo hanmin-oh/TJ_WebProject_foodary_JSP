@@ -154,31 +154,31 @@
 		
 		// 양력 공휴일
 		if(month == 1 && i == 1) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>신정</span></button></a></td>");
 		}else if(month == 3 && i == 1) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>삼일절</span></button></a></td>");
 		}else if(month == 5 && i == 1) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>근로자의날</span></button></a></td>");
 		}else if(month == 5 && i == 5) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>어린이날</span></button></a></td>");
 		}else if(month == 6 && i == 6) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>현충일</span></button></a></td>");
 		}else if(month == 8 && i == 15) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>광복절</span></button></a></td>");
 		}else if(month == 10 && i == 3) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>개천절</span></button></a></td>");
 		}else if(month == 10 && i == 9) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>한글날</span></button></a></td>");
 		}else if(month == 12 && i == 25) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>성탄절</span></button></a></td>");
 		}
 		
@@ -186,19 +186,19 @@
 		
 		// 대체 공휴일
 		else if(flag0301 && month == 3 && i == subHoliday0301) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag0505 && month == 5 && i == subHoliday0505) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag0815 && month == 8 && i == subHoliday0815) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag1003 && month == 10 && i == subHoliday1003) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 					"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}else if(flag1009 && month == 10 && i == subHoliday1009) {
-			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" + 
+			out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" + 
 			"<button class='holiday' onclick='dayCheck(" + year + "," + month + "," + i + ")'>" + i + "<br><span>대체공휴일</span></button></a></td>");
 		}
 		
@@ -208,17 +208,16 @@
 			switch(MyCalendar.weekDay(year, month, i) % 7) {
 				
 				case 0:  // 일요일
-					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
-							"<button id='day' onclick='dayCheck(" + year + "," + month + "," + i +")'>" +
-										 + i + "</button></a></td>");
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) 
+						+ "'>" + "<button id='day' onclick='dayCheck(" + year + "," + month + "," + i +")'>" + i + "</button></a></td>");
 					break;
 				case 6:  // 토요일
-					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" +
 						"<button id='day' onclick='dayCheck(" + year + "," + month + "," + i +")'>" +
 									 + i + "</button></a></td>");
 					break;
 				default:  // 평일
-					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + month + "-" + i + "'>" +
+					out.println("<td><a href='dietListView.jsp?dietWriteDate=" + year + "-" + String.format("%02d", month) + "-" + String.format("%02d", i) + "'>" +
 							"<button id='day' onclick='dayCheck()'>" +
 										 + i + "</button></a></td>");
 					break;

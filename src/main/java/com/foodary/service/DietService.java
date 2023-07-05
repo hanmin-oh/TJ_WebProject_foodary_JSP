@@ -1,5 +1,9 @@
 package com.foodary.service;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -32,9 +36,21 @@ public class DietService {
 		System.out.println("DietService의 selectDiet()");
 		SqlSession mapper = MySession.getSession();
 		System.out.println(mapper);
-		System.out.println(date);
+
 		DietList dietList = new DietList();
 		dietList.setList(DietDAO.getInstance().selectDiet(mapper, date));
+		System.out.println(dietList);
+		mapper.close();
+		return dietList;
+	}
+	
+	public DietList selectDietList(String dietWriteDate) {
+		System.out.println("DietService의 selectDietList()");
+		SqlSession mapper = MySession.getSession();
+		DietDAO dao = DietDAO.getInstance();
+		
+		DietList dietList = new DietList();
+		dietList.setList(dao.selectDietList(mapper, dietWriteDate));
 		System.out.println(dietList);
 		mapper.close();
 		return dietList;

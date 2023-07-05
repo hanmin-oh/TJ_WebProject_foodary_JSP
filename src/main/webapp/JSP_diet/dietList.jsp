@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.time.LocalTime"%>
@@ -44,29 +46,17 @@
 		e.printStackTrace();
 	}
 
-/* 
-	String date = request.getParameter("dietWriteDate");
-	LocalDate localdate = LocalDate.parse(date);
-	Date dietWriteDate = java.sql.Date.valueOf(localdate);
-			
-	String time = request.getParameter("dietWriteTime");
-	SimpleDateFormat format2 = new SimpleDateFormat("hh:mm");
-	LocalTime localtime = LocalTime.parse(time);
-	Time dietWriteTime = java.sql.Time.valueOf(localtime);	
- */
  %>
 
 <jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
 	<jsp:setProperty property="*" name="dvo"/>
 </jsp:useBean>
-
+	
 <%
-	DietList dietList = null;
+
 	if (dietWriteDate != null) {
 //	foodWrite.jsp에서 넘어온 메인글 테이블에 저장하는 메소드 실행
 		DietService.getInstance().insert(dvo);
-		
-		dietList = DietService.getInstance().selectDiet(dietWriteDate);
 	}
 
 //	String dietWriteDate = request.getParameter("dietWriteDate");
@@ -75,7 +65,7 @@
 //	request.setAttribute("enter", "\r\n");
 //	request.setAttribute("dietWriteDate", dietWriteDate);
 //	request.setAttribute("dietWriteTime", dietWriteTime);
-	request.setAttribute("dietList", dietList);
+//	request.setAttribute("dietList", dietList);
 //	입력한 음식글 dietListView.jsp로 넘겨준다.
 	response.sendRedirect("dietListView.jsp?dietWriteDate=" + dietWriteDate); 
 %>
