@@ -1,3 +1,4 @@
+<%@page import="com.foodary.service.UserFoodService"%>
 <%@page import="com.foodary.vo.UserFoodList"%>
 <%@page import="com.foodary.vo.FoodList"%>
 <%@page import="com.foodary.service.FoodService"%>
@@ -52,9 +53,8 @@
 <%
 	out.println(vo);
 	out.println(vo.getuserFoodName());
-//	register.jsp에서 넘어온 메인글을 테이블에 저장하는 메소드를 실행한다.
-	FoodService.getInstance().insertFood(vo);
-	UserFoodList userFoodList = FoodService.getInstance().userSelectList(vo);
+	UserFoodService.getInstance().insertFood(vo);
+	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(vo);
 	out.println(vo);
 	request.setAttribute("userFoodList", userFoodList);
 	pageContext.forward("foodWrite.jsp");

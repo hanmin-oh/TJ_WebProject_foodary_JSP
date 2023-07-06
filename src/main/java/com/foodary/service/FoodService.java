@@ -39,27 +39,7 @@ public class FoodService {
 			return foodList;
 		}
 	    
-	    public void insertFood(UserFoodVO vo) {
-	    	System.out.println("UserRegisterService의 insert()");
-			SqlSession mapper = MySession.getSession();
-			System.out.println(mapper);
-			System.out.println(vo);
-			FoodDAO.getInstance().insertFood(mapper, vo);
-			mapper.commit();
-			mapper.close();
-		}
-	    
-	    public UserFoodList userSelectList(UserFoodVO vo) {
-	    	System.out.println("FoodService의 writeSelectList()");
-	    	System.out.println(vo);
-	    	SqlSession mapper = MySession.getSession();
-	    	UserFoodList writeFoodList  = new UserFoodList();
-	    	writeFoodList.setList(FoodDAO.getInstance().userSelectList(mapper,vo));
-			System.out.println(writeFoodList);
-			mapper.close();
-			return writeFoodList;
-	    }
-	    
+	   
 	    
 	    
 	    

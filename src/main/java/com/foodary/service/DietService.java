@@ -26,34 +26,67 @@ public class DietService {
 	public void insert(DietVO dietvo) {
 		System.out.println("DietService의 insert()");
 		SqlSession mapper = MySession.getSession();
-		System.out.println(mapper);
+//		System.out.println(mapper);
 		DietDAO.getInstance().insert(mapper, dietvo);
 		mapper.commit();
 		mapper.close();
 	}
 	
-	public DietList selectDiet(String date) {
+	public DietList selectDiet(String dietWriteDate) {
 		System.out.println("DietService의 selectDiet()");
 		SqlSession mapper = MySession.getSession();
-		System.out.println(mapper);
+//		System.out.println(mapper);
 
 		DietList dietList = new DietList();
-		dietList.setList(DietDAO.getInstance().selectDiet(mapper, date));
+		dietList.setList(DietDAO.getInstance().selectDiet(mapper, dietWriteDate));
+//		System.out.println(dietList);
+		mapper.close();
+		return dietList;
+	}
+	
+	public DietList selectDietList(DietVO dietvo) {
+		System.out.println("DietService의 selectDietList()");
+		SqlSession mapper = MySession.getSession();
+		DietDAO dao = DietDAO.getInstance();
+		System.out.println(dietvo);
+		DietList dietList = new DietList();
+		dietList.setList(dao.selectDietList(mapper, dietvo));
 		System.out.println(dietList);
 		mapper.close();
 		return dietList;
 	}
 	
-	public DietList selectDietList(String dietWriteDate) {
-		System.out.println("DietService의 selectDietList()");
+	public DietList selectDietUpdateList(DietVO vo) {
+		System.out.println("DietService의 selectDietUpdateList()");
 		SqlSession mapper = MySession.getSession();
 		DietDAO dao = DietDAO.getInstance();
 		
 		DietList dietList = new DietList();
-		dietList.setList(dao.selectDietList(mapper, dietWriteDate));
+		dietList.setList(dao.selectDietUpdateList(mapper, vo));
 		System.out.println(dietList);
+		
 		mapper.close();
 		return dietList;
 	}
+	
+	public DietList selectByDateTime(DietVO vo) {
+		System.out.println("DietService의 selectDietUpdateList()");
+		SqlSession mapper = MySession.getSession();
+		DietDAO dao = DietDAO.getInstance();
+		DietList dietList = new DietList();
+		dietList.setList(dao.selectByDateTime(mapper, vo));
+		mapper.close();
+		return dietList;
+
+	}
+	
+	public void dietUpdateByDateTime(DietVO vo) {
+		System.out.println("FreeboardService의 update()");
+		SqlSession mapper = MySession.getSession();
+		DietDAO.getInstance().dietUpdateByDateTime(mapper, vo);
+		mapper.commit();
+		mapper.close();
+	}
+	
 
 }

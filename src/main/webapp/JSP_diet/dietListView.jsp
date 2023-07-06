@@ -1,4 +1,8 @@
 
+<%@page import="org.apache.catalina.User"%>
+<%@page import="com.foodary.service.UserFoodService"%>
+<%@page import="com.foodary.vo.UserFoodList"%>
+<%@page import="com.foodary.vo.UserFoodVO"%>
 <%@page import="com.foodary.vo.DietList"%>
 <%@page import="java.sql.Time"%>
 <%@page import="java.time.LocalTime"%>
@@ -56,11 +60,11 @@
 <%
 
 	request.setCharacterEncoding("UTF-8");
-	String date = request.getParameter("dietWriteDate");
+	String dietWriteDate = request.getParameter("dietWriteDate");
 	String dietWriteTime = request.getParameter("dietWriteTime");
-
-	DietList dietList = DietService.getInstance().selectDiet(date);
-	pageContext.setAttribute("dietList", dietList);
+	
+	UserFoodList userFoodList = UserFoodService.getInstance().userSelectDietList(dietWriteDate);
+	pageContext.setAttribute("userFoodList" , userFoodList);
 
 %>
 
@@ -71,18 +75,20 @@
 	</div>
 		<form action="showDietOK.jsp" method="post">
 	<div class="diet-table">
-		<h2><%=date%> 식단 목록</h2><br/><br/>
-		<table width="400" border="1" align="center">
-		<c:set var="list" value="${dietList.list}"/>
-		<c:forEach var="dvo" items="${list}">
+		<h2><%=dietWriteDate%> 식단 목록</h2><br/><br/>
+		
+	 <table width="400" border="1" align="center">
+		<c:set var="list" value="${userFoodList.list}"/>
+		<c:forEach var="uvo" items="${list}">
 			<tr>
-				<th>${dvo.dietWriteTime}</th>
-				<td>${dvo.dietFoodName}</td>
+				<th><a href="showDietOK.jsp?dietWriteDate=${uvo.userFoodDate}&dietWriteTime=${uvo.userFoodTime}">
+				${uvo.userFoodTime}</a></th>
+				<td>${uvo.userFoodName}</td>
 			</tr>
-			<input type="hidden" name="dietWriteDate" value="${dietVO.dietWriteDate}" />
-			<input type="hidden" name="dietWriteTime" value="${dietVO.dietWriteTime}" />
+			<input type="hidden" name="dietWriteDate" value="${uvo.userFoodDate}" />
+			<input type="hidden" name="dietWriteTime" value="${uvo.userFoodTime}" />
 		</c:forEach>
-			</table><br/>
+			</table><br/> 
 		<input type="submit" value="목록 보기"/>
 		</div>
 	</form>

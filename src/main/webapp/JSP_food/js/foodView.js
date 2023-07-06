@@ -28,4 +28,3 @@ const searchRequest = new XMLHttpRequest();
 function searchFunction() {
 	
 }
-

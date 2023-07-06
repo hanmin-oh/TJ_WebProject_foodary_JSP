@@ -39,7 +39,7 @@ public class FoodSearch extends HttpServlet {
 		//System.out.println("actuonDo");
 		response.setContentType("text/html; charset=UTF-8");
 		String name = request.getParameter("name");
-		System.out.println(name);
+		//System.out.println(name);
 		
 		// ajax 방식으로 요청한 곳으로 데이터를 리턴한다.
 		// write() 메소드로 ajax 방식으로 요청한 곳으로 데이터를 리턴한다.

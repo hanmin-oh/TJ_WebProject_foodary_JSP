@@ -1,4 +1,5 @@
-<%@page import="com.foodary.vo.DietList"%>
+<%@page import="com.foodary.vo.DietVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -7,10 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식단 보기</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<style type="text/css">
-
+<title>음식목록</title>
+<!-- bootstrap -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="./js/foodWrite.js" defer="defer"></script> 
+<style>
 	.dietContent_title {
 		float: left;
 		width: 100%;
@@ -27,7 +32,9 @@
 	
 	td, th {
 		height: 50px;
+		border: 1px solid black;
 	}
+
 
 </style>
 </head>
@@ -36,19 +43,16 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	
-	//pageContext.getAttribute("dietList");
+
 %>
 
-
-
-
-<!-- 헤더 파일 -->	
-
 <div class="dietContent_title">
-	<b><i class="bi bi-cup-straw"></i>식단 보기</b>
+   <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
 <div class="diet">
+<form class="m-3" action="foodUpdateOK.jsp" method="post">
 <c:set var="list" value="${userFoodList.list}"/>
+<c:forEach var="uvo" items="${list}">
 <table width="1500" align="center" border="1" cellpadding="10" cellspacing="0">
 	<!-- 1 -->
 	<tr>
@@ -56,12 +60,11 @@
 			<label for="ateDate">일시</label>
 		</th>
 		<th colspan="8">
-			<input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
-        	 <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/>
+			<input type="text" name="dietWriteDate" value="${uvo.userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
+        	 <input type="text" name="dietWriteTime" value="${uvo.userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/>
 		</th>
 	</tr>
 	<!-- 2 -->
-	<c:forEach var="uvo" items="${list}">
 	<tr>
 		<th>먹은 음식</th>
 		<td align="center">
@@ -86,6 +89,7 @@
 	</tr>
 	</c:forEach>
 	<c:set var="list" value="${dietList.list}"/>
+	<c:forEach var="dvo" items="${list}">
 	<!-- 3 -->
 	<tr>
 		<th colspan="2">메모</th>
@@ -95,7 +99,7 @@
 				name="dietMemo" 
 				style="resize: none; width: 97%; height: 90%; vertical-align: middle;"
 				readonly="readonly"
-				>${list[0].dietMemo}</textarea>
+				>${dvo.dietMemo}</textarea>
 		</th>
 	</tr>
 	<!-- 4 -->
@@ -108,37 +112,10 @@
 			<input type="button" value="업로드 완료!" style="width: 100px; height: 30px;" onclick=""/>			
 		</th>
 	</tr>
-	<!-- 5 -->
-	<tr>
-		<!-- <form action="/foodary/JSP_food/selectByDateTime.jsp" method="post"> -->
-		<th colspan="10">
-	
-			<input 
-				type="button" 
-				value="수정하기"  
-				style="width: 100px; height: 30px;"
-				onclick="location.href='/foodary/JSP_food/foodUpdateOK.jsp?dietWriteDate=${dvo.dietWriteDate}&dietWriteTime=${dvo.dietWriteTime}'"/>&nbsp;&nbsp;	
-			<input 
-				type="button" 
-				value="삭제하기" 
-				style="width: 100px; height: 30px;"
-				onclick="location.href='foodDeleteOK.jsp'"/>&nbsp;&nbsp;
-			<input 
-				type="button" 
-				value="이미지로 저장" 
-				style="width: 100px; height: 30px;"/>			
-			<input 
-				type="button" 
-				value="목록보기" 
-				onclick="location.href='main.jsp'" 
-				style="width: 100px; height: 30px;"/>&nbsp;&nbsp;
-		</th>
-<!-- 		</form> -->
-	</tr>
+		
 </table>
+</c:forEach>
+</form>
 </div>
-
-<!-- 풋터 파일 -->	
-
 </body>
 </html>

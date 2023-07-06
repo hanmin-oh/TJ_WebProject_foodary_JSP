@@ -3,7 +3,8 @@ function dayCheck() {
 /*	let month = getmonth; */
 	
 	console.log('테스트');
-	window.location.href = 'selectDiet.jsp';
+	var url = 'selectDiet.jsp';
+	location.href = url;
 //	$('#sendYear').val() = year;
 //	$('#sendMonth').val() = month;
 //	$('#sendDay').val() = day;

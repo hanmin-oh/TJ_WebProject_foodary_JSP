@@ -1,8 +1,10 @@
+<%@page import="com.foodary.vo.UserFoodVO"%>
+<%@page import="com.foodary.service.UserFoodService"%>
+<%@page import="com.foodary.vo.UserFoodList"%>
 <%@page import="com.foodary.vo.DietVO"%>
 <%@page import="com.foodary.vo.DietList"%>
 <%@page import="com.foodary.service.DietService"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,24 +12,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <%
-	request.setCharacterEncoding("UTF-8");
-	String dietWriteDate = request.getParameter("dietWriteDate");
-	String dietWriteTime = request.getParameter("dietWriteTime");
-	
-//	out.println(dietWriteDate + ", " + dietWriteTime);
-	DietService service = DietService.getInstance();
-	
-//	1ÆäÀÌÁö ºĞ·®ÀÇ ¸ŞÀÎ±ÛÀ» ¾ò¾î¿Â´Ù.
-	DietList dietList = service.selectDietList(dietWriteDate);
-	out.println(dietList);
-
-//	°øÁö±Û°ú ¸ŞÀÎ±ÛÀÇ ¸ñ·ÏÀ» request ¿µ¿ª¿¡ ÀúÀåÇØ¼­ ¸ŞÀÎ±ÛÀ» È­¸é¿¡ Ç¥½ÃÇÏ´Â ÆäÀÌÁö(listView.jsp)·Î ³Ñ°ÜÁØ´Ù.
-	request.setAttribute("dietList", dietList);
-//	request.setAttribute("currentPage", currentPage);
-	pageContext.forward("showDiet.jsp");
-	
+   request.setCharacterEncoding("UTF-8");
+   String dietWriteDate = request.getParameter("dietWriteDate");
+   String dietWriteTime = request.getParameter("dietWriteTime");
+   
+   DietVO dietvo = new DietVO();
+   dietvo.setDietWriteDate(dietWriteDate);
+   dietvo.setDietWriteTime(dietWriteTime);
+   
+//   out.println(dietWriteDate + ", " + dietWriteTime);
+   DietService service = DietService.getInstance();
+   
+//   1í˜ì´ì§€ ë¶„ëŸ‰ì˜ ë©”ì¸ê¸€ì„ ì–»ì–´ì˜¨ë‹¤.
+   DietList dietList = service.selectDietList(dietvo);
+   out.println(dietList);
+   
+   UserFoodVO userfoodvo = new UserFoodVO();
+   userfoodvo.setuserFoodDate(dietWriteDate);
+   userfoodvo.setuserFoodTime(dietWriteTime);
+   
+   UserFoodList userFoodList = UserFoodService.getInstance().userSelectDietList2(userfoodvo);
+   out.println(userFoodList);
+//   ê³µì§€ê¸€ê³¼ ë©”ì¸ê¸€ì˜ ëª©ë¡ì„ request ì˜ì—­ì— ì €ì¥í•´ì„œ ë©”ì¸ê¸€ì„ í™”ë©´ì— í‘œì‹œí•˜ëŠ” í˜ì´ì§€(listView.jsp)ë¡œ ë„˜ê²¨ì¤€ë‹¤.
+   request.setAttribute("dietList", dietList);
+   request.setAttribute("userFoodList", userFoodList);
+   pageContext.forward("showDiet.jsp");
+   
 %>
 
 </body>

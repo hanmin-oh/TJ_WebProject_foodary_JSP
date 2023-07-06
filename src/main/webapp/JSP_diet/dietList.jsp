@@ -1,3 +1,8 @@
+<%@page import="com.foodary.vo.UserFoodVO"%>
+<%@page import="com.foodary.vo.DietVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.foodary.service.UserFoodService"%>
+<%@page import="com.foodary.vo.UserFoodList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -6,7 +11,6 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="com.foodary.service.DietService"%>
-<%@page import="com.foodary.vo.DietList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -46,28 +50,40 @@
 		e.printStackTrace();
 	}
 
+//	out.println(dietWriteDate);
+
  %>
 
-<jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
+ <jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
 	<jsp:setProperty property="*" name="dvo"/>
-</jsp:useBean>
-	
+</jsp:useBean> 
+<%-- ${dvo} --%>
+
 <%
 
+	
 	if (dietWriteDate != null) {
 //	foodWrite.jsp에서 넘어온 메인글 테이블에 저장하는 메소드 실행
 		DietService.getInstance().insert(dvo);
-	}
 
+	} 
+
+//	out.println(userFoodList);
 //	String dietWriteDate = request.getParameter("dietWriteDate");
 // 	DietList dietList = DietService.getInstance().selectList(dietWriteDate);
 	
 //	request.setAttribute("enter", "\r\n");
-//	request.setAttribute("dietWriteDate", dietWriteDate);
-//	request.setAttribute("dietWriteTime", dietWriteTime);
+	request.setAttribute("dietWriteDate", dietWriteDate);
+	request.setAttribute("dietWriteTime", dietWriteTime);
 //	request.setAttribute("dietList", dietList);
+
+//	out.println("현서 : " + userFoodList);
+//	request.setAttribute("userFoodList", userFoodList);
+
+	pageContext.forward("dietListView.jsp"); 
+	
 //	입력한 음식글 dietListView.jsp로 넘겨준다.
-	response.sendRedirect("dietListView.jsp?dietWriteDate=" + dietWriteDate); 
+//	response.sendRedirect("dietListView.jsp?dietWriteDate=" + dietWriteDate); 
 %>
 
 

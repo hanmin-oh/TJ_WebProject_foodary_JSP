@@ -51,7 +51,11 @@
 	
 //	1페이지 분량의 메인글을 얻어온다.
 	FoodList foodList = service.selectList(currentPage);
-
+	//foodWrite.jsp에서 날짜와 시간을 띄우기 위해 세션에 값을 저장한다. 
+	String dietWriteDate = request.getParameter("dietWriteDate");
+  	String dietWriteTime = request.getParameter("dietWriteTime");
+	  session.setAttribute("dietWriteDate", dietWriteDate);
+	  session.setAttribute("dietWriteTime", dietWriteTime);
 
 //	공지글과 메인글의 목록을 request 영역에 저장해서 메인글을 화면에 표시하는 페이지(listView.jsp)로 넘겨준다.
 	request.setAttribute("foodList", foodList);

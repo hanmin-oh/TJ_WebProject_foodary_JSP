@@ -3,17 +3,30 @@
 <mapper namespace="com.foodary.vo.DietVO">
 
 	<insert id="dietInsert" parameterType="dvo">
-		insert into diet (idx,  dietMemo, dietWriteDate, dietWriteTime) 
+		insert into diet (idx, dietMemo, dietWriteDate, dietWriteTime) 
 		values (diet_idx_seq.nextval, #{dietMemo}, #{dietWriteDate}, #{dietWriteTime})
 	</insert>
 	
 	<select id="selectDiet" parameterType="String" resultType="dvo">
-		select * from diet where dietWriteDate = #{date} order by dietWriteTime asc
-	</select>
-	
-	<select id="selectDietList" parameterType="java.util.HashMap" resultType="dvo">
 		select * from diet where dietWriteDate = #{dietWriteDate} order by dietWriteTime asc
 	</select>
+	
+	<select id="selectDietList" parameterType="dvo" resultType="dvo">
+		select * from diet where dietWriteDate = #{dietWriteDate} and dietWriteTime = #{dietWriteTime}	
+	</select>
+	
+	<select id="selectDietUpdateList" parameterType="dvo" resultType="dvo">
+		select * from diet where dietWriteDate = #{dietWriteDate} and dietWriteTime = #{dietWriteTime} order by dietWriteTime asc	
+	</select>
+	
+	<select id="selectByDateTime" parameterType="dvo" resultType="dvo">
+		select * from diet where dietWriteDate = #{dietWriteDate} and dietWriteTime = #{dietWriteTime} order by dietWriteTime asc		
+	</select>
+	
+	<update id="dietUpdateByDateTime" parameterType="dvo">
+		update diet set dietMemo = #{dietMemo}, dietPicture = #{dietPicture}, dietWriteDate = #{dietWriteDate}, dietWriteTime = #{dietWriteTime} 
+			where dietWriteDate = dietWriteDate and dietWriteTime = dietWriteTime
+	</update>
 	
 </mapper>
 

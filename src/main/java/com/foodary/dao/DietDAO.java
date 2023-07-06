@@ -23,16 +23,28 @@ public class DietDAO {
 		mapper.insert("dietInsert", dietvo);
 	}
 	
-	public ArrayList<DietVO> selectDiet(SqlSession mapper, String d) {
+	public ArrayList<DietVO> selectDiet(SqlSession mapper, String dietWriteDate) {
 		System.out.println("DietDAO 클래스의 selectDiet()");
-		return (ArrayList<DietVO>) mapper.selectList("selectDiet", d);
+		return (ArrayList<DietVO>) mapper.selectList("selectDiet", dietWriteDate);
 	}
 	
-	public ArrayList<DietVO> selectDietList(SqlSession mapper, String dietWriteDate) {
+	public ArrayList<DietVO> selectDietList(SqlSession mapper, DietVO dietvo) {
 		System.out.println("DietDAO 클래스의 selectDietList()");
-		return (ArrayList<DietVO>) mapper.selectList("selectDietList", dietWriteDate);
+		return (ArrayList<DietVO>) mapper.selectList("selectDietList", dietvo);
+	}
+
+	public ArrayList<DietVO> selectDietUpdateList(SqlSession mapper, DietVO vo) {
+		System.out.println("DietDAO 클래스의 selectDietUpdateList()");
+		return (ArrayList<DietVO>) mapper.selectList("selectDietUpdateList", vo);
 	}
 	
+	public ArrayList<DietVO> selectByDateTime(SqlSession mapper, DietVO vo) {
+		System.out.println("DietDAO 클래스의 selectByDateTime()");
+		return (ArrayList<DietVO>) mapper.selectList("selectByDateTime", vo);
+	}
 	
-	
+	public void dietUpdateByDateTime(SqlSession mapper, DietVO vo) {
+		System.out.println("DietDAO 클래스의 selectByDateTime()");
+		mapper.update("dietUpdateByDateTime", vo);
+	}
 }
