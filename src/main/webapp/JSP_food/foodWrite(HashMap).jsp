@@ -1,6 +1,5 @@
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="javax.servlet.http.HttpSession" %>
-<%@ page session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -41,37 +40,24 @@
 <body>
 
 <%
-		String[] foodNames;
-		String[] kcals;
-		String[] carbs;
-		String[] proteins;
-		String[] fats;
+	HashMap<String, String> foodData = new HashMap<>();
 	
-	    // 요청 파라미터에서 데이터 가져오기
-	    foodNames = request.getParameterValues("foodName");
-	    kcals = request.getParameterValues("kcal");
-	    carbs = request.getParameterValues("carbs");
-	    proteins = request.getParameterValues("protein");
-	    fats = request.getParameterValues("fat");
+	String[] foodNames = request.getParameterValues("foodName");
+	String[] kcals = request.getParameterValues("kcal");
+	String[] carbs = request.getParameterValues("carbs");
+	String[] proteins = request.getParameterValues("protein");
+	String[] fats = request.getParameterValues("fat");
 	
-	    if (foodNames == null) {
-	        foodNames = new String[]{};
-	        kcals = new String[]{};
-	        carbs = new String[]{};
-	        proteins = new String[]{};
-	        fats = new String[]{};
-	   }
-	    request.setAttribute("foodNames", foodNames);
-		request.setAttribute("kcals", kcals);
-		request.setAttribute("carbs", carbs);
-		request.setAttribute("proteins", proteins);
-		request.setAttribute("fats", fats);
-	    // 세션에 데이터 저장
-	    session.setAttribute("foodNames", foodNames);
-	    session.setAttribute("kcals", kcals);
-	    session.setAttribute("carbs", carbs);
-	    session.setAttribute("proteins", proteins);
-	    session.setAttribute("fats", fats);
+	if (foodNames != null && kcals != null && carbs != null && proteins != null && fats != null) {
+	    int length = Math.min(Math.min(Math.min(foodNames.length, kcals.length), carbs.length), Math.min(proteins.length, fats.length));
+	    
+	    for (int i = 0; i < length; i++) {
+	        foodData.put(foodNames[i], "kcal: " + kcals[i] + ", carbs: " + carbs[i] 
+	        		+ ", protein: " + proteins[i] + ", fat: " + fats[i]);
+	    }
+	}
+	out.println(foodData);
+	request.setAttribute("foodData", foodData);
 %>
 
 
@@ -110,64 +96,72 @@
      <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <tbody id="tableBody">
       <!-- 3 -->
-		<c:set var="foodNames" value="${requestScope.foodNames}" />
-		<c:set var="kcals" value="${requestScope.kcals}" />
-		<c:set var="carbs" value="${requestScope.carbs}" />
-		<c:set var="proteins" value="${requestScope.proteins}" />
-		<c:set var="fats" value="${requestScope.fats}" />
-		<c:if test="${not empty foodNames}">
-		<c:forEach var="index" begin="0" end="${fn:length(foodNames) - 1}">
-		  <tr>
-         <td colspan="2">
-            <label for="foodName">음식이름</label>
-         </td>
-         <td colspan="2">
-            <input type="text" id="dietFoodName" name="dietFoodName" value="${foodNames[index]}" />
-         </td>
-         
-         <td colspan="1">
-            <label for="totalcalorie">칼로리</label>
-         </td>
-         
-         <td colspan="2" class="kcals" id="kcal">
-            <input type="text" id="dietKcal" name="dietKcal" value="${kcals[index]}"/>      
-         </td>
-         
-         <td colspan="1">
-            <label for="carbo">탄수화물</label>
-         </td>
-         
-         <td colspan="1"class="carbs">
-            <input type="text" id="dietCarbs" name="dietCarbs" value="${carbs[index]}"/>      
-         </td>
-         
-         <td colspan="1">
-            <label for="protein">단백질</label>
-         </td>
-         
-         <td colspan="1" class="proteins">
-           <input type="text" id="dietProtein" name="dietProtein" value="${proteins[index]}"/>       
-         </td>
-         
-         <td colspan="1" >
-            <label for="province">지방</label>
-         </td>
-         
-         <td colspan="1" class="fats">
-            <input type="text" id="dietFat" name="dietFat" value="${fats[index]}"/>      
-         </td>
-         <td colspan="1" align="center">
-             <input type="button" value="추가" onclick="updateVOValues()"/>
-         </td>
-      </tr>
-		</c:forEach>
-    </c:if>
-    <c:if test="${empty foodNames}">
-	  <tr>
-	  </tr>
-	</c:if>
-    </tbody>
-    </table>
+      
+     <c:set var="foodData" value="${userFoodList.list}" />
+<c:forEach var="foodEntry" items="${foodData}">
+  <c:set var="entry" value="${foodEntry.key}" />
+  <c:set var="foodName" value="${entry.substring(0, entry.indexOf('='))}" />
+  <c:set var="kcal" value="${foodEntry.value['kcal']}" />
+  <c:set var="carbs" value="${foodEntry.value['carbs']}" />
+  <c:set var="protein" value="${foodEntry.value['protein']}" />
+  <c:set var="fat" value="${foodEntry.value['fat']}" />
+  
+  <tr>
+    <td colspan="1" align="center">
+      내 식단
+    </td>
+    <td colspan="2" class="text-center">
+      <label for="foodName">음식이름</label>
+    </td>
+    <td colspan="2" class="text-center">
+      <input type="text" name="dietFoodName" value="${foodName}" />
+    </td>
+    
+    <td colspan="1" class="text-center">
+      <label for="totalcalorie">칼로리</label>
+    </td>
+    
+    <td colspan="2" class="text-center" id="kcal">
+      <input type="text" name="dietKcal" value="${kcal}" />
+    </td>
+    
+    <td colspan="1">
+      <label for="carbo">탄수화물</label>
+    </td>
+    
+    <td colspan="1" class="text-center">
+      <input type="text" name="dietCarbs" value="${carbs}" />
+    </td>
+    
+    <td colspan="1">
+      <label for="protein">단백질</label>
+    </td>
+    
+    <td colspan="1">
+      <input type="text" name="dietProtein" value="${protein}" />
+    </td>
+    
+    <td colspan="1" class="text-center">
+      <label for="province">지방</label>
+    </td>
+    
+    <td colspan="1" align="center">
+      <input type="text" name="dietFat" value="${fat}" />
+    </td>
+    
+    <td colspan="1" align="center">
+      <input type="button" value="수정" onclick="location.href='updateFood.jsp'" />
+      <input type="button" value="삭제" onclick="location.href='deleteFood.jsp'" />
+    </td>
+  </tr>
+</c:forEach>
+
+
+    
+    
+    
+    
+    
       <!-- 4 -->
      <table width="1400" align="center" border="1" cellpadding="11" cellspacing="0">
       <tbody id="tableBody">

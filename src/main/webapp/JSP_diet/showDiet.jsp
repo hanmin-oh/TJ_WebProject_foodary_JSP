@@ -114,10 +114,10 @@
 		<th colspan="10">
 	
 			<input 
-				type="button" 
-				value="수정하기"  
-				style="width: 100px; height: 30px;"
-				onclick="location.href='/foodary/JSP_food/foodUpdateOK.jsp?dietWriteDate=${dvo.dietWriteDate}&dietWriteTime=${dvo.dietWriteTime}'"/>&nbsp;&nbsp;	
+	            type="button" 
+	            value="수정하기"  
+	            style="width: 100px; height: 30px;"
+	            onclick="location.href='/foodary/JSP_food/foodUpdateOK.jsp?dietWriteDate=${list[0].dietWriteDate}&dietWriteTime=${list[0].dietWriteTime}'"/>&nbsp;&nbsp;   
 			<input 
 				type="button" 
 				value="삭제하기" 

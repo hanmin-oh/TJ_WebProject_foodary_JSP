@@ -32,6 +32,7 @@ public class FoodDAO {
 
 		public ArrayList<FoodVO> search(SqlSession mapper , String name) {
 			System.out.println("search() 실행");
+			System.out.println(name);
 			return (ArrayList<FoodVO>) mapper.selectList("search", name);
 		}
 		

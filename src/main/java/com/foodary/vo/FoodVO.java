@@ -4,14 +4,14 @@ public class FoodVO {
 	
 	private int idx;
 	private String foodName;
-	private int kcal;
-	private int carbs;
-	private int protein;
-	private int fat;
+	private float kcal;
+	private float carbs;
+	private float protein;
+	private float fat;
 	
 	public FoodVO() {	}
 
-	public FoodVO(int idx, String foodName, int kcal, int carbs, int protein, int fat) {
+	public FoodVO(int idx, String foodName, float kcal, float carbs, float protein, float fat) {
 		this.idx = idx;
 		this.foodName = foodName;
 		this.kcal = kcal;
@@ -36,43 +36,38 @@ public class FoodVO {
 		this.foodName = foodName;
 	}
 
-	public int getKcal() {
+	public float getKcal() {
 		return kcal;
 	}
 
-	public void setKcal(int kcal) {
+	public void setKcal(float kcal) {
 		this.kcal = kcal;
 	}
 
-	public int getCarbs() {
+	public float getCarbs() {
 		return carbs;
 	}
 
-	public void setCarbs(int carbs) {
+	public void setCarbs(float carbs) {
 		this.carbs = carbs;
 	}
 
-	public int getProtein() {
+	public float getProtein() {
 		return protein;
 	}
 
-	public void setProtein(int protein) {
+	public void setProtein(float protein) {
 		this.protein = protein;
 	}
 
-	public int getFat() {
+	public float getFat() {
 		return fat;
 	}
 
-	public void setFat(int fat) {
+	public void setFat(float fat) {
 		this.fat = fat;
 	}
 
-	@Override
-	public String toString() {
-		return "FoodVO [idx=" + idx + ", foodName=" + foodName + ", kcal=" + kcal + ", carbs=" + carbs + ", protein="
-				+ protein + ", fat=" + fat + "]";
-	}
-
+	
 	
 }

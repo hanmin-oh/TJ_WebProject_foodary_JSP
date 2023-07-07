@@ -67,7 +67,7 @@
 		DietService.getInstance().insert(dvo);
 
 	} 
-
+	DietService.getInstance().insert(dvo);
 //	out.println(userFoodList);
 //	String dietWriteDate = request.getParameter("dietWriteDate");
 // 	DietList dietList = DietService.getInstance().selectList(dietWriteDate);
