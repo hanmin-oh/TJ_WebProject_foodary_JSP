@@ -46,5 +46,23 @@ public class UserFoodDAO {
 		System.out.println("UserFoodDAO 클래스의 selectUserFoodBeforeSelect()");
 		mapper.update("dietUpdateByDateTime", uvo);
 	}
-
+	
+   
+   // showDiet.jsp => foodUpdateOK.jsp
+   public ArrayList<UserFoodVO> selectUserFoodListTofoodwrite(SqlSession mapper, UserFoodVO uvo) {
+      System.out.println("UserFoodDAO 클래스의 selectUserFoodListTofoodwrite()");
+      return (ArrayList<UserFoodVO>) mapper.selectList("selectUserFoodListTofoodwrite", uvo);
+   }
+   
+   // deleteFood.jsp
+   public void deleteUserFoodList(SqlSession mapper, UserFoodVO uvo) {
+	   System.out.println("UserFoodDAO 클래스의 deleteUserFoodList()");
+	   mapper.delete("deleteUserFoodList", uvo);      
+   }
+   
+   // updateFood.jsp
+   public void UpdateUserFoodList(SqlSession mapper, UserFoodVO uvo) {
+      System.out.println("UserFoodDAO 클래스의 UpdateUserFoodList()");
+      mapper.update("UpdateUserFoodList", uvo);
+   }
 }

@@ -81,6 +81,34 @@ public class UserFoodService {
 		mapper.close();
     }
     
+    // showDiet.jsp => foodUpdateOK.jsp
+    public UserFoodList selectUserFoodListTofoodwrite(UserFoodVO uvo) {
+       System.out.println("UserFoodService의 selectUserFoodListTofoodwrite()");
+       SqlSession mapper = MySession.getSession();
+       System.out.println(uvo);
+       UserFoodList userFoodList = new UserFoodList();
+       userFoodList.setList(UserFoodDAO.getInstance().selectUserFoodListTofoodwrite(mapper, uvo));
+       System.out.println(userFoodList);
+       mapper.close();
+       return userFoodList;
+    }
     
+    public void deleteUserFoodList(UserFoodVO uvo) {
+        System.out.println("UserFoodService의 deleteUserFoodList()");
+        SqlSession mapper = MySession.getSession();
+        System.out.println(uvo);
+        UserFoodDAO.getInstance().deleteUserFoodList(mapper, uvo);
+        mapper.commit();
+        mapper.close();
+     }
     
+    // foodUpdateComplete.jsp
+    public void UpdateUserFoodList(UserFoodVO uvo) {
+       System.out.println("UserFoodService의 UpdateUserFoodList()");
+       SqlSession mapper = MySession.getSession();
+       System.out.println(uvo);
+      UserFoodDAO.getInstance().UpdateUserFoodList(mapper, uvo);
+      mapper.commit();
+      mapper.close();
+    }
 }

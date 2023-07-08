@@ -28,7 +28,24 @@
 			userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate}
 			where dietWriteDate = dietWriteDate and dietWriteTime = dietWriteTime
    </update>
-
+	
+	   <!-- showDiet.jsp => foodUpdateOK.jsp -->
+    <select id="selectUserFoodListTofoodwrite" parameterType="uvo" resultType="uvo">
+      SELECT * FROM USERFOOD WHERE userFoodDate = #{userFoodDate} AND userFoodTime = #{userFoodTime}
+   </select>
+	
+   <update id="UpdateUserFoodList" parameterType="uvo">
+      update userfood set userFoodName = #{userFoodName}, userKcal = #{userKcal}, userCarbs = #{userCarbs}, userProtein = #{userProtein} ,
+         userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate}
+         where userFoodTime = #{userFoodTime} and userFoodDate = #{userFoodDate} and userFoodName = #{userFoodName}
+   </update>
+   
+     <delete id="deleteUserFoodList" parameterType="uvo">
+         delete from userfood where userFoodTime = #{userFoodTime} and userFoodDate = #{userFoodDate}
+   </delete>
+   
+   
+		
 </mapper>
 
 

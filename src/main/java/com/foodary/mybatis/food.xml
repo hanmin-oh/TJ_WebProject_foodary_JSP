@@ -23,7 +23,6 @@
 		SELECT * FROM FOOD WHERE foodname like '%'||#{name}||'%' ORDER BY idx DESC
 	</select>
 	
-	
 </mapper>
 
 

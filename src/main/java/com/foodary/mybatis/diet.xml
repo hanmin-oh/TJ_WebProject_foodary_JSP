@@ -28,6 +28,10 @@
 			where dietWriteDate = dietWriteDate and dietWriteTime = dietWriteTime
 	</update>
 	
+   <select id="selectDietListTofoodwrite" parameterType="dvo" resultType="dvo">
+      select * from diet where dietWriteDate = #{dietWriteDate} and dietWriteTime = #{dietWriteTime}   
+   </select>
+	
 </mapper>
 
 

@@ -49,13 +49,13 @@
 	<jsp:setProperty property="*" name="vo"/>
 </jsp:useBean>
 <%
-	String[] foodNames = (String[]) session.getAttribute("foodNames");
+/* 	String[] foodNames = (String[]) session.getAttribute("foodNames");
 	String[] kcals = (String[]) session.getAttribute("kcals");
 	String[] carbs = (String[]) session.getAttribute("carbs");
 	String[] proteins = (String[]) session.getAttribute("proteins");
 	String[] fats = (String[]) session.getAttribute("fats");
 	
-	/* session.setAttribute("foodNames", foodNames);
+	session.setAttribute("foodNames", foodNames);
 	session.setAttribute("kcals", kcals);
 	session.setAttribute("carbs", carbs);
 	session.setAttribute("proteins", proteins);

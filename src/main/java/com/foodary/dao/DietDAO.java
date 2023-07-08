@@ -47,4 +47,10 @@ public class DietDAO {
 		System.out.println("DietDAO 클래스의 selectByDateTime()");
 		mapper.update("dietUpdateByDateTime", vo);
 	}
+	
+   // showDiet.jsp => foodUpdateOK.jsp
+   public ArrayList<DietVO> selectDietListTofoodwrite(SqlSession mapper, DietVO vo) {
+      System.out.println("DietDAO 클래스의 selectDietListTofoodwrite()");
+      return (ArrayList<DietVO>) mapper.selectList("selectDietListTofoodwrite", vo);
+   }
 }

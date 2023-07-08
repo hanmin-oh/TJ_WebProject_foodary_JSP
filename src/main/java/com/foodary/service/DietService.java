@@ -88,5 +88,17 @@ public class DietService {
 		mapper.close();
 	}
 	
+	   // showDiet.jsp => foodUpdateOK.jsp
+   public DietList selectDietListTofoodwrite(DietVO vo) {
+      System.out.println("DietService의 selectDietListTofoodwrite()");
+      SqlSession mapper = MySession.getSession();
+      System.out.println(vo);
+      DietDAO dao = DietDAO.getInstance();
+      DietList dietList = new DietList();
+      dietList.setList(dao.selectDietListTofoodwrite(mapper, vo));
+      mapper.close();
+      return dietList;
+   }
+	
 
 }
