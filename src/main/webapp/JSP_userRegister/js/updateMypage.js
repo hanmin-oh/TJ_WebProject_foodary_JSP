@@ -24,5 +24,10 @@ function updateMypage() {
 			updateBtn.value = "정보 수정";
 			
 		}
+		
 }
 
+function passwordUpdate() {
+  let password = document.getElementById("password");
+  password.disabled = false;
+}	

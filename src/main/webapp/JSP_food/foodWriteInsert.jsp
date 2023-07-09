@@ -43,29 +43,19 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
+	
+	
 %>
 
-<jsp:useBean id="vo" class="com.foodary.vo.UserFoodVO">
-	<jsp:setProperty property="*" name="vo"/>
+<jsp:useBean id="uvo" class="com.foodary.vo.UserFoodVO">
+	<jsp:setProperty property="*" name="uvo"/>
 </jsp:useBean>
 <%
-/* 	String[] foodNames = (String[]) session.getAttribute("foodNames");
-	String[] kcals = (String[]) session.getAttribute("kcals");
-	String[] carbs = (String[]) session.getAttribute("carbs");
-	String[] proteins = (String[]) session.getAttribute("proteins");
-	String[] fats = (String[]) session.getAttribute("fats");
-	
-	session.setAttribute("foodNames", foodNames);
-	session.setAttribute("kcals", kcals);
-	session.setAttribute("carbs", carbs);
-	session.setAttribute("proteins", proteins);
-	session.setAttribute("fats", fats); */
-	
-	out.println(vo);
-	out.println(vo.getuserFoodName());
-	UserFoodService.getInstance().insertFood(vo);
-	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(vo);
-	out.println(vo);
+	out.println(uvo);
+	out.println(uvo.getUserFoodName());
+	UserFoodService.getInstance().insertFood(uvo);
+	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
+	out.println(uvo);
 	request.setAttribute("userFoodList", userFoodList);
 	pageContext.forward("foodWrite.jsp");
 %>

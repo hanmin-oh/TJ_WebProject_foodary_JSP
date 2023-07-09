@@ -38,24 +38,24 @@ public class FoodSearch extends HttpServlet {
 	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//System.out.println("actuonDo");
 		response.setContentType("text/html; charset=UTF-8");
-		String name = request.getParameter("name");
+		String foodName = request.getParameter("foodName");
 		//System.out.println(name);
 		
 		// ajax 방식으로 요청한 곳으로 데이터를 리턴한다.
 		// write() 메소드로 ajax 방식으로 요청한 곳으로 데이터를 리턴한다.
 		// write() 메소드의 인수는 반드시 문자열이 나와야 하고 ajax로 서블릿을 호출한 곳에서는
 		// responseText를 사용해서 받는다.
-		response.getWriter().write(getJSON(name));
+		response.getWriter().write(getJSON(foodName));
 	}
 	
-	private String getJSON(String name) {
+	private String getJSON(String foodName) {
 		//검색할 이름을 입력하지 않고 검색 버튼을 클릭했을 때 넘어오는 null을 공백으로 처리한다. 
-		if(name == null) {
-			name = "";
+		if(foodName == null) {
+			foodName = "";
 		}
 		SqlSession mapper = MySession.getSession();
 		// ajax 테이블에서 입력한 문자열이 name 필드에 포함된 데이터를 얻어온다. 
-		ArrayList<FoodVO> list = FoodDAO.getInstance().search(mapper ,name);
+		ArrayList<FoodVO> list = FoodDAO.getInstance().search(mapper ,foodName);
 		//System.out.println(list);
 		
 		//테이블을 검색해서 얻어온 데이터를 json 형식의 문자열로 만든다.

@@ -37,7 +37,7 @@
 </style>
 </head>
 <body>
-
+<%-- 
 <%
 		String[] foodNames;
 		String[] kcals;
@@ -72,22 +72,27 @@
 	    session.setAttribute("fats", fats);
 %>
 
-
+ --%>
+ ${dietList}
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
-<form action="/foodary/JSP_diet/dietList.jsp" method="post">
+<form action="/foodary/JSP_food/foodUpdateComplete.jsp" method="post">
 <div class="diet">
+   <c:set var="list" value="${userFoodList.list}"/>
    <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <!-- 1 -->
-      <c:set var="dvo" value="${DietVO.vo}" />
+      <%-- <c:set var="dvo" value="${DietVO.vo}" /> --%>
+      
       <tr>
          <td colspan="2" class="text-center">
             <label for="ateDate">일시</label>
          </td>
-            <td colspan="12">
-                <input type="date" id="dietWriteDate" name="dietWriteDate" style="width: 48%; height: 90%;" value="${dvo.dietWriteDate}"/>
-            <input type="time" id="dietWriteTime" name="dietWriteTime" style="width: 48%; height: 90%;" value="${dvo.dietWriteTime}" }/>
+            <td colspan="6">
+               <input type="Date" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;"/>       
+            </td>
+            <td colspan="6">            
+               <input type="Time" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;"/>       
            </td>
          </tr>
           <!-- 2 -->
@@ -228,6 +233,8 @@
     </table>
     <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
    <!-- 4 -->
+   <c:set var="list" value="${dietList.list}"/>
+   <input type="hidden"  name="idx" value="${list[0].idx}"/>
    <tr>
       <td colspan="2" class="text-center">
          <label for="memo">메모</label>
@@ -238,7 +245,7 @@
             rows="10" 
             name="dietMemo" 
             style="resize: none; width: 97%; height: 75%; vertical-align: middle;"
-            ></textarea>
+            >${list[0].dietMemo}</textarea>
       </td>
    </tr>
    <!-- 5 -->

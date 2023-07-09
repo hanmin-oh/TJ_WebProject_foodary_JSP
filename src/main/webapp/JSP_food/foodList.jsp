@@ -41,21 +41,48 @@
 	request.setCharacterEncoding("UTF-8");
 //	이전 페이지에서 넘어오는 화면에 표시할 페이지 번호를 받는다.
 	int currentPage = 1;
+   	String userFoodDate = request.getParameter("userFoodDate");
+  	String userFoodTime = request.getParameter("userFoodTime");
+	  session.setAttribute("userFoodDate", userFoodDate);
+	  session.setAttribute("userFoodTime", userFoodTime);
 	try {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	} catch (NumberFormatException e) {
 		
 	}
 	
-	FoodService service = FoodService.getInstance();
-	
-//	1페이지 분량의 메인글을 얻어온다.
-	FoodList foodList = service.selectList(currentPage);
+	 // 카테고리와 검색어를 받는다.
+	  String foodName = request.getParameter("foodName"); //검색어
+	  String list = request.getParameter("list"); //목록으로 돌아오는 변수
+	//  넣어온 검색어가 있으면 카테고리와 검색어를 세션에 저장하고 넘어온 검색어가 없으면 세션에 저장된 카테고리와 검색어를
+	//  저장한다.
+	  if(foodName != null) {
+		  foodName = foodName.trim().length() == 0 ? "" : foodName;
+	    session.setAttribute("foodName" , foodName);
+	  } else {
+		  foodName = (String) session.getAttribute("foodName");
+	  }
+	  if(list != null) {
+		  foodName = null;
+	    session.removeAttribute("foodName");
+	  }
+	  
+	  FoodService service = FoodService.getInstance();
+//		1페이지 분량의 메인글을 얻어온다.
+		FoodList foodList = service.selectList(currentPage);
+	  if(foodName == null || foodName.trim().length() == 0) { //검색어가 넘어왔는가?
+//	    검색어가 입력되지 않은 경우
+	    foodList = service.selectList(currentPage);
+	  } else {
+//	    검색어가 입력되고 카테고리가 "내용"인 경우
+	    foodList = service.selectListFood(currentPage , foodName);
+	  }	  
+	  
 	//foodWrite.jsp에서 날짜와 시간을 띄우기 위해 세션에 값을 저장한다. 
-	String dietWriteDate = request.getParameter("dietWriteDate");
-  	String dietWriteTime = request.getParameter("dietWriteTime");
-	  session.setAttribute("dietWriteDate", dietWriteDate);
-	  session.setAttribute("dietWriteTime", dietWriteTime);
+/* 	String dietWriteDate = request.getParameter("userFoodDate");
+  	String dietWriteTime = request.getParameter("userFoodTime");
+	  request.setAttribute("userFoodDate", dietWriteDate);
+	  request.setAttribute("userFoodTime", dietWriteTime); */
 
 //	공지글과 메인글의 목록을 request 영역에 저장해서 메인글을 화면에 표시하는 페이지(listView.jsp)로 넘겨준다.
 	request.setAttribute("foodList", foodList);

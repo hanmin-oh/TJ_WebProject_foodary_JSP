@@ -55,9 +55,9 @@ public class UserFoodDAO {
    }
    
    // deleteFood.jsp
-   public void deleteUserFoodList(SqlSession mapper, UserFoodVO uvo) {
+   public void deleteUserFoodList(SqlSession mapper, int idx) {
 	   System.out.println("UserFoodDAO 클래스의 deleteUserFoodList()");
-	   mapper.delete("deleteUserFoodList", uvo);      
+	   mapper.delete("deleteUserFoodList", idx);      
    }
    
    // updateFood.jsp

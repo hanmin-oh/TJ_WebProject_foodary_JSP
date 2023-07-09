@@ -114,7 +114,7 @@
       <th colspan="10">
       
          <input 
-            type="button" 
+            type="submit" 
             value="수정하기"  
             style="width: 100px; height: 30px;"
             onclick="location.href='/foodary/JSP_food/foodUpdateOK.jsp?dietWriteDate=${list[0].dietWriteDate}&dietWriteTime=${list[0].dietWriteTime}'"/>&nbsp;&nbsp;   
@@ -122,7 +122,7 @@
             type="button" 
             value="삭제하기" 
             style="width: 100px; height: 30px;"
-            onclick="location.href='foodDeleteOK.jsp'"/>&nbsp;&nbsp;
+            onclick="location.href='/foodary/JSP_food/foodDeleteOK.jsp?idx=${list[0].idx}&dietWriteDate=${list[0].dietWriteDate}&dietWriteTime=${list[0].dietWriteTime}'"/>&nbsp;&nbsp;
          <input 
             type="button" 
             value="이미지로 저장" 

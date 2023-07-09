@@ -16,17 +16,12 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	int idx = Integer.parseInt(request.getParameter("idx"));
 	
-	String userFoodDate = request.getParameter("userFoodDate");
-	String userFoodTime = request.getParameter("userFoodTime");
-	System.out.println(userFoodDate + userFoodTime);
-	UserFoodVO userfoodvo = new UserFoodVO();
-	userfoodvo.setuserFoodDate(userFoodDate);
-	userfoodvo.setuserFoodTime(userFoodTime);
+	UserFoodService.getInstance().deleteUserFoodList(idx);
 	
-	UserFoodService.getInstance().deleteUserFoodList(userfoodvo);
-	
-	pageContext.forward("foodUpdate.jsp");
+	pageContext.forward("foodWrite.jsp");
 %>
 
 </body>

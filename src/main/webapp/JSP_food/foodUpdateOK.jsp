@@ -51,8 +51,8 @@
 //	out.println(dietList);
 //	UserFoodVO uvo = new UserFoodVO();
 	UserFoodVO userfoodvo = new UserFoodVO();
-	userfoodvo.setuserFoodDate(dietWriteDate);
-	userfoodvo.setuserFoodTime(dietWriteTime);
+   userfoodvo.setUserFoodDate(dietWriteDate);
+   userfoodvo.setUserFoodTime(dietWriteTime);
 
 	UserFoodList userFoodList = UserFoodService.getInstance().selectUserFoodListTofoodwrite(userfoodvo);
 	out.println(userFoodList);

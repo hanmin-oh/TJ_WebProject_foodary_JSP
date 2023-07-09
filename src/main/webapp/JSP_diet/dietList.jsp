@@ -18,20 +18,20 @@
 <meta charset="UTF-8">
 <title>식단 목록</title>
 <!-- <script type="text/javascript" src="html2canvas.hertzen.com_dist_html2canvas"></script> -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <!-- insertOK.jsp -->
 <%
 	request.setCharacterEncoding("UTF-8");
-
-	String dietWriteDate_re = request.getParameter("dietWriteDate");
-	SimpleDateFormat inputDate = new SimpleDateFormat("yyyy-MM-dd");
+ 
+	String dietMemo = request.getParameter("dietMemo");
+	/*	String dietWriteDate_re = request.getParameter("userfoodDate");
+//	SimpleDateFormat inputDate = new SimpleDateFormat("yyyy-MM-dd");
 	SimpleDateFormat outputDate = new SimpleDateFormat("yyyy-MM-dd");
 //	String dietWriteDate = dietWriteDate_re.replace("T", " ");
-//	out.println(dietWriteDate);
 
-	String dietWriteTime_re = request.getParameter("dietWriteTime");
+//	String dietWriteTime_re = request.getParameter("userfoodTime");
 	SimpleDateFormat inputTime = new SimpleDateFormat("HH:mm");
 //	SimpleDateFormat outputTime = new SimpleDateFormat("hh:mm");
 	
@@ -49,27 +49,28 @@
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-
-//	out.println(dietWriteDate);
-
+	out.println(dietWriteDate); */
+	
  %>
 
  <jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
 	<jsp:setProperty property="*" name="dvo"/>
 </jsp:useBean> 
-<%-- ${dvo} --%>
+${dvo}
 
 <%
-
-	
-	if (dietWriteDate != null) {
+	String dietWriteDate = request.getParameter("userfoodDate");
+	String dietWriteTime = request.getParameter("userfoodTime");
+	out.println(dietWriteDate);
+	dvo.setDietWriteDate(dietWriteDate);
+	dvo.setDietWriteTime(dietWriteTime);
+	out.println(dvo);
+	if (dietMemo != null) {
 //	foodWrite.jsp에서 넘어온 메인글 테이블에 저장하는 메소드 실행
-		DietService.getInstance().insert(dvo);
-
+		//DietService.getInstance().insert(dvo);
 	} 
-	DietService.getInstance().insert(dvo);
 //	out.println(userFoodList);
-//	String dietWriteDate = request.getParameter("dietWriteDate");
+//	
 // 	DietList dietList = DietService.getInstance().selectList(dietWriteDate);
 	
 //	request.setAttribute("enter", "\r\n");
@@ -80,7 +81,7 @@
 //	out.println("현서 : " + userFoodList);
 //	request.setAttribute("userFoodList", userFoodList);
 
-	pageContext.forward("dietListView.jsp"); 
+	//pageContext.forward("dietListView.jsp"); 
 	
 //	입력한 음식글 dietListView.jsp로 넘겨준다.
 //	response.sendRedirect("dietListView.jsp?dietWriteDate=" + dietWriteDate); 
@@ -90,4 +91,4 @@
 
 
 </body>
-</html>
+</html>;

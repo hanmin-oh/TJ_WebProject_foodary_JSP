@@ -53,4 +53,13 @@ public class DietDAO {
       System.out.println("DietDAO 클래스의 selectDietListTofoodwrite()");
       return (ArrayList<DietVO>) mapper.selectList("selectDietListTofoodwrite", vo);
    }
+   
+	public void UpdateDietList(SqlSession mapper, DietVO dvo) {
+		System.out.println("DietDAO 클래스의 UpdateDietList()");
+		mapper.update("UpdateDietList", dvo);
+	}
+	public void deleteDietList(SqlSession mapper, int idx) {
+		mapper.delete("deleteDietList", idx);
+		
+	}
 }

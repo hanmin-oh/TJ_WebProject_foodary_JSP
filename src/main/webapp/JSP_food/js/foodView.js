@@ -35,7 +35,7 @@ function addData() {
 */
 
 function addData() {
-  var selectedRadios = document.querySelectorAll('input[name="food"]:checked');
+  var selectedRadios = document.querySelectorAll('input[name="foodName"]:checked');
   if (selectedRadios.length > 0) {
     var foodNames = [];
     var kcals = [];
@@ -65,19 +65,37 @@ function addData() {
              '&kcal=' + encodeURIComponent(kcals[i]) +
              '&carbs=' + encodeURIComponent(carbs[i]) +
              '&protein=' + encodeURIComponent(proteins[i]) +
-             '&fat=' + encodeURIComponent(fats[i]) +
+             '&fat=' + encodeURIComponent(fats[i]) + 
              '&';
     }
-    window.location.href = url;
+   var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
+	var userFoodTime = getParameterByName('time'); // URL에서 time 값을 가져오는 함수 호출
+	
+	url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
+	url += '&userFoodTime=' + encodeURIComponent(userFoodTime);
+	window.location.href = url;
   }
 }
+
+
+function getParameterByName(name) {
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(window.location.href);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+
 
 const searchRequest = new XMLHttpRequest();
 //ajax 검색 요청 함수
 function searchFunction() {
 	
 	//GET 방식 요청
-	let url = '../FoodSearch?name=' + encodeURIComponent(document.getElementById('food').value);
+	let url = '../FoodSearch?foodName=' + encodeURIComponent(document.getElementById('foodName').value);
 	searchRequest.open('GET' , url , true);
 	//send() 함수로 서버에 요청(서블릿 호출)한다.
 	searchRequest.send(null);
@@ -117,9 +135,9 @@ function searchProcess() {
           // 열을 추가하여 체크박스를 포함시킨다.
 		  let checkboxCell = row.insertCell(result[i].length);
 		  checkboxCell.className = "text-center";
-		  checkboxCell.innerHTML = "<input type='checkbox' value='선택' name='food'/>";
+		  checkboxCell.innerHTML = "<input type='checkbox' value='선택' name='foodName'/>";
       }
 	} 
 }
 
-onload = () => searchFunction();
+//onload = () => searchFunction();

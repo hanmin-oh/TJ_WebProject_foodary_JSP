@@ -99,6 +99,24 @@ public class DietService {
       mapper.close();
       return dietList;
    }
+   
+   public void UpdateDietList(DietVO dvo) {
+	   System.out.println("DietService의 UpdateDietList()");
+	   SqlSession mapper = MySession.getSession();
+	   System.out.println();
+	   DietDAO.getInstance().UpdateDietList(mapper, dvo);
+	   mapper.commit();
+	   mapper.close();
+   }
+
+   public void deleteDietList(int idx) {
+	   System.out.println("DietService의 UpdateDietList()");
+	   SqlSession mapper = MySession.getSession();
+	   System.out.println();
+	   DietDAO.getInstance().deleteDietList(mapper, idx);
+	   mapper.commit();
+	   mapper.close();
+   }
 	
 
 }

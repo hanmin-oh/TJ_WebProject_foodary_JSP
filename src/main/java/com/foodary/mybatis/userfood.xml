@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tjoeun.vo.UserFoodVO">
+<mapper namespace="com.foodary.vo.UserFoodVO">
 
 	<insert id="insertFood" parameterType="uvo">
 		insert into userfood (idx, userFoodName, userKcal, userCarbs, userProtein, userFat, userFoodTime , userFoodDate) 
@@ -35,13 +35,12 @@
    </select>
 	
    <update id="UpdateUserFoodList" parameterType="uvo">
-      update userfood set userFoodName = #{userFoodName}, userKcal = #{userKcal}, userCarbs = #{userCarbs}, userProtein = #{userProtein} ,
-         userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate}
-         where userFoodTime = #{userFoodTime} and userFoodDate = #{userFoodDate} and userFoodName = #{userFoodName}
+      update userfood set userFoodName = #{userFoodName}, userKcal = #{userKcal}, userCarbs = #{userCarbs}, userProtein = #{userProtein},
+         userFat = #{userFat}, userFoodTime = #{userFoodTime}, userFoodDate = #{userFoodDate} where idx = #{idx}
    </update>
    
-     <delete id="deleteUserFoodList" parameterType="uvo">
-         delete from userfood where userFoodTime = #{userFoodTime} and userFoodDate = #{userFoodDate}
+     <delete id="deleteUserFoodList" parameterType="int">
+         delete from userfood where idx = #{idx}
    </delete>
    
    

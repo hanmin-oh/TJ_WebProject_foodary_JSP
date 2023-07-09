@@ -93,11 +93,11 @@ public class UserFoodService {
        return userFoodList;
     }
     
-    public void deleteUserFoodList(UserFoodVO uvo) {
+    public void deleteUserFoodList(int idx) {
         System.out.println("UserFoodService의 deleteUserFoodList()");
         SqlSession mapper = MySession.getSession();
-        System.out.println(uvo);
-        UserFoodDAO.getInstance().deleteUserFoodList(mapper, uvo);
+        System.out.println(idx);
+        UserFoodDAO.getInstance().deleteUserFoodList(mapper, idx);
         mapper.commit();
         mapper.close();
      }

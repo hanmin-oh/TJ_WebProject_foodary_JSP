@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page session="true" %>
@@ -35,50 +36,57 @@
       border: 1px solid black;
    }
 
-
 </style>
 </head>
 <body>
 
 <%
-		String[] foodNames;
-		String[] kcals;
-		String[] carbs;
-		String[] proteins;
-		String[] fats;
-	
-	    // 요청 파라미터에서 데이터 가져오기
-	    foodNames = request.getParameterValues("foodName");
-	    kcals = request.getParameterValues("kcal");
-	    carbs = request.getParameterValues("carbs");
-	    proteins = request.getParameterValues("protein");
-	    fats = request.getParameterValues("fat");
-	
-	    if (foodNames == null) {
-	        foodNames = new String[]{};
-	        kcals = new String[]{};
-	        carbs = new String[]{};
-	        proteins = new String[]{};
-	        fats = new String[]{};
-	   }
-	    request.setAttribute("foodNames", foodNames);
-		request.setAttribute("kcals", kcals);
-		request.setAttribute("carbs", carbs);
-		request.setAttribute("proteins", proteins);
-		request.setAttribute("fats", fats);
-	    // 세션에 데이터 저장
-	    session.setAttribute("foodNames", foodNames);
-	    session.setAttribute("kcals", kcals);
-	    session.setAttribute("carbs", carbs);
-	    session.setAttribute("proteins", proteins);
-	    session.setAttribute("fats", fats);
+      String[] foodNames;
+      String[] kcals;
+      String[] carbs;
+      String[] proteins;
+      String[] fats;
+   
+       // 요청 파라미터에서 데이터 가져오기
+       foodNames = request.getParameterValues("foodName");
+       kcals = request.getParameterValues("kcal");
+       carbs = request.getParameterValues("carbs");
+       proteins = request.getParameterValues("protein");
+       fats = request.getParameterValues("fat");
+   
+       if (foodNames == null) {
+           foodNames = new String[]{};
+           kcals = new String[]{};
+           carbs = new String[]{};
+           proteins = new String[]{};
+           fats = new String[]{};
+      }
+      request.setAttribute("foodNames", foodNames);
+      request.setAttribute("kcals", kcals);
+      request.setAttribute("carbs", carbs);
+      request.setAttribute("proteins", proteins);
+      request.setAttribute("fats", fats);
+       // 세션에 데이터 저장
+       session.setAttribute("foodNames", foodNames);
+       session.setAttribute("kcals", kcals);
+       session.setAttribute("carbs", carbs);
+       session.setAttribute("proteins", proteins);
+       session.setAttribute("fats", fats);
+       
+	   	String userFoodDate = request.getParameter("userFoodDate");
+	  	String userFoodTime = request.getParameter("userFoodTime");
+	  session.setAttribute("userFoodDate", userFoodDate);
+	  session.setAttribute("userFoodTime", userFoodTime);
+       
 %>
 
 
+
+   ${userFoodDate}
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
-<form action="/foodary/JSP_diet/dietList.jsp" method="post">
+<form action="/foodary_final/JSP_diet/dietList.jsp" method="post">
 <div class="diet">
    <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <!-- 1 -->
@@ -87,8 +95,11 @@
             <label for="ateDate">일시</label>
          </td>
             <td colspan="12">
-                <input type="date" id="dietWriteDate" name="dietWriteDate" style="width: 48%; height: 90%;"/>
-            <input type="time" id="dietWriteTime" name="dietWriteTime" style="width: 48%; height: 90%;"/>
+                <input type="date" id="userFoodDate" name="userFoodDate" style="width: 48%; height: 90%;" 
+                	onchange="lockDate()" value="${userFoodDate}" />
+            	<input type="time" id="userFoodTime" name="userFoodTime" style="width: 48%; height: 90%;" 
+            		onchange="lockTime()" value="${userFoodTime}" />
+            	<button type="reset" onclick="resetDateTime()">시간 재설정</button>
            </td>
          </tr>
           <!-- 2 -->
@@ -97,19 +108,17 @@
             <label for="food">음식 검색</label>
          </td>
          <td colspan="6" align="center">
-            <input type="text" id="food" name="food" style="width:95%;" />      
+            <input type="text" id="food" name="food" style="width:95%;" readonly="readonly"/>      
          </td>
          <td colspan="2" align="center">
-          <button  type="button" onclick="location.href='./foodList.jsp'">검색</button> 
-         </td>
-         <td colspan="3" align="center">
-             <button  type="button" onclick="foodPlus()">음식추가</button> 
+          <!-- <button  type="button" onclick="foodList()">검색</button>  -->
+             <input type="button" value="검색" onclick="foodList()"/>
          </td>
       </tr>
       </table>
+      <!-- 3 -->
      <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <tbody id="tableBody">
-      <!-- 3 -->
 		<c:set var="foodNames" value="${requestScope.foodNames}" />
 		<c:set var="kcals" value="${requestScope.kcals}" />
 		<c:set var="carbs" value="${requestScope.carbs}" />
@@ -156,9 +165,9 @@
          <td colspan="1" class="fats">
             <input type="text" id="dietFat" name="dietFat" value="${fats[index]}"/>      
          </td>
-         <td colspan="1" align="center">
-             <input type="button" value="추가" onclick="updateVOValues()"/>
-         </td>
+        <td colspan="1" align="center">
+		    <input type="button" value="추가" onclick="foodPlus()"/>
+		</td>
       </tr>
 		</c:forEach>
     </c:if>
@@ -173,9 +182,8 @@
       <tbody id="tableBody">
      <fmt:requestEncoding value="UTF-8"/>
       <!-- foodWriteInsert.jsp에서 request 영역에 저장한 foodList에서 1페이지 분량의 글을 꺼내온다. -->
-          <c:set var="list" value="${userFoodList.list}"/>
-      <c:forEach var="uvo" items="${list}">
-      
+        <c:set var="list" value="${userFoodList.list}"/>
+   		<c:forEach var="uvo" items="${list}">
         <tr>
         <td colspan="1" align="center">
              내 식단
@@ -184,7 +192,7 @@
             <label for="foodName">음식이름</label>
          </td>
          <td colspan="2" class="text-center">
-             <input type="text" name="dietFoodName" value="${uvo.userFoodName}"/>   
+             <input type="text" id="userFoodName" name="userFoodName" value="${uvo.userFoodName}"/>   
          </td>
          
          <td colspan="1" class="text-center">
@@ -192,7 +200,7 @@
          </td>
          
          <td colspan="2" class="text-center" id="kcal">
-            <input type="text" name="dietKcal" value="${uvo.userKcal}"/>      
+            <input type="text" id="userKcal" name="userKcal" value="${uvo.userKcal}"/>      
          </td>
          
          <td colspan="1">
@@ -200,7 +208,7 @@
          </td>
          
          <td colspan="1"class="text-center">
-            <input type="text" name="dietCarbs" value="${uvo.userCarbs}"/>      
+            <input type="text" id="userCarbs" name="userCarbs" value="${uvo.userCarbs}"/>      
          </td>
          
          <td colspan="1">
@@ -208,7 +216,7 @@
          </td>
          
          <td colspan="1">
-           <input type="text" name="dietProtein" value="${uvo.userProtein}"/>       
+           <input type="text" id="userProtein" name="userProtein" value="${uvo.userProtein}"/>       
          </td>
          
          <td colspan="1" class="text-center">
@@ -216,11 +224,12 @@
          </td>
          
          <td colspan="1" align="center">
-            <input type="text" name="dietFat" value="${uvo.userFat}"/>      
+            <input type="text" id="userFat" name="userFat" value="${uvo.userFat}"/>      
          </td>
          <td colspan="1" align="center">
-            <input type="button" value="수정" onclick="location.href='updateFood.jsp'"/>
-            <input type="button" value="삭제" onclick="location.href='deleteFood.jsp'"/>
+            <input type="button" value="수정"
+            	onclick="updateUserFood(${uvo.idx})"/>
+            <input type="button" value="삭제" onclick="location.href='deleteFood.jsp?idx=${uvo.idx}'"/>
          </td>
       </tr>
     </c:forEach>

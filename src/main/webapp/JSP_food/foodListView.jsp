@@ -35,12 +35,12 @@
 <body>
 <%
 
-String dietWriteDate = request.getParameter("userFoodDate");
-String dietWriteTime = request.getParameter("userFoodTime");
+String userFoodDate = request.getParameter("userFoodDate");
+String userFoodTime = request.getParameter("userFoodTime");
 
 // 가져온 값을 세션에 저장
-session.setAttribute("dietWriteDate", dietWriteDate);
-session.setAttribute("dietWriteTime", dietWriteTime);
+session.setAttribute("userFoodDate", userFoodDate);
+session.setAttribute("userFoodTime", userFoodTime);
 	
   
 %>
@@ -50,9 +50,7 @@ session.setAttribute("dietWriteTime", dietWriteTime);
 </div>
    <br/>
    <!-- 4 -->
-<!-- <form id="myForm" action="#" method="POST"> -->
-  <%--  <input type="hidden" id="dietWriteDate" value="<%= session.getAttribute("dietWriteDate") %>">
-<input type="hidden" id="dietWriteTime" value="<%= session.getAttribute("dietWriteTime") %>"> --%>
+<form id="myForm" action="foodList.jsp" method="POST">
    <table  width="1000" align="center" border="1" cellpadding="7" cellspacing="0">
 		<thead>
 		   <tr>
@@ -60,21 +58,22 @@ session.setAttribute("dietWriteTime", dietWriteTime);
 		         <label for="food">음식 검색</label>
 	      	</td>
 	      	<td colspan="4" align="center">
-		         <input type="text" id="food" name="food" style="width:95%;" />      
+		         <input type="text" id="foodName" name="foodName" style="width:95%;" /> 
 	      	</td>
 		    <td colspan="1" align="center">
-				  <button  type="button" onclick="searchFunction()">검색</button> 
+		          <input class='button button1' type="submit" value="검색" style="width: 100px; height: 30px;">     
+				<!--   <button  type="button" onclick="searchFunction()">검색</button>  -->
 			</td>
 		   </tr>
-		<tr class="info">
-			<th style="text-align: center;">번호</th>
-			<th style="text-align: center;">음식이름</th>
-			<th style="text-align: center;">칼로리</th>
-			<th style="text-align: center;">탄수화물</th>
-			<th style="text-align: center;">단백질</th>
-			<th style="text-align: center;">지방</th>
-			<th style="text-align: center;">선택</th>
-		</tr>
+			<tr class="info">
+				<th style="text-align: center;">번호</th>
+				<th style="text-align: center;">음식이름</th>
+				<th style="text-align: center;">칼로리</th>
+				<th style="text-align: center;">탄수화물</th>
+				<th style="text-align: center;">단백질</th>
+				<th style="text-align: center;">지방</th>
+				<th style="text-align: center;">선택</th>
+			</tr>
 		</thead>
 		<fmt:requestEncoding value="UTF-8"/>
 	   <!-- foodList.jsp에서 request 영역에 저장한 foodList에서 1페이지 분량의 글을 꺼내온다. -->
@@ -101,12 +100,12 @@ session.setAttribute("dietWriteTime", dietWriteTime);
 	           ${vo.fat}
 	      </td>
 	      <td class="text-center">
-	         <input type="checkbox" value="선택" name="food"/>      
+	         <input type="checkbox" value="선택" name="foodName"/>      
 	      </td>
 	   </tr>
 	   </c:forEach>
 	   </tbody>
-	<%-- 	<!-- 페이지 이동 버튼 --> 
+	<!-- 페이지 이동 버튼 --> 
 		<c:set var="list" value="${foodList.list}"/>
 		<tr>
 			<td colspan="7" align="center">
@@ -197,15 +196,13 @@ session.setAttribute("dietWriteTime", dietWriteTime);
 					>마지막</button>
 				</c:if>
 			</td>
-		</tr> --%>
+		</tr> 
          <tr>
 		   	<td colspan="8" align="right">
-				<input type="submit" value="넣기"/>
 				<button type="button" onclick="addData()">저장</button>
-				<button type="button" onclick="location.href='foodWrite.jsp'">테스트</button>
 		   	</td>
 	   	</tr>
     	</table>
-<!--    </form> -->
+   </form>
 </body>
 </html>

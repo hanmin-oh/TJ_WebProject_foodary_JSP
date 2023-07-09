@@ -1,3 +1,4 @@
+ <%@page import="com.foodary.vo.DietList"%>
 <%@page import="com.foodary.service.UserFoodService"%>
 <%@page import="com.foodary.service.DietService"%>
 <%@page import="com.foodary.vo.UserFoodVO"%>
@@ -11,25 +12,36 @@
 </head>
 <body>
 
-<jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
+<%-- <jsp:useBean id="dvo" class="com.foodary.vo.DietVO">
 	<jsp:setProperty property="*" name="dvo"/>
 </jsp:useBean>
 
-
+ --%>
 
 <%
 	request.setCharacterEncoding("UTF-8");
 
-//	String dietWriteDate = request.getParameter("dietWriteDate");
-//	String dietWriteTime = request.getParameter("dietWriteTime");
 //	out.println(dietWriteDate);
 //	out.println(dietWriteTime);
 	
-//	DietVO dietvo = new DietVO();
-//	dietvo.setDietWriteDate(dietWriteDate);
-//	dietvo.setDietWriteTime(dietWriteTime);
-	out.println(dvo);
-	//DietService.getInstance().UpdateDietList(dvo);
+	DietVO dietvo = new DietVO();
+	int idx = Integer.parseInt(request.getParameter("idx"));
+	String dietMemo = request.getParameter("dietMemo");
+	String dietWriteDate = request.getParameter("dietWriteDate");
+	String dietWriteTime = request.getParameter("dietWriteTime");
+	
+	
+	out.println(idx);
+	out.println(dietMemo);
+	out.println(dietWriteDate);
+	out.println(dietWriteTime);
+
+	dietvo.setIdx(idx);
+	dietvo.setDietMemo(dietMemo);
+	dietvo.setDietWriteDate(dietWriteDate);
+	dietvo.setDietWriteTime(dietWriteTime);
+	
+	DietService.getInstance().UpdateDietList(dietvo);
 	
 	
 //	UserFoodVO userfoodvo = new UserFoodVO();
