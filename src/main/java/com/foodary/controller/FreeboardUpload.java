@@ -35,7 +35,7 @@ public class FreeboardUpload extends HttpServlet {
 		
 		
 		
-		String fileurl= "C:\\foodary\\eclipse\\workspace\\foodary_final\\src\\main\\webapp\\JSP_freeboard\\upload";
+		String fileurl= "C:\\coding\\JSP-web project\\foodary\\src\\main\\webapp\\JSP_freeboard\\upload";
 		String saveFolder="upload";
 		String encType="UTF-8";
 		int Maxsize = 5*1024*1024;

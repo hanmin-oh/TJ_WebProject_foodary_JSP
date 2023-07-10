@@ -43,27 +43,6 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
-	/* String[] foodNames;
-	String[] kcals;
-	String[] carbs;
-	String[] proteins;
-	String[] fats;
-	
-	if (session.getAttribute("foodNames") != null) {
-	    // 세션으로부터 데이터 가져오기
-	    foodNames = (String[]) session.getAttribute("foodNames");
-	    kcals = (String[]) session.getAttribute("kcals");
-	    carbs = (String[]) session.getAttribute("carbs");
-	    proteins = (String[]) session.getAttribute("proteins");
-	    fats = (String[]) session.getAttribute("fats");
-	    
-	    request.setAttribute("foodNames", foodNames);
-		request.setAttribute("kcals", kcals);
-		request.setAttribute("carbs", carbs);
-		request.setAttribute("proteins", proteins);
-		request.setAttribute("fats", fats);
-	} */
-	
 %>
 
 <jsp:useBean id="uvo" class="com.foodary.vo.UserFoodVO">
@@ -75,8 +54,8 @@
 	UserFoodService.getInstance().insertFood(uvo);
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
 	out.println(uvo);
-	request.setAttribute("userFoodList", userFoodList);
-	pageContext.forward("foodWrite.jsp");
+	session.setAttribute("userFoodList", userFoodList);
+	response.sendRedirect("foodWrite.jsp");
 %>
 </body>
 </html>

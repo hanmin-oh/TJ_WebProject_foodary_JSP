@@ -71,7 +71,8 @@ function addData() {
    var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
 	var userFoodTime = getParameterByName('time'); // URL에서 time 값을 가져오는 함수 호출
 	
-	url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
+	//url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
+	url += 'userFoodDate=' + encodeURIComponent(userFoodDate);
 	url += '&userFoodTime=' + encodeURIComponent(userFoodTime);
 	window.location.href = url;
   }

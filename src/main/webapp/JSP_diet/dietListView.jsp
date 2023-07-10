@@ -73,7 +73,7 @@
 		<jsp:include page="dietCalendar.jsp" />
 
 	</div>
-		<form action="showDietOK.jsp" method="post">
+		<form action="dietViewOK.jsp" method="post">
 	<div class="diet-table">
 		<h2><%=dietWriteDate%> 식단 목록</h2><br/><br/>
 		
@@ -81,7 +81,7 @@
 		<c:set var="list" value="${userFoodList.list}"/>
 		<c:forEach var="uvo" items="${list}">
 			<tr>
-				<th><a href="showDietOK.jsp?dietWriteDate=${uvo.userFoodDate}&dietWriteTime=${uvo.userFoodTime}">
+				<th><a href="dietViewOK.jsp?dietWriteDate=${uvo.userFoodDate}&dietWriteTime=${uvo.userFoodTime}">
 				${uvo.userFoodTime}</a></th>
 				<td>${uvo.userFoodName}</td>
 			</tr>

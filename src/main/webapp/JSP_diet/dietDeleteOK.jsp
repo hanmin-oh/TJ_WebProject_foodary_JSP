@@ -31,7 +31,7 @@
 	out.println("<script>");
 	DietService.getInstance().deleteDietList(idx);
 	out.println("alert('삭제 갈김')");
-	out.println("location.href='/foodary/JSP_diet/dietList.jsp?dietWriteDate="+ dietWriteDate + "&dietWriteTime=" + dietWriteTime + "'");
+	out.println("location.href='/foodary_final/JSP_diet/dietList.jsp?dietWriteDate="+ dietWriteDate + "&dietWriteTime=" + dietWriteTime + "'");
 	out.println("</script>");
 	
 	

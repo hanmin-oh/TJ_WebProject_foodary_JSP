@@ -60,29 +60,51 @@
            carbs = new String[]{};
            proteins = new String[]{};
            fats = new String[]{};
+      } else {
+	      request.setAttribute("foodNames", foodNames);
+	      request.setAttribute("kcals", kcals);
+	      request.setAttribute("carbs", carbs);
+	      request.setAttribute("proteins", proteins);
+	      request.setAttribute("fats", fats);
+	       // 세션에 데이터 저장
+	       session.setAttribute("foodNames", foodNames);
+	       session.setAttribute("kcals", kcals);
+	       session.setAttribute("carbs", carbs);
+	       session.setAttribute("proteins", proteins);
+	       session.setAttribute("fats", fats);
       }
-      request.setAttribute("foodNames", foodNames);
-      request.setAttribute("kcals", kcals);
-      request.setAttribute("carbs", carbs);
-      request.setAttribute("proteins", proteins);
-      request.setAttribute("fats", fats);
-       // 세션에 데이터 저장
-       session.setAttribute("foodNames", foodNames);
-       session.setAttribute("kcals", kcals);
-       session.setAttribute("carbs", carbs);
-       session.setAttribute("proteins", proteins);
-       session.setAttribute("fats", fats);
+
+		if (session.getAttribute("foodNames") != null) {
+		    // 세션으로부터 데이터 가져오기
+		    foodNames = (String[]) session.getAttribute("foodNames");
+		    kcals = (String[]) session.getAttribute("kcals");
+		    carbs = (String[]) session.getAttribute("carbs");
+		    proteins = (String[]) session.getAttribute("proteins");
+		    fats = (String[]) session.getAttribute("fats");
+		    
+		    request.setAttribute("foodNames", foodNames);
+			request.setAttribute("kcals", kcals);
+			request.setAttribute("carbs", carbs);
+			request.setAttribute("proteins", proteins);
+			request.setAttribute("fats", fats);
+		}
        
-	   	String userFoodDate = request.getParameter("userFoodDate");
-	  	String userFoodTime = request.getParameter("userFoodTime");
-	  session.setAttribute("userFoodDate", userFoodDate);
-	  session.setAttribute("userFoodTime", userFoodTime);
+		/* String userFoodDate = request.getParameter("userFoodDate");
+		String userFoodTime = request.getParameter("userFoodTime");
+		session.setAttribute("userFoodDate", userFoodDate);
+		session.setAttribute("userFoodTime", userFoodTime); */
+		
+		String userFoodDate = "2023-07-05";
+	    String userFoodTime = "13:30";
+
+	    session.setAttribute("userFoodDate", userFoodDate);
+	    session.setAttribute("userFoodTime", userFoodTime);
+	    request.setAttribute("userFoodDate", userFoodDate);
+	    request.setAttribute("userFoodTime", userFoodTime);
        
 %>
-
-
-
-   ${userFoodDate}
+    <input type="hidden" id="userFoodDate" name="userFoodDate" value="${userFoodDate}" />
+   	<input type="hidden" id="userFoodTime" name="userFoodTime" value="${userFoodTime}" />
 <div class="dietContent_title">
    <b><i class="bi bi-cup-straw"></i>식단 기록</b>
 </div>
@@ -90,19 +112,6 @@
 <div class="diet">
    <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <!-- 1 -->
-      <tr>
-         <td colspan="2" class="text-center">
-            <label for="ateDate">일시</label>
-         </td>
-            <td colspan="12">
-                <input type="date" id="userFoodDate" name="userFoodDate" style="width: 48%; height: 90%;" 
-                	onchange="lockDate()" value="${userFoodDate}" />
-            	<input type="time" id="userFoodTime" name="userFoodTime" style="width: 48%; height: 90%;" 
-            		onchange="lockTime()" value="${userFoodTime}" />
-            	<button type="reset" onclick="resetDateTime()">시간 재설정</button>
-           </td>
-         </tr>
-          <!-- 2 -->
          <tr>
          <td colspan="3" class="text-center" style="font-size: 13px;">
             <label for="food">음식 검색</label>
@@ -116,7 +125,7 @@
          </td>
       </tr>
       </table>
-      <!-- 3 -->
+          <!-- 2 -->
      <table width="1400" align="center" border="1" cellpadding="10" cellspacing="0">
       <tbody id="tableBody">
 		<c:set var="foodNames" value="${requestScope.foodNames}" />
@@ -133,40 +142,32 @@
          <td colspan="2">
             <input type="text" id="dietFoodName" name="dietFoodName" value="${foodNames[index]}" />
          </td>
-         
          <td colspan="1">
             <label for="totalcalorie">칼로리</label>
          </td>
-         
-         <td colspan="2" class="kcals" id="kcal">
+         <td colspan="2" id="kcal">
             <input type="text" id="dietKcal" name="dietKcal" value="${kcals[index]}"/>      
          </td>
-         
          <td colspan="1">
             <label for="carbo">탄수화물</label>
          </td>
-         
-         <td colspan="1"class="carbs">
+         <td colspan="1">
             <input type="text" id="dietCarbs" name="dietCarbs" value="${carbs[index]}"/>      
          </td>
-         
          <td colspan="1">
             <label for="protein">단백질</label>
          </td>
-         
-         <td colspan="1" class="proteins">
+         <td colspan="1">
            <input type="text" id="dietProtein" name="dietProtein" value="${proteins[index]}"/>       
          </td>
-         
          <td colspan="1" >
             <label for="province">지방</label>
          </td>
-         
-         <td colspan="1" class="fats">
+         <td colspan="1">
             <input type="text" id="dietFat" name="dietFat" value="${fats[index]}"/>      
          </td>
         <td colspan="1" align="center">
-		    <input type="button" value="추가" onclick="foodPlus()"/>
+		<input type="button" value="추가" onclick="foodPlus(<c:out value='${index}' />)"/> 
 		</td>
       </tr>
 		</c:forEach>
@@ -177,7 +178,7 @@
 	</c:if>
     </tbody>
     </table>
-      <!-- 4 -->
+      <!-- 3 -->
      <table width="1400" align="center" border="1" cellpadding="11" cellspacing="0">
       <tbody id="tableBody">
      <fmt:requestEncoding value="UTF-8"/>
@@ -194,36 +195,28 @@
          <td colspan="2" class="text-center">
              <input type="text" id="userFoodName" name="userFoodName" value="${uvo.userFoodName}"/>   
          </td>
-         
          <td colspan="1" class="text-center">
             <label for="totalcalorie">칼로리</label>
          </td>
-         
-         <td colspan="2" class="text-center" id="kcal">
+         <td colspan="2" class="kcals" id="kcal">
             <input type="text" id="userKcal" name="userKcal" value="${uvo.userKcal}"/>      
          </td>
-         
          <td colspan="1">
             <label for="carbo">탄수화물</label>
          </td>
-         
-         <td colspan="1"class="text-center">
+         <td colspan="1" class="carbs">
             <input type="text" id="userCarbs" name="userCarbs" value="${uvo.userCarbs}"/>      
          </td>
-         
          <td colspan="1">
             <label for="protein">단백질</label>
          </td>
-         
-         <td colspan="1">
+         <td colspan="1" class="proteins">
            <input type="text" id="userProtein" name="userProtein" value="${uvo.userProtein}"/>       
          </td>
-         
          <td colspan="1" class="text-center">
             <label for="province">지방</label>
          </td>
-         
-         <td colspan="1" align="center">
+         <td colspan="1" class="fats">
             <input type="text" id="userFat" name="userFat" value="${uvo.userFat}"/>      
          </td>
          <td colspan="1" align="center">
@@ -306,7 +299,7 @@
     <!-- 8 -->
     <tr>
        <td colspan="3" class="text-center">
-          <input type="button" value="식단보기" onclick="location.href='/foodary/JSP_diet/dietList.jsp'"/>
+          <input type="button" value="식단보기" onclick="location.href='/foodary_final/JSP_diet/dietList.jsp'"/>
           <input type="submit" value="저장"/>
        </td>
     </tr>
