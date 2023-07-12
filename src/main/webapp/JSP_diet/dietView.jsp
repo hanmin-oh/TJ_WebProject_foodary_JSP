@@ -36,7 +36,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
    
-   //pageContext.getAttribute("dietList");
+//   pageContext.setAttribute("dietList");
 %>
 
 
@@ -48,16 +48,20 @@
    <b><i class="bi bi-cup-straw"></i>식단 보기</b>
 </div>
 <div class="diet">
+<form action="dietUpdateOK.jsp" method="post">
 <c:set var="list" value="${userFoodList.list}"/>
 <table width="1500" align="center" border="1" cellpadding="10" cellspacing="0">
+
    <!-- 1 -->
    <tr>
       <th colspan="2">
          <label for="ateDate">일시</label>
       </th>
       <th colspan="8">
-         <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
-            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/>
+       <%--   <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
+            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/> --%>
+        <input type="text" name="dietWriteDate" value="${list[0].userFoodDate}" style="width: 48%; height: 90%;" readonly="readonly"/>
+            <input type="text" name="dietWriteTime" value="${list[0].userFoodTime}" style="width: 48%; height: 90%;" readonly="readonly"/> 
       </th>
    </tr>
    <!-- 2 -->
@@ -65,23 +69,23 @@
    <tr>
       <th>먹은 음식</th>
       <td align="center">
-         <input type="text" name="dietFoodName" value="${uvo.userFoodName}" style="width: 95%; height: 50%;" readonly="readonly"/>      
+         <input type="text" name="userFoodName" value="${uvo.userFoodName}" style="width: 95%; height: 50%;" readonly="readonly"/>      
       </td>
       <th>칼로리</th>
       <td align="center">
-         <input type="text" name="dietKcal" value="${uvo.userKcal}" style="width: 95%; height: 50%;" readonly="readonly"/>      
+         <input type="text" name="userKcal" value="${uvo.userKcal}" style="width: 95%; height: 50%;" readonly="readonly"/>      
       </td>
       <th>탄수화물</th>
       <td align="center">
-         <input type="text" name="dietCarbs" value="${uvo.userCarbs}" style="width: 95%; height: 50%;" readonly="readonly"/>   
+         <input type="text" name="userCarbs" value="${uvo.userCarbs}" style="width: 95%; height: 50%;" readonly="readonly"/>   
       </td>
       <th>단백질</th>
       <td align="center">
-         <input type="text" name="dietProtein" value="${uvo.userProtein}" style="width: 95%; height: 50%;" readonly="readonly"/>   
+         <input type="text" name="userProtein" value="${uvo.userProtein}" style="width: 95%; height: 50%;" readonly="readonly"/>   
       </td>
       <th>지방</th>
       <td align="center">
-         <input type="text" name="dietFat" value="${uvo.userFat}" style="width: 95%; height: 50%;" readonly="readonly"/>   
+         <input type="text" name="userFat" value="${uvo.userFat}" style="width: 95%; height: 50%;" readonly="readonly"/>   
       </td>
    </tr>
    </c:forEach>
@@ -116,8 +120,7 @@
          <input 
             type="submit" 
             value="수정하기"  
-            style="width: 100px; height: 30px;"
-            onclick="location.href='dietDeleteOK.jsp?dietWriteDate=${list[0].dietWriteDate}&dietWriteTime=${list[0].dietWriteTime}'"/>&nbsp;&nbsp;   
+            style="width: 100px; height: 30px;" />&nbsp;&nbsp;   
          <input 
             type="button" 
             value="삭제하기" 
@@ -136,6 +139,7 @@
 <!--       </form> -->
    </tr>
 </table>
+</form>
 </div>
 
 <!-- 풋터 파일 -->   

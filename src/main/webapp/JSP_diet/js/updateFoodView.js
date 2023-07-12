@@ -1,3 +1,4 @@
+
 function addData() {
   var selectedRadios = document.querySelectorAll('input[name="foodName"]:checked');
   if (selectedRadios.length > 0) {
@@ -23,7 +24,7 @@ function addData() {
     });
     
     // 선택한 데이터를 배열로 URL 매개변수로 전달하여 페이지 이동
-    var url = 'foodWrite.jsp?';
+    var url = 'dietUpdate.jsp?';
     for (var i = 0; i < foodNames.length; i++) {
       url += 'foodName=' + encodeURIComponent(foodNames[i]) +
              '&kcal=' + encodeURIComponent(kcals[i]) +
@@ -33,8 +34,9 @@ function addData() {
              '&';
     }
    var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
-	var userFoodTime = getParameterByName('userFoodTime'); // URL에서 userFoodTime 값을 가져오는 함수 호출
-	
+	var userFoodTime = getParameterByName('userFoodTime'); // URL에서 time 값을 가져오는 함수 호출
+	console.log(userFoodDate);
+	console.log(userFoodTime);
 	//url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
 	url += 'userFoodDate=' + encodeURIComponent(userFoodDate);
 	url += '&userFoodTime=' + encodeURIComponent(userFoodTime);
@@ -54,7 +56,7 @@ function getParameterByName(name) {
 
 
 
-//ajax 검색 -- 향후 활용 가능(현재 service 활용 검색중)
+
 const searchRequest = new XMLHttpRequest();
 //ajax 검색 요청 함수
 function searchFunction() {
@@ -104,4 +106,5 @@ function searchProcess() {
       }
 	} 
 }
+
 //onload = () => searchFunction();

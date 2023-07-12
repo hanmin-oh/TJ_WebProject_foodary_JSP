@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>음식 목록</title>
-<script type="text/javascript" src="./js/foodView.js"></script> 
+<script type="text/javascript" src="./js/updateFoodView.js" defer="defer"></script> 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <style type="text/css">
 
@@ -34,14 +34,16 @@
 </head>
 <body>
 <%
+request.setCharacterEncoding("UTF-8");
 
-	String userFoodDate = request.getParameter("userFoodDate");
-	String userFoodTime = request.getParameter("userFoodTime");
+String userFoodDate = request.getParameter("userFoodDate");
+String userFoodTime = request.getParameter("userFoodTime");
+
+// 가져온 값을 세션에 저장
+session.setAttribute("userFoodDate", userFoodDate);
+session.setAttribute("userFoodTime", userFoodTime);
 	
-	// 가져온 값을 세션에 저장
-	session.setAttribute("userFoodDate", userFoodDate);
-	session.setAttribute("userFoodTime", userFoodTime);
-	  
+  
 %>
 
 <div class="dietContent_title">
@@ -49,9 +51,7 @@
 </div>
    <br/>
    <!-- 4 -->
-<form id="myForm" action="foodList.jsp" method="POST">
-<input type="hidden" id="userFoodDate" name="userFoodDate" value="${userFoodDate}" />
-<input type="hidden" id="userFoodTime" name="userFoodTime" value="${userFoodTime}" />
+<form id="myForm" action="updateFoodList.jsp" method="POST">
    <table  width="1000" align="center" border="1" cellpadding="7" cellspacing="0">
 		<thead>
 		   <tr>

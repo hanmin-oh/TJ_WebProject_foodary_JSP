@@ -1,15 +1,18 @@
 function foodList() {
-   //console.log('테스트');
-    var userFoodDate = document.getElementById("userFoodDate").value;
+	//console.log('테스트');
     var userFoodTime = document.getElementById("userFoodTime").value;
-    //console.log(date + time);
-    var url = "./foodList.jsp?userFoodDate=" + userFoodDate + "&userFoodTime=" + userFoodTime;
+    var userFoodDate = document.getElementById("userFoodDate").value;
+    console.log(userFoodTime);
+    console.log(userFoodDate);
+    console.log(userFoodDate + userFoodTime);
+    var url = "./updateFoodList.jsp?userFoodDate=" + userFoodDate + "&userFoodTime=" + userFoodTime;
     location.href = url;
 }
 
+
 //인덱스 활용 음식 저장 형태 완료 
 function foodPlus(index) {
-   console.log(index);
+	console.log(index);
     var userFoodName = document.getElementsByName("dietFoodName")[index].value;
     var kcal = document.getElementsByName("dietKcal")[index].value;
     var carbs = document.getElementsByName("dietCarbs")[index].value;
@@ -20,7 +23,8 @@ function foodPlus(index) {
     console.log(userFoodTime);
     console.log(userFoodDate);
     console.log(carbs);
-   var url = 'foodInsert.jsp' +
+// Redirect to foodWriteInsert.jsp with query parameters
+   var url = 'dietUpdateFoodInsert.jsp' +
         '?userFoodName=' + encodeURIComponent(userFoodName) +
         '&userKcal=' + encodeURIComponent(kcal) +
         '&userCarbs=' + encodeURIComponent(carbs) +
@@ -30,19 +34,21 @@ function foodPlus(index) {
         '&userFoodDate=' + encodeURIComponent(userFoodDate);
     location.href = url;
 }
-
-
-//idx활용, index활용 수정 완료!! 
+ 
+/*
+ idx활용, index활용 수정 완료!! */
 function updateUserFood(idx , index) {
-   var userFoodName = $('#userFoodName_' + index).val().trim();
-   var userKcal = $('#userKcal_' + index).val().trim();
-   var userCarbs = $('#userCarbs_' + index).val().trim();
-   var userProtein = $('#userProtein_' + index).val().trim();
-   var userFat = $('#userFat_' + index).val().trim();
-   var userFoodDate = $('#userFoodDate').val().trim();
-   var userFoodTime = $('#userFoodTime').val().trim();
-   console.log(userProtein);
-    var url = 'updateFood.jsp' +
+	console.log(idx);
+	console.log(index);
+	var userFoodName = $('#userFoodName_' + index).val().trim();
+	var userKcal = $('#userKcal_' + index).val().trim();
+	var userCarbs = $('#userCarbs_' + index).val().trim();
+	var userProtein = $('#userProtein_' + index).val().trim();
+	var userFat = $('#userFat_' + index).val().trim();
+	var userFoodDate = $('#userFoodDate').val().trim();
+	var userFoodTime = $('#userFoodTime').val().trim();
+	console.log(userProtein);
+	 var url = 'dietUpdateFood.jsp' +
       '?idx=' + idx +
       '&userFoodName=' + userFoodName +
       '&userKcal=' + userKcal +
@@ -53,6 +59,9 @@ function updateUserFood(idx , index) {
       '&userFoodTime=' + userFoodTime;
     location.href = url;
 }
+
+
+
 
  function showNutrient() {
 	 

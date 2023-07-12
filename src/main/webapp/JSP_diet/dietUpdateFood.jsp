@@ -31,7 +31,7 @@
   	UserFoodService.getInstance().UpdateUserFoodList(uvo);
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
 	session.setAttribute("userFoodList", userFoodList);
-	response.sendRedirect("foodWrite.jsp");
+	response.sendRedirect("dietUpdate.jsp");
 %>
 </body>
 </html>

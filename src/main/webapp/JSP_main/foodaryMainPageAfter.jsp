@@ -47,7 +47,7 @@
 		<div style="width: 100%; height: auto; margin-top: 20px;" align="center">
 			<div style="height: 180px;">
 				<div style="display: inline-block; background-image:url('./images/clipMemo.png'); background-repeat:no-repeat; width: 200px; padding-top: 30px;">
-					<a href="#" style=" color: black; font-size: 40pt; cursor: pointer; text-decoration: none;" onclick="location.href='/foodary_final/JSP_food/foodWrite.jsp'">
+					<a href="#" style=" color: black; font-size: 40pt; cursor: pointer; text-decoration: none;" onclick="location.href='/foodary_final/JSP_food/selectDate.jsp'">
 						식단 쓰기
 					</a>
 				</div>
