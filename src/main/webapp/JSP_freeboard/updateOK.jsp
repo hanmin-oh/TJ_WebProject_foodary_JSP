@@ -18,7 +18,7 @@
 	response.setContentType("text/html; charset=UTF-8");
 	
 	
-	String fileurl= "C:\\foodary\\eclipse\\workspace\\Foodary\\src\\main\\webapp\\upload";
+	String fileurl= "C:\\coding\\JSP-web project\\foodary_final\\src\\main\\webapp\\JSP_freeboard\\upload";
 	String saveFolder="upload";
 	String encType="UTF-8";
 	int Maxsize = 5*1024*1024;

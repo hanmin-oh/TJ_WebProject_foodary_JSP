@@ -7,7 +7,6 @@
 		insert into userregister (idx, username, id, password, email, gender, height, age, currentWeight, goalWeight, active, state)
 		values (userregister_idx_seq.nextval, #{username}, #{id}, #{password}, #{email}, #{gender}, #{height}, #{age}, #{currentWeight}, #{goalWeight}, #{active}, #{state})
 	</insert>
-
 	
 	<!-- 회원정보 1건을 얻어온다. -->
 	<select id="User.selectByIdx" parameterType="int" resultType="rvo">

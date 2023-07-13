@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인 로그인 폼, 달력</title>
+<title>메인 로그인 폼</title>
 </head>
 <body>
 	<form action="loginOK.jsp" method="post">

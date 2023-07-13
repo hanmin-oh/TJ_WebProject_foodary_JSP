@@ -111,4 +111,13 @@ public class UserFoodService {
       mapper.commit();
       mapper.close();
     }
+    
+    public void deleteUser(UserFoodVO uvo) {
+        System.out.println("UserFoodService의 deleteUser()");
+        SqlSession mapper = MySession.getSession();
+        System.out.println(uvo);
+        UserFoodDAO.getInstance().deleteUser(mapper, uvo);
+        mapper.commit();
+        mapper.close();
+     }
 }

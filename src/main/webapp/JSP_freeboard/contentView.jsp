@@ -137,7 +137,7 @@
 					<th><span style="background: lavender; font-size: 22pt;">내용: </span></th>
 					<td colspan="3" style="width: 600px;">
 						<textarea 
-							id="ccontent" 
+							id="ccontent"
 							rows="3"
 							name="content" 
 							style="resize: none; width: 580px; padding: 5px;"></textarea>
@@ -195,13 +195,13 @@
 								<button
 									type="button" 
 									style="background: none; border: 0; cursor: pointer;"
-									onclick="setting(${co.idx}, 2, '댓글수정', '${name}', '${content}')">
+									onclick="setting(${co.idx}, 2, '댓글수정', '${name}', '${co.content}')">
 									<span style="background: #fafcd9; font-size: 20pt;; font-weight: 800;">수정하기</span>
 								</button>&nbsp;&nbsp;&nbsp;
 								<button
 									type="button" 
 									style="background: none; border: 0; cursor: pointer;"
-									onclick="setting(${co.idx}, 3, '댓글삭제', '${name}', '${content}')">
+									onclick="setting(${co.idx}, 3, '댓글삭제', '${name}', '${co.content}')">
 									<span style="background: #fafcd9; font-size: 20pt;; font-weight: 800;">삭제하기</span>
 								</button>
 							</c:if>

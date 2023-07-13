@@ -28,7 +28,7 @@
 	               <th style="text-align: right; font-size: 25pt;">이름: </th>
 	               <td>
 	               		<input id="name" type="text" name="name" autocomplete="off" value="${rvo.username}"
-	               			style="font-size: 25pt; width: 100px; border: 0;"/>
+	               			style="font-size: 25pt; width: 200px; border: 1;"/>
 	               </td>
 	            </tr>
 	            <tr>
@@ -49,7 +49,7 @@
 	               <th style="text-align: right; font-size: 25pt;">비밀번호: </th>
 	               <td>	
 	                  <button id="passwordUpdate" type="button" onclick="location.href='/foodary_final/JSP_userRegister/passwordUpdate.jsp'" style="width: 100px; border: 0; background: none; cursor: pointer;">
-	                  	<span style="font-size: 25pt; background: #baffda;">수정</span>
+	                  	<span style="font-size: 25pt; background: #baffda; font-weight: 800;">수정</span>
 	                  </button>
 	               </td>
 	            </tr>
@@ -57,16 +57,16 @@
 	               <th style="text-align: right; font-size: 25pt;">이메일: </th>
 	               <td>
 	                  <input id="email" type="email" name="email" autocomplete="off" value="${rvo.email}"
-	                  	style="font-size: 25pt; width: 350px; border: 0;"/>
+	                  	style="font-size: 25pt; width: 350px; border: 1;"/>
 	               </td>
 	            </tr>
 	           <tr>
 	                <td colspan="2" style="text-align: right; padding-right: 70px;">
 	                  <button id="updateBtn" type="submit" onclick="location.href='myPageUpdate.jsp'" style="border: 0; background: none; cursor: pointer;">
-	                  		<span style="font-size: 30pt; background: lavender;">정보 수정</span>
+	                  		<span style="font-size: 30pt; background: lavender; font-weight: 800;">정보 수정</span>
 	                  	</button>&nbsp;&nbsp;&nbsp;&nbsp;
 	                  <button type="button" onclick="location.href='unregister.jsp'" style="border: 0; background: none; cursor: pointer;">
-	                  	<span style="font-size: 30pt; background: lavender;">회원 탈퇴</span>
+	                  	<span style="font-size: 30pt; background: lavender; font-weight: 800;">회원 탈퇴</span>
 	                  </button>
 	                </td>
 	           </tr>
@@ -79,10 +79,10 @@
 		<div style="display: inline;">
 			<form action="myPageUpdateEnd.jsp" method="post">
 			   <div style="text-align: center; display: inline-block; font-size: 25pt;" align="center">
-			      키:<input id="height" type="text" name="height" value="${rvo.height}" style="width: 50px; text-align: center; border: 0;">cm&nbsp;
-			      현재 체중:<input id="currentWeight" type="text" name="currentWeight" value="${rvo.currentWeight}" style="width: 50px; text-align: center; border: 0;">kg&nbsp;
-			      목표 체중:<input id="goalWeight" type="text" name="goalWeight" value="${rvo.goalWeight}" style="width: 50px; text-align: center; border: 0;">kg&nbsp;
-			      만 나이:<input id="age" type="text" name="age" value="${rvo.age}" style="width: 50px; text-align: center; border: 0;"/>
+			      키: <input id="height" type="text" name="height" value="${rvo.height}" style="width: 50px; text-align: center; border: 1; font-size: 25pt;">cm&nbsp;
+			      현재 체중: <input id="currentWeight" type="text" name="currentWeight" value="${rvo.currentWeight}" style="width: 50px; text-align: center; border: 1; font-size: 25pt;">kg&nbsp;
+			      목표 체중: <input id="goalWeight" type="text" name="goalWeight" value="${rvo.goalWeight}" style="width: 50px; text-align: center; border: 1; font-size: 25pt;">kg&nbsp;
+			      만 나이: <input id="age" type="text" name="age" value="${rvo.age}" style="width: 50px; text-align: center; border: 1; font-size: 25pt;"/>세
 			   <br/><br/>
 		         Mode: 
 		         <c:if test="${rvo.state eq 'health'}">
@@ -154,7 +154,7 @@
 			   <br/>
 			   <div align="center">
 			      <button style="align-content: center; border: 0; background: none; cursor: pointer;" type="submit">
-			      	<span style="font-size: 30pt; background: lavender;">수정 완료</span>
+			      	<span style="font-size: 30pt; background: lavender; font-weight: 800;">수정 완료</span>
 			      </button>
 			   </div>
 		   		<input type="hidden" name="id" value="${rvo.id}"/>

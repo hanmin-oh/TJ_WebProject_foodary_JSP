@@ -80,9 +80,10 @@
 			<td>
 				<c:set var="subject" value="${fn:replace(vo.subject, '<', '&lt;')}"/>
 				<c:set var="subject" value="${fn:replace(subject, '>', '&gt;')}"/>
-				<a href="increment.jsp?idx=${vo.idx}&currentPage=1" style="font-size: 18pt; color: black; text-decoration: none;">
+				<button onclick="location.href='/foodary_final/JSP_freeboard/increment.jsp?idx=${vo.idx}&currentPage=1'"
+					style="font-size: 18pt; color: black; text-decoration: none;">
 					${subject}(${vo.commentCount})
-				</a>
+				</button>>
 			</td>
 			<td align="center" style="font-size: 18pt;">${vo.hit}</td>
 		</tr>

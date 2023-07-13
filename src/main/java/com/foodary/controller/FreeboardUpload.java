@@ -10,12 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.foodary.service.FreeboardService;
 import com.foodary.vo.FreeboardVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/FreeboardUpload")
 public class FreeboardUpload extends HttpServlet {
@@ -35,16 +34,14 @@ public class FreeboardUpload extends HttpServlet {
 		
 		
 		
-		String fileurl= "C:\\foodary\\eclipse\\workspace\\foodary_final\\src\\main\\webapp\\JSP_freeboard\\upload";
-		String saveFolder="upload";
+		String fileurl= "C:\\coding\\JSP-web project\\foodary_final\\src\\main\\webapp\\JSP_freeboard\\upload";
 		String encType="UTF-8";
 		int Maxsize = 5*1024*1024;
 		ServletContext servletContext = request.getServletContext();
-		MultipartRequest mr = null;
 		DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 		
 		try {
-			mr = new MultipartRequest(request,fileurl,Maxsize,encType,policy);
+			MultipartRequest mr = new MultipartRequest(request, fileurl, Maxsize, encType, policy);
 			File realFilename = mr.getFile("fileName");
 			String picture = realFilename.getName();
 			String subject = mr.getParameter("subject");
@@ -58,9 +55,10 @@ public class FreeboardUpload extends HttpServlet {
 			FreeboardVO vo = new FreeboardVO(0, subject, content, writeDate, 0, name, notice, picture, 0, id, realFilePath);
 			FreeboardService.getInstance().insert(vo);
 			
-			response.sendRedirect("list.jsp");
+			response.sendRedirect("./JSP_freeboard/list.jsp");
 			
 		} catch (Exception e) {
+			MultipartRequest mr = new MultipartRequest(request, fileurl, Maxsize, encType, policy);
 			String picture = "";
 			String subject = mr.getParameter("subject");
 			Date writeDate = new Date();
@@ -77,14 +75,3 @@ public class FreeboardUpload extends HttpServlet {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

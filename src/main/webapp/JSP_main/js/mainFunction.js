@@ -6,20 +6,6 @@ function showMenu() {
 	$('#showMenu').html('<img src="./images/' + ranNum + '.png" style="width: 290px;"/>');
 }
 
-function insertTime() {
-	alert("tlrked");
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 

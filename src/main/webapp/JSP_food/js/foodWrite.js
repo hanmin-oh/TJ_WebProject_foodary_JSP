@@ -1,40 +1,48 @@
-function lockDate() {
-	$('#userFoodDate').attr('readonly', 'readonly');
-}
-
-function lockTime() {
-	$('#userFoodTime').attr('readonly', 'readonly');
-}
-
-function resetDateTime() {
-	var result = confirm("시간을 재설정하면 입력하신 데이터가 사라집니다. \n 다시 설정하시겠습니까?");
-		if(result){
-			$('#dietWriteDate').removeAttr('readonly');
-			$('#dietWriteTime').removeAttr('readonly');
-		} else{
-		   // =============================== 나중에 처리 =============================================
-		}
-}
-
 function foodList() {
-	//console.log('테스트');
+   //console.log('테스트');
     var userFoodDate = document.getElementById("userFoodDate").value;
     var userFoodTime = document.getElementById("userFoodTime").value;
     //console.log(date + time);
-    var url = "./foodList.jsp?userFoodDate=" + userFoodDate + "&time=" + userFoodTime;
+    var url = "./foodList.jsp?userFoodDate=" + userFoodDate + "&userFoodTime=" + userFoodTime;
     location.href = url;
 }
 
-function updateUserFood(idx) {
-	var userFoodName = $('#userFoodName').val().trim();
-	var userKcal = $('#userKcal').val().trim();
-	var userCarbs = $('#userCarbs').val().trim();
-	var userProtein = $('#userProtein').val().trim();
-	var userFat = $('#userFat').val().trim();
-	var userFoodDate = $('#userFoodDate').val().trim();
-	var userFoodTime = $('#userFoodTime').val().trim();
-	console.log(userFoodName);
-	 var url = 'updateFood.jsp' +
+//인덱스 활용 음식 저장 형태 완료 
+function foodPlus(index) {
+   console.log(index);
+    var userFoodName = document.getElementsByName("dietFoodName")[index].value;
+    var kcal = document.getElementsByName("dietKcal")[index].value;
+    var carbs = document.getElementsByName("dietCarbs")[index].value;
+    var protein = document.getElementsByName("dietProtein")[index].value;
+    var fat = document.getElementsByName("dietFat")[index].value;
+    var userFoodTime = document.getElementById("userFoodTime").value;
+    var userFoodDate = document.getElementById("userFoodDate").value;
+    console.log(userFoodTime);
+    console.log(userFoodDate);
+    console.log(carbs);
+   var url = 'foodInsert.jsp' +
+        '?userFoodName=' + encodeURIComponent(userFoodName) +
+        '&userKcal=' + encodeURIComponent(kcal) +
+        '&userCarbs=' + encodeURIComponent(carbs) +
+        '&userProtein=' + encodeURIComponent(protein) +
+        '&userFat=' + encodeURIComponent(fat) +
+        '&userFoodTime=' + encodeURIComponent(userFoodTime) +
+        '&userFoodDate=' + encodeURIComponent(userFoodDate);
+    location.href = url;
+}
+
+
+//idx활용, index활용 수정 완료!! 
+function updateUserFood(idx , index) {
+   var userFoodName = $('#userFoodName_' + index).val().trim();
+   var userKcal = $('#userKcal_' + index).val().trim();
+   var userCarbs = $('#userCarbs_' + index).val().trim();
+   var userProtein = $('#userProtein_' + index).val().trim();
+   var userFat = $('#userFat_' + index).val().trim();
+   var userFoodDate = $('#userFoodDate').val().trim();
+   var userFoodTime = $('#userFoodTime').val().trim();
+   console.log(userProtein);
+    var url = 'updateFood.jsp' +
       '?idx=' + idx +
       '&userFoodName=' + userFoodName +
       '&userKcal=' + userKcal +
@@ -46,280 +54,122 @@ function updateUserFood(idx) {
     location.href = url;
 }
 
+ function showNutrient() {
+	 
+   var kcalElements = document.getElementsByClassName("kcals");
+   var carbsElements = document.getElementsByClassName("carbs");
+   var proteinElements = document.getElementsByClassName("proteins");
+   var fatElements = document.getElementsByClassName("fats");
+   
+   var userKcals = [];
+   var userCarbs = [];
+   var userProteins = [];
+   var userFats = [];
+   
+   // 각 태그의 값을 배열에 저장
+   for (var i = 0; i < kcalElements.length; i++) {
+     var kcalValue = document.getElementById("userKcal_" + i).value;
+     var carbsValue = document.getElementById("userCarbs_" + i).value;
+     var proteinValue = document.getElementById("userProtein_" + i).value;
+     var fatValue = document.getElementById("userFat_" + i).value;
+   
+     userKcals.push(kcalValue);
+     userCarbs.push(carbsValue);
+     userProteins.push(proteinValue);
+     userFats.push(fatValue);
+}
 
-/* 테이블 추가 함수
-function foodPlus() {
-	
-	 // 새로운 <tr> 요소 생성
-  var newRow = document.createElement('tr');
-  
-  // <tr> 요소 내부 HTML 설정
-  newRow.innerHTML = `
-    <td colspan="2" class="text-center">
-         <label for="foodName">음식이름</label>
-      </td>
+   console.log(userCarbs);    // ["50", "60", "70"]
+     
+   var kcalSum = 0;
+   var carbsSum  = 0;
+   var proteinSum  = 0;
+   var fatSum  = 0;
+   
+   for (var i = 0; i < userKcals.length; i++) {
+     kcalSum += Number(userKcals[i]);
+     carbsSum += Number(userCarbs[i]);
+     proteinSum += Number(userProteins[i]);
+     fatSum += Number(userFats[i]);
+   }
+   
+   // alert("mainCalculator");
+   // alert(currentWeight)
+   let currentWeight = parseInt($('#currentWeight').val().trim());
+   let goalWeight = parseInt($('#goalWeight').val().trim());
+   let gender = $('input[name=gender]').val();
+   let age = parseInt($('#age').val().trim());
+   let height = parseInt($('#height').val().trim());
+   let active = parseFloat($('select > option[name=active]:selected').val());
+   let mode = $('input[name=mode]:checked').val();
+   console.log(currentWeight, goalWeight, gender, age, height, active, mode);
+   let kcal = 0.0;
+   let protein = 0.0;
+   let carbs = 0.0;
+   let fat = 0.0;
+//   입력되지 않은 정보 있는지 거르기   
+   if (!isNaN(currentWeight) && !isNaN(goalWeight) && !isNaN(age) && !isNaN(height) && !isNaN(active)) {
+      console.log(currentWeight, goalWeight, gender, age, height, active, mode);
+      // 성별 체크
+      if (gender == '남자') {
+         // 모드 체크
+         if (mode == 'health') {
+            kcal = 66 + (13.7 * currentWeight) + (5 * height) - (4.7 * age) ;
+         }
+         else{
+            kcal = 66 + (13.7 * goalWeight) + (5 * height) - (4.7 * age);
+         }
+      } else {
+         if (mode == 'health') {
+            kcal = 655 + (9.6 * currentWeight) + (1.8 * height) - (4.7 * age);
+         }
+         else {
+            kcal = 655 + (9.6 * goalWeight) + (1.8 * height) - (4.7 * age);
+         }
+         
+         kcal = kcal * active;
+      }
+      if (mode == 'health') {
+         carbs = kcal * 0.4 / 4;
+         protein = kcal * 0.3 / 4;
+         fat = kcal * 0.3 / 9;
+      } else {
+         carbs = kcal * 0.5 / 4;
+         protein = kcal * 0.3 / 4;
+         fat = kcal * 0.2 / 9;
+      }
       
-      <td colspan="2" class="text-center">
-    	   <input type="text" name="food" value=""/>   
-      </td>
+       
+	   var kcalGraph = document.getElementById("kcalGraph");
+	   var carbsGraph = document.getElementById("carbsGraph");
+	   var proteinGraph = document.getElementById("proteinGraph");
+	   var fatGraph = document.getElementById("fatGraph");
+	   
+	   
+	   	kcalGraph.style.width =  kcalSum / kcal * 100 + "%";// 너비 값을 변경
+		carbsGraph.style.width = carbsSum / carbs * 100 + "%";// 너비 값을 변경
+		proteinGraph.style.width = proteinSum / protein * 100 + "%";// 너비 값을 변경
+		fatGraph.style.width = fatSum / fat * 100  + "%";// 너비 값을 변경
+		
+      // console.log(kcal, carbs, protein, fat);
+      $('#kcalGraph').attr('aria-valuemax', parseInt(kcal)); 
+      $('#kcalGraph').text(parseInt(kcalSum) + 'kcal / ' + parseInt(kcal) + ' kcal');
+
+      $('#carbsGraph').attr('aria-valuemax', parseInt(carbs)); 
+      $('#carbsGraph').text(parseInt(carbsSum) + 'g / '+ parseInt(carbs) + ' g');
+
+      $('#proteinGraph').attr('aria-valuemax', parseInt(protein)); 
+      $('#proteinGraph').text(parseInt(proteinSum) + 'g / '+ parseInt(protein) + ' g');
+
+      $('#fatGraph').attr('aria-valuemax', parseInt(fat)); 
+      $('#fatGraph').text(parseInt(fatSum) + 'g / '+ parseInt(fat) + ' g');
       
-      <td colspan="1" class="text-center">
-         <label for="totalcalorie">칼로리</label>
-      </td>
-      
-      <td colspan="2" class="text-center" id="kcal">
-         <input type="text" name="kcal" value=""/>      
-      </td>
-      
-      <td colspan="1">
-         <label for="carbo">탄수화물</label>
-      </td>
-      
-      <td colspan="1"class="text-center">
-         <input type="text" name="carbs" value=""/>      
-      </td>
-      
-      <td colspan="1">
-         <label for="protein">단백질</label>
-      </td>
-      
-      <td colspan="1">
-        <input type="text" name="protein" value=""/>       
-      </td>
-      
-      <td colspan="1" class="text-center">
-         <label for="province">지방</label>
-      </td>
-      
-      <td colspan="1" align="center">
-         <input type="text" name="fat" value=""/>      
-      </td>
-      <td colspan="1" align="center">
-          <button  type="button" onclick="location.href='./foodListDirect.jsp'">확인</button> 
-      </td>
-  `;
-  
-  // 새로운 <tr> 요소를 테이블에 추가
-  var tableBody = document.getElementById('tableBody');
-  tableBody.appendChild(newRow);
-} */
-
-
-/*  window.onload = function() {
-    var foodNameInput = document.getElementById("dietFoodName");
-    
-    // foodName 값이 null이면 value를 빈 문자열로 설정
-    if (foodNameInput.value === "null") {
-      foodNameInput.value = "";
-    }
-  }*/
- 
-// 이벤트가 발생했을 때 실행되는 함수
-/*function changeWidth() {
-	console.log('아~~!');
-  var myDiv = document.getElementById("kcalGraph");
-  let a = 20;
-  let b = 10;
-  
-  myDiv.style.width = (a + b) + "%"; // 너비 값을 변경
-}*/
-
-
-//단일 음식 그래프 변화 함수 (완성)
-/*
-$(document).ready(function() {
-		console.log('아~~!');
-	  var dietKcal = document.getElementById("dietKcal").value;
-	  var dietCarbs = document.getElementById("dietCarbs").value;
-	  var dietProtein = document.getElementById("dietProtein").value;
-	  var dietFat = document.getElementById("dietFat").value;
-	    console.log(dietKcal);
-	    console.log(dietKcal);
-	    console.log(dietKcal);
-	    console.log(dietKcal);
-	  
-	  var kcalGraph = document.getElementById("kcalGraph");
-	  var carbsGraph = document.getElementById("carbsGraph");
-	  var fatGraph = document.getElementById("fatGraph");
-	  var proteinGraph = document.getElementById("proteinGraph");
-	  
-	  kcalGraph.style.width = dietKcal + "%";// 너비 값을 변경
-	  carbsGraph.style.width = dietCarbs + "%";// 너비 값을 변경
-	  fatGraph.style.width = dietProtein + "%";// 너비 값을 변경
-	  proteinGraph.style.width = dietFat + "%";// 너비 값을 변경
-	  
- });*/
-
-//그래프 이동 배열형태 (완성)
-
-$(document).ready(function() {
-	var kcalElements = document.getElementsByClassName("kcals");
-	var carbsElements = document.getElementsByClassName("carbs");
-	var proteinElements = document.getElementsByClassName("proteins");
-	var fatElements = document.getElementsByClassName("fats");
-	
-	var dietKcals = [];
-	var dietCarbs = [];
-	var dietProteins = [];
-	var dietFats = [];
-	
-	// 각 태그의 값을 배열에 저장
-	for (var i = 0; i < kcalElements.length; i++) {
-	  var kcalValue = kcalElements[i].querySelector("input[name='dietKcal']").value;
-	  var carbsValue = carbsElements[i].querySelector("input[name='dietCarbs']").value;
-	  var proteinValue = proteinElements[i].querySelector("input[name='dietProtein']").value;
-	  var fatValue = fatElements[i].querySelector("input[name='dietFat']").value;
-	  
-	  dietKcals.push(kcalValue);
-	  dietCarbs.push(carbsValue);
-	  dietProteins.push(proteinValue);
-	  dietFats.push(fatValue);
-	}
-
-	console.log(dietKcals);     // ["100", "200", "300"]
-	console.log(dietCarbs);    // ["50", "60", "70"]
-	console.log(dietProteins); // ["20", "30", "40"]
-	console.log(dietFats);     // ["10", "15", "20"]
-	  
-	var kcalSum = 0;
-	var carbsSum  = 0;
-	var proteinSum  = 0;
-	var fatSum  = 0;
-	
-	for (var i = 0; i < dietKcals.length; i++) {
-	  kcalSum += Number(dietKcals[i]);
-	  carbsSum += Number(dietCarbs[i]);
-	  proteinSum += Number(dietProteins[i]);
-	  fatSum += Number(dietFats[i]);
-	}
-	
-	
-	var kcalGraph = document.getElementById("kcalGraph");
-	var carbsGraph = document.getElementById("carbsGraph");
-	var fatGraph = document.getElementById("fatGraph");
-	var proteinGraph = document.getElementById("proteinGraph");
-	
-	kcalGraph.style.width = kcalSum + "%";// 너비 값을 변경
-	carbsGraph.style.width = carbsSum + "%";// 너비 값을 변경
-	fatGraph.style.width = proteinSum + "%";// 너비 값을 변경
-	proteinGraph.style.width = fatSum + "%";// 너비 값을 변경
-	
-	// 날짜와 시간 input 요소에 값 설정
-	//document.getElementById('dietWriteDate').value = dietWriteDate;
-	//document.getElementById('dietWriteTime').value = dietWriteTime;
- });
- 
-//단일값 음식 저장 형태 완료 
-
-function foodPlus() {
-    var userFoodName = document.getElementsByName("dietFoodName")[0].value;
-    var kcal = document.getElementsByName("dietKcal")[0].value;
-    var carbs = document.getElementsByName("dietCarbs")[0].value;
-    var protein = document.getElementsByName("dietProtein")[0].value;
-    var fat = document.getElementsByName("dietFat")[0].value;
-    var userFoodTime = document.getElementById("userFoodTime").value;
-    var userFoodDate = document.getElementById("userFoodDate").value;
-    console.log(userFoodTime);
-    console.log(userFoodDate );
-    console.log(carbs);
-    // Assign values to the VO object's properties
-    var vo = {
-      userFoodName: userFoodName,
-      userKcal: parseFloat(kcal),
-      userCarbs: parseFloat(carbs),
-      userProtein: parseFloat(protein),
-      userFat: parseFloat(fat),
-      userFoodTime: userFoodTime
-    };
-    
-    // Redirect to foodWriteInsert.jsp with query parameters
-   var url = 'foodWriteInsert.jsp' +
-      '?userFoodName=' + encodeURIComponent(userFoodName) +
-      '&userKcal=' + encodeURIComponent(kcal) +
-      '&userCarbs=' + encodeURIComponent(carbs) +
-      '&userProtein=' + encodeURIComponent(protein) +
-      '&userFat=' + encodeURIComponent(fat) +
-      '&userFoodTime=' + encodeURIComponent(userFoodTime) +
-      '&userFoodDate=' + encodeURIComponent(userFoodDate);
-    location.href = url;
-  }
- 
- /*
-function foodPlus(index) {
-    var userFoodName = document.getElementsByName("dietFoodName")[index].value;
-    var kcal = document.getElementsByName("dietKcal")[index].value;
-    var carbs = document.getElementsByName("dietCarbs")[index].value;
-    var protein = document.getElementsByName("dietProtein")[index].value;
-    var fat = document.getElementsByName("dietFat")[index].value;
-    var userFoodTime = document.getElementById("dietWriteTime").value;
-    var userFoodDate = document.getElementById("dietWriteDate").value;
-    
-    // 나머지 코드 생략
-      for (var i = 0; i < userFoodNames.length; i++) {
-        var userFoodName = userFoodNames[i].value;
-        var kcal = kcals[i].value;
-        var carb = carbs[i].value;
-        var protein = proteins[i].value;
-        var fat = fats[i].value;
-        var userFoodTime = userFoodTimes[i].value; // 수정된 부분
-        var userFoodDate = userFoodDates[i].value; // 수정된 부분
-
-        // Assign values to the VO object's properties
-        var vo = {
-            userFoodName: userFoodName,
-            userKcal: parseFloat(kcal),
-            userCarbs: parseFloat(carb),
-            userProtein: parseFloat(protein),
-            userFat: parseFloat(fat),
-            userFoodTime: userFoodTime
-        };
-
-        // Redirect to foodWriteInsert.jsp with query parameters
-        var url = 'foodWriteInsert.jsp' +
-            '?userFoodName=' + encodeURIComponent(userFoodName) +
-            '&userKcal=' + encodeURIComponent(kcal) +
-            '&userCarbs=' + encodeURIComponent(carb) +
-            '&userProtein=' + encodeURIComponent(protein) +
-            '&userFat=' + encodeURIComponent(fat) +
-            '&userFoodTime=' + encodeURIComponent(userFoodTime) +
-            '&userFoodDate=' + encodeURIComponent(userFoodDate);
-        location.href = url;
-    }
-} */
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-/*function goFoodList() {
-  var userFoodTime = document.getElementById("dietWriteTime").value;
-  var userFoodDate = document.getElementById("dietWriteDate").value;
-	 var url = 'foodList.jsp?' +
- 	'&userFoodTime=' + encodeURIComponent(userFoodTime) +
-    '&userFoodDate=' + encodeURIComponent(userFoodDate);
-    location.href = url;
-} */
+   } else {
+      alert('입력한 정보를 확인해주세요')
+      $('#currentWeight').val('');
+      $('#currentWeight').focus();
+      $('#goalWeight').val('');
+      $('#age').val('');
+      $('#height').val('');
+   }
+}

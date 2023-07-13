@@ -1,4 +1,4 @@
-function setting(idx, mode, title, name, ccontent) {
+function setting(idx, mode, title, name, content) {
 	let frm = document.commentForm; // 댓글 폼을 저장한다.
 //	수정 또는 삭제할 댓글 번호를 넣어준다. 댓글 입력 작업시는 0을 넣어줄다.
 	frm.idx.value = idx;
@@ -24,10 +24,10 @@ function setting(idx, mode, title, name, ccontent) {
 //	위와 같이 코딩하면 최초의 <br/>만 \r\n으로 치환되고 나머지 <br/>은 그대로 출력된다.
 
 //	인수로 넘어온 데이터에서 더 이상 <br/>이 없을때까지 반복하며 \r\n으로 치환한다.
-	while (ccontent.indexOf('<br/>') != -1) {
-		ccontent = ccontent.replace('<br/>', '\r\n');
+	while (content.indexOf('<br/>') != -1) {
+		content = content.replace('<br/>', '\r\n');
 	}
-	frm.ccontent.value = ccontent;
+	frm.content.value = content;
 }
 
 
