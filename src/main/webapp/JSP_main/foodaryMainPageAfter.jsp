@@ -50,8 +50,12 @@
 		<div style="width: 100%; height: auto; margin-top: 20px;" align="center">
 			<div style="height: 180px;">
 				<div style="display: inline-block; background-image:url('./images/clipMemo.png'); background-repeat:no-repeat; width: 200px; padding-top: 30px;">
+<<<<<<< HEAD
 					<a href="/foodary_final/JSP_food/selectDate.jsp"
 						style=" color: black; font-size: 40pt; cursor: pointer; text-decoration: none;">
+=======
+					<a href="#" style=" color: black; font-size: 40pt; cursor: pointer; text-decoration: none;" onclick="location.href='/foodary_final/JSP_food/selectDate.jsp'">
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 						식단 쓰기
 					</a>
 				</div>

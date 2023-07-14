@@ -37,15 +37,23 @@
    dietvo.setDietWriteTime(dietWriteTime);
    
  
+<<<<<<< HEAD
  	 out.println("<script>");
+=======
+ 	out.println("<script>");
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
    // diet 테이블에서 idx를 이용하여 수정하기
    DietService.getInstance().UpdateDiet(dietvo);
 	out.println(dietWriteDate);
     out.println("alert('수정 완료!')");
    out.println("location.href='/foodary_final/JSP_diet/dietList.jsp?dietWriteDate="+ dietWriteDate + "'");
+<<<<<<< HEAD
    out.println("</script>");  
    
    
+=======
+   out.println("</script>"); 
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
  %>
 
 </body>

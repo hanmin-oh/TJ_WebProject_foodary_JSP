@@ -61,12 +61,17 @@
           proteins = (String[]) session.getAttribute("proteins");
           fats = (String[]) session.getAttribute("fats");
           
+<<<<<<< HEAD
          request.setAttribute("foodNames", foodNames);
+=======
+          request.setAttribute("foodNames", foodNames);
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
          request.setAttribute("kcals", kcals);
          request.setAttribute("carbs", carbs);
          request.setAttribute("proteins", proteins);
          request.setAttribute("fats", fats);
       }
+<<<<<<< HEAD
       String userFoodDate = request.getParameter("userFoodDate");
       String userFoodTime = request.getParameter("userFoodTime");
       request.setAttribute("userFoodDate", userFoodDate);
@@ -78,6 +83,13 @@
        session.setAttribute("userFoodTime", userFoodTime); 
    
    } */
+=======
+   
+      String userFoodDate = request.getParameter("userFoodDate");
+      String userFoodTime = request.getParameter("userFoodTime");
+       request.setAttribute("userFoodDate", userFoodDate);
+       request.setAttribute("userFoodTime", userFoodTime); 
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 %>
 <div class="main" style="text-align: center;" align="center">
 <input id="id" type="hidden" name="id" value="${rvo.id}"/>
@@ -181,7 +193,11 @@
             </td>
            <td align="center">
          <button type="button" onclick="foodPlus(<c:out value='${index}'/>)" style="border: 0; font-size: 25pt; background: 0;">
+<<<<<<< HEAD
              <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">추가</span>
+=======
+            <span style="background: lavender; font-size: 35px; font-weight: 900;">추가</span>
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
          </button> 
          </td>
          </tr>
@@ -202,45 +218,73 @@
        <c:forEach var="uvo" items="${list}" varStatus="status">
          <tr>
            <td>
+<<<<<<< HEAD
              <input type="text" id="userFoodName_${status.index}" name="userFoodName_${status.index}" value="${uvo.userFoodName}"
              	style="border: 1; font-size: 25pt; width: 200px; font-weight: 900; height: 45px;"/>   
+=======
+             <input type="text" id="userFoodName_${status.index}" name="userFoodName_${status.index}" value="${uvo.userFoodName}" style="border: 0; font-size: 25pt; width: 200px; font-weight: 900;"/>   
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
            </td>
            <td>
                <span style="background: lavender; font-size: 25pt;">칼로리:</span>
            </td>
            <td class="kcals" id="kcal">
+<<<<<<< HEAD
              <input type="text" id="userKcal_${status.index}" name="userKcal_${status.index}" value="${uvo.userKcal}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> kcal      
+=======
+             <input type="text" id="userKcal_${status.index}" name="userKcal_${status.index}" value="${uvo.userKcal}" style="border: 0; font-size: 25pt; width: 80px;"/> kcal      
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
            </td>
            <td>
                 <span style="background: lavender; font-size: 25pt;">탄수화물:</span>
            </td>
            <td class="carbs">
+<<<<<<< HEAD
              <input type="text" id="userCarbs_${status.index}" name="userCarbs_${status.index}" value="${uvo.userCarbs}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> g      
+=======
+             <input type="text" id="userCarbs_${status.index}" name="userCarbs_${status.index}" value="${uvo.userCarbs}" style="border: 0; font-size: 25pt; width: 80px;"/> g      
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
            </td>
            <td>
             <span style="background: lavender; font-size: 25pt;">단백질:</span>
            </td>
            <td class="proteins">
+<<<<<<< HEAD
              <input type="text" id="userProtein_${status.index}" name="userProtein_${status.index}" value="${uvo.userProtein}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> g      
+=======
+             <input type="text" id="userProtein_${status.index}" name="userProtein_${status.index}" value="${uvo.userProtein}" style="border: 0; font-size: 25pt; width: 80px;"/> g      
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
            </td>
            <td>
               <span style="background: lavender; font-size: 25pt;">지방:</span>
            </td>
            <td class="fats">
+<<<<<<< HEAD
              <input type="text" id="userFat_${status.index}" name="userFat_${status.index}" value="${uvo.userFat}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> g    
            </td>
            <td align="center">
              <button type="button" onclick="updateUserFood(${uvo.idx}, ${status.index})" style="border: 0; font-size: 25pt; background: 0;">
                  <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">수정</span>
+=======
+             <input type="text" id="userFat_${status.index}" name="userFat_${status.index}" value="${uvo.userFat}" style="border: 0; font-size: 25pt; width: 80px;"/> g    
+           </td>
+           <td align="center">
+             <button type="button" onclick="updateUserFood(${uvo.idx}, ${status.index})" style="border: 0; font-size: 25pt; background: 0;">
+                <span style="background: lavender; font-size: 35px; font-weight: 900;">수정</span>
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
              </button>
              &nbsp;
              <button type="button" onclick="location.href='deleteFood.jsp?idx=${uvo.idx}&userFoodDate=${userFoodDate}&userFoodTime=${userFoodTime}'"
                 style="border: 0; font-size: 25pt; background: 0;">
+<<<<<<< HEAD
                <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">삭제</span>
+=======
+              <span style="background: lavender; font-size: 35px; font-weight: 900;">삭제</span>
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
            </button>
            </td>
          </tr>
@@ -249,17 +293,29 @@
    </table>
        <table width="1400" align="center" border="0" cellpadding="10" cellspacing="10">
       <!-- 4 -->
+<<<<<<< HEAD
      <tr style="height: 50px;"></tr>
       <tr>
          <td colspan="2" class="text-center">
             <span style="background: lavender; font-size: 30pt;">메모</span>
+=======
+      <tr>
+         <td colspan="2" class="text-center">
+            <label for="memo">메모</label>
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
          </td>
          <td colspan="12">
             <textarea 
                id="memo"
+<<<<<<< HEAD
                rows="5" 
                name="dietMemo" 
                style="resize: none; width: 80%; height: 75%; vertical-align: middle; padding: 10px;"
+=======
+               rows="10" 
+               name="dietMemo" 
+               style="resize: none; width: 97%; height: 75%; vertical-align: middle;"
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
                ></textarea>
          </td>
       </tr>
@@ -280,10 +336,16 @@
    </div>
       <div align="center" style="text-align: center;">
           <table width="1400" align="center" border="0" cellpadding="10" cellspacing="10">
+<<<<<<< HEAD
           <tr style="height: 30px;"></tr>
            <tr>
               <td style="height: 40px; text-align: left;">
                  <span style="background: lavender; font-size: 25pt; margin-left: 300px;"><칼로리></span>
+=======
+           <tr>
+              <td style="height: 40px;">
+                 <칼로리> 
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
                  <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                    <div id="kcalGraph" class="progress-bar" role="progressbar" 
                    aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
@@ -292,6 +354,7 @@
                </td>   
             </tr>
            <!-- 7 -->
+<<<<<<< HEAD
            <tr style="height: 30px;"></tr>
             <tr>
              <td style="height: 40px; text-align: left;">
@@ -299,10 +362,20 @@
                 <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                   <div id="carbsGraph" class="progress-bar progress-bar-info" role="progressbar" 
                      aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
+=======
+            <tr>
+             <td>
+                <탄수화물>
+                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
+                  <div id="carbsGraph" class="progress-bar progress-bar-info" role="progressbar" 
+                     aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
+                     
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
                   </div>
                 </div>
              </td>
             </tr>
+<<<<<<< HEAD
             <tr style="height: 30px;"></tr>
             <tr>
              <td style="height: 40px; text-align: left;">
@@ -321,17 +394,44 @@
                 <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                      <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar"
                         aria-valuemin="0" style="width:0%; height: 40px; background: #8800ff;">
+=======
+            <tr>
+             <td>
+                  <단백질>
+                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">   
+                     <div id="proteinGraph" class="progress-bar progress-bar-info" role="progressbar"
+                        aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
+                        
+                     </div>
+                </div>
+             </td>
+            </tr> 
+            <tr>
+             <td>
+                   <지방> 
+                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
+                     <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar"
+                        aria-valuemin="0" style="width:0%; height: 40px; background: #8800ff;">
+                        
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
                      </div>
                 </div>
              </td>   
           </tr>
           <!-- 8 -->
+<<<<<<< HEAD
           <tr style="height: 50px;"></tr>
           <tr>
              <td class="text-center">
                 <button type="submit" style="background: none; border: 0; cursor: pointer;">
                 	 <span style="background: #fafcd9; font-size: 30pt; font-weight: 900;">저장 하기</span>
                 </button>
+=======
+          <tr>
+             <td class="text-center">
+                <input type="button" value="식단보기" onclick="location.href='/foodary_final/JSP_diet/dietList.jsp'"/>
+                <input type="submit" value="저장"/>
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
              </td>
           </tr>
          </table>

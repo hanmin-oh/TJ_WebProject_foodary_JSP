@@ -24,12 +24,15 @@
 	int idx = Integer.parseInt(request.getParameter("idx"));
 	UserFoodService.getInstance().deleteUserFoodList(idx);
 	
+<<<<<<< HEAD
 /* 	String userFoodDate = request.getParameter("userFoodDate");
 	String userFoodTime = request.getParameter("userFoodTime");
 	// 가져온 값을 세션에 저장
 	session.setAttribute("userFoodDate", userFoodDate);
 	session.setAttribute("userFoodTime", userFoodTime); */
 	
+=======
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
 	session.setAttribute("userFoodList", userFoodList);
 	response.sendRedirect("foodWrite.jsp");

@@ -39,7 +39,11 @@
    DietService.getInstance().deleteDietList(idx);
    // userfood 테이블에서 날짜, 시간을 통해 삭제하기
    UserFoodService.getInstance().deleteUser(uvo);
+<<<<<<< HEAD
    out.println("alert('삭제 완료!')");
+=======
+   out.println("alert('삭제 갈김')");
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
    // 데이터가 아무것도 없으면 dietWriteDate에 null 값이 넘어감(수정 필요!)
    out.println("location.href='/foodary_final/JSP_diet/dietList.jsp?dietWriteDate="+ dietWriteDate + "'");
    out.println("</script>"); 

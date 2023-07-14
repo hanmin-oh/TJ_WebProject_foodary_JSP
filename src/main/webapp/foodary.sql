@@ -60,6 +60,10 @@ delete from FREEBOARDCOMMENT;
 drop sequence FREEBOARDCOMMENT_idx_seq;
 create sequence FREEBOARDCOMMENT_idx_seq;
 
+<<<<<<< HEAD
+=======
+select * from diet;
+>>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 
 CREATE TABLE "USERFOOD" 
    (   "IDX" NUMBER(*,0) NOT NULL , 
