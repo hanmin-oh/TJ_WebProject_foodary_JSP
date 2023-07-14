@@ -55,8 +55,7 @@
 	out.println(uvo.getUserFoodName());
 	UserFoodService.getInstance().insertFood(uvo);
 	UserFoodList userFoodList = UserFoodService.getInstance().userSelectList(uvo);
-	/* session.setAttribute("userFoodDate", userFoodDate);
-	session.setAttribute("userFoodTime", userFoodTime); */
+	session.setAttribute("userFoodTime", userFoodTime); 
 	session.setAttribute("userFoodList", userFoodList);
 	response.sendRedirect("foodWrite.jsp");
 %>

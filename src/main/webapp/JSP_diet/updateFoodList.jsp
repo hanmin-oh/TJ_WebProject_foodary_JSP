@@ -43,8 +43,10 @@
 	int currentPage = 1;
    	String userFoodDate = request.getParameter("userFoodDate");
   	String userFoodTime = request.getParameter("userFoodTime");
-	  session.setAttribute("userFoodDate", userFoodDate);
-	  session.setAttribute("userFoodTime", userFoodTime);
+	session.setAttribute("userFoodDate", userFoodDate);
+	session.setAttribute("userFoodTime", userFoodTime);
+	request.setAttribute("userFoodDate", userFoodDate);
+	request.setAttribute("userFoodTime", userFoodTime);
 	try {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	} catch (NumberFormatException e) {
@@ -61,6 +63,8 @@
 	    session.setAttribute("foodName" , foodName);
 	  } else {
 		  foodName = (String) session.getAttribute("foodName");
+		  request.setAttribute("userFoodDate", userFoodDate);
+	  		request.setAttribute("userFoodTime", userFoodTime);
 	  }
 	  if(list != null) {
 		  foodName = null;
@@ -73,16 +77,14 @@
 	  if(foodName == null || foodName.trim().length() == 0) { //검색어가 넘어왔는가?
 //	    검색어가 입력되지 않은 경우
 	    foodList = service.selectList(currentPage);
+	    request.setAttribute("userFoodDate", userFoodDate);
+  		request.setAttribute("userFoodTime", userFoodTime);
 	  } else {
 //	    검색어가 입력되고 카테고리가 "내용"인 경우
 	    foodList = service.selectListFood(currentPage , foodName);
+	    request.setAttribute("userFoodDate", userFoodDate);
+  		request.setAttribute("userFoodTime", userFoodTime);
 	  }	  
-	  
-	//foodWrite.jsp에서 날짜와 시간을 띄우기 위해 세션에 값을 저장한다. 
-/* 	String dietWriteDate = request.getParameter("userFoodDate");
-  	String dietWriteTime = request.getParameter("userFoodTime");
-	  request.setAttribute("userFoodDate", dietWriteDate);
-	  request.setAttribute("userFoodTime", dietWriteTime); */
 
 	request.setAttribute("foodList", foodList);
 	request.setAttribute("currentPage", currentPage);

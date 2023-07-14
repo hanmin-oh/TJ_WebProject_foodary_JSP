@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>식단 보기</title>
+<title>푸드어리 보기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./css/threeGrid.css"/>
 </head>
@@ -20,7 +20,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-   		<span style="background: #fafcd9; font-size: 35pt; font-weight: 900;">식단 보기</span>
+   		<span style="background: #fafcd9; font-size: 35pt; font-weight: 900;">푸드어리 보기</span>
 		<div class="diet">
 			<form action="dietUpdateOK.jsp" method="post">
 			<c:set var="list" value="${userFoodList.list}"/>
@@ -94,7 +94,7 @@
 			            </button>&nbsp;&nbsp;
 			         <button
 			            type="button" 
-			            onclick="location.href='main.jsp'" 
+			            onclick="location.href='dietListView.jsp?dietWriteDate=${list[0].dietWriteDate}'" 
 			             style="background: none; border: 0; cursor: pointer;">
 			            <span style="background: #baffda; font-size: 25pt; font-weight: 900;">목록보기</span>
 			            </button>&nbsp;&nbsp;

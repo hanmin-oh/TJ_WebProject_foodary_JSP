@@ -23,11 +23,10 @@
 		<%
 			String userFoodDate = request.getParameter("userFoodDate");
 			String userFoodTime = request.getParameter("userFoodTime");
-			
-			// 가져온 값을 세션에 저장
 			session.setAttribute("userFoodDate", userFoodDate);
 			session.setAttribute("userFoodTime", userFoodTime);
-			  
+			request.setAttribute("userFoodDate", userFoodDate);
+	  		request.setAttribute("userFoodTime", userFoodTime);
 		%>
 		
 		<div class="dietContent_title">
@@ -158,7 +157,7 @@
 								<button 
 									type='button' 
 									title="${i}페이지로 이동합니다."
-									onclick="location.href='?currentPage=${i}'"
+									onclick="location.href='?currentPage=${i}&userFoodDate=${userFoodDate}&userFoodTime=${userFoodTime}'"
 									style="background: none; border: 0; cursor: pointer;"
 								>
 									<span style="background: lavender; font-size: 25pt;">${i}</span>

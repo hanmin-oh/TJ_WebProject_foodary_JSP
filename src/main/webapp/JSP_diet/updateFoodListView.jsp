@@ -20,14 +20,16 @@
    </div>
   	<div class="main" align="center">
 <%
-request.setCharacterEncoding("UTF-8");
-
-String userFoodDate = request.getParameter("userFoodDate");
-String userFoodTime = request.getParameter("userFoodTime");
-
-// 가져온 값을 세션에 저장
-session.setAttribute("userFoodDate", userFoodDate);
-session.setAttribute("userFoodTime", userFoodTime);
+		request.setCharacterEncoding("UTF-8");
+		
+		String userFoodDate = request.getParameter("userFoodDate");
+		String userFoodTime = request.getParameter("userFoodTime");
+		
+		// 가져온 값을 세션에 저장
+		session.setAttribute("userFoodDate", userFoodDate);
+		session.setAttribute("userFoodTime", userFoodTime);
+		request.setAttribute("userFoodDate", userFoodDate);
+		request.setAttribute("userFoodTime", userFoodTime);
 %>
 
 		<div class="dietContent_title">
@@ -36,6 +38,8 @@ session.setAttribute("userFoodTime", userFoodTime);
 		   <br/>
 		   <!-- 4 -->
 		<form id="myForm" action="updateFoodList.jsp" method="POST">
+				<input type="hidden" id="userFoodDate" name="userFoodDate" value="${userFoodDate}" />
+		<input type="hidden" id="userFoodTime" name="userFoodTime" value="${userFoodTime}" />
 		   <table  width="1000" align="center" border="1" cellpadding="7" cellspacing="0">
 				<thead>
 				   <tr style="height: 60px;">
@@ -155,7 +159,7 @@ session.setAttribute("userFoodTime", userFoodTime);
 								<button 
 									type='button' 
 									title="${i}페이지로 이동합니다."
-									onclick="location.href='?currentPage=${i}'"
+									onclick="location.href='?currentPage=${i}&userFoodDate=${userFoodDate}&userFoodTime=${userFoodTime}'"
 									style="background: none; border: 0; cursor: pointer;"
 								>
 									<span style="background: lavender; font-size: 25pt;">${i}</span>

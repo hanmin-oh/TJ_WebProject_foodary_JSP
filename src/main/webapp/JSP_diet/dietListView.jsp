@@ -216,11 +216,6 @@
 		         <input type="hidden" name="dietWriteDate" value="${uvo.userFoodDate}" />
 		         <input type="hidden" name="dietWriteTime" value="${uvo.userFoodTime}" />
 		         </table><br/> 
-		         <div align="right">
-				      <button type="submit" style="background: none; border: 0; cursor: pointer; text-align: right;">
-				      	<span style="background: lavender; font-size: 27pt; font-weight: 900;">식단 보기</span>
-				      </button>
-			      </div>
 		      </div>
 		   </form>
 		</div>

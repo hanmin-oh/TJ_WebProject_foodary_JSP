@@ -274,7 +274,7 @@
 	               rows="5" 
 	               name="dietMemo" 
 	               style="resize: none; width: 80%; height: 75%; vertical-align: middle; padding: 10px;"
-	               ></textarea>
+	               >${list[0].dietMemo}</textarea>
 	         </td>
 		   </tr>
 		   <!-- 5 사진 기능 추후 추가-->
@@ -348,7 +348,7 @@
                 	 <span style="background: #fafcd9; font-size: 27pt; font-weight: 900;">수정하기</span>
                	 </button>
                	 &nbsp; &nbsp;
-		          <button type="submit" style="background: none; border: 0; cursor: pointer;" onclick="location.href='/foodary/JSP_diet/dietList.jsp'">
+		          <button type="button" style="background: none; border: 0; cursor: pointer;" onclick="location.href='dietList.jsp?dietWriteDate=${userFoodDate}'">
                 	 <span style="background: #fafcd9; font-size: 27pt; font-weight: 900;">돌아가기</span>
                 </button>
 		       </td>
