@@ -56,11 +56,7 @@ function updateUserFood(idx , index) {
 
  function showNutrient() {
 	 
-<<<<<<< HEAD
    var kcalElements = document.getElementsByClassName("kcals");
-=======
-	var kcalElements = document.getElementsByClassName("kcals");
->>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
    var carbsElements = document.getElementsByClassName("carbs");
    var proteinElements = document.getElementsByClassName("proteins");
    var fatElements = document.getElementsByClassName("fats");

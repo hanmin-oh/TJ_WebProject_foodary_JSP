@@ -32,17 +32,14 @@ function addData() {
              '&fat=' + encodeURIComponent(fats[i]) + 
              '&';
     }
-<<<<<<< HEAD
    // var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
 	//var userFoodTime = getParameterByName('userFoodTime'); // URL에서 userFoodTime 값을 가져오는 함수 호출
 	var userFoodDate = document.getElementById("userFoodDate").value;
     var userFoodTime = document.getElementById("userFoodTime").value;
 	console.log(userFoodDate + userFoodTime);
-=======
    var userFoodDate = getParameterByName('userFoodDate'); // URL에서 userFoodDate 값을 가져오는 함수 호출
 	var userFoodTime = getParameterByName('userFoodTime'); // URL에서 userFoodTime 값을 가져오는 함수 호출
 	
->>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 	//url += 'userFoodDate=' + encodeURIComponent(userFoodDate.replace(/%20/g, ''));
 	url += 'userFoodDate=' + encodeURIComponent(userFoodDate);
 	url += '&userFoodTime=' + encodeURIComponent(userFoodTime);
