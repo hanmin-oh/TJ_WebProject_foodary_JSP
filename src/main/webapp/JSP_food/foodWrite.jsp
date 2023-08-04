@@ -176,7 +176,6 @@
            <td align="center">
          <button type="button" onclick="foodPlus(<c:out value='${index}'/>)" style="border: 0; font-size: 25pt; background: 0;">
              <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">추가</span>
-            <span style="background: lavender; font-size: 35px; font-weight: 900;">추가</span>
          </button> 
          </td>
          </tr>
@@ -199,7 +198,6 @@
            <td>
              <input type="text" id="userFoodName_${status.index}" name="userFoodName_${status.index}" value="${uvo.userFoodName}"
              	style="border: 1; font-size: 25pt; width: 200px; font-weight: 900; height: 45px;"/>   
-             <input type="text" id="userFoodName_${status.index}" name="userFoodName_${status.index}" value="${uvo.userFoodName}" style="border: 0; font-size: 25pt; width: 200px; font-weight: 900;"/>   
            </td>
            <td>
                <span style="background: lavender; font-size: 25pt;">칼로리:</span>
@@ -207,7 +205,6 @@
            <td class="kcals" id="kcal">
              <input type="text" id="userKcal_${status.index}" name="userKcal_${status.index}" value="${uvo.userKcal}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> kcal      
-             <input type="text" id="userKcal_${status.index}" name="userKcal_${status.index}" value="${uvo.userKcal}" style="border: 0; font-size: 25pt; width: 80px;"/> kcal      
            </td>
            <td>
                 <span style="background: lavender; font-size: 25pt;">탄수화물:</span>
@@ -215,7 +212,6 @@
            <td class="carbs">
              <input type="text" id="userCarbs_${status.index}" name="userCarbs_${status.index}" value="${uvo.userCarbs}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> g      
-             <input type="text" id="userCarbs_${status.index}" name="userCarbs_${status.index}" value="${uvo.userCarbs}" style="border: 0; font-size: 25pt; width: 80px;"/> g      
            </td>
            <td>
             <span style="background: lavender; font-size: 25pt;">단백질:</span>
@@ -223,7 +219,6 @@
            <td class="proteins">
              <input type="text" id="userProtein_${status.index}" name="userProtein_${status.index}" value="${uvo.userProtein}"
              	style="border: 1; font-size: 25pt; width: 80px; height: 45px;"/> g      
-             <input type="text" id="userProtein_${status.index}" name="userProtein_${status.index}" value="${uvo.userProtein}" style="border: 0; font-size: 25pt; width: 80px;"/> g      
            </td>
            <td>
               <span style="background: lavender; font-size: 25pt;">지방:</span>
@@ -234,18 +229,12 @@
            </td>
            <td align="center">
              <button type="button" onclick="updateUserFood(${uvo.idx}, ${status.index})" style="border: 0; font-size: 25pt; background: 0;">
-                 <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">수정</span>
-             <input type="text" id="userFat_${status.index}" name="userFat_${status.index}" value="${uvo.userFat}" style="border: 0; font-size: 25pt; width: 80px;"/> g    
-           </td>
-           <td align="center">
-             <button type="button" onclick="updateUserFood(${uvo.idx}, ${status.index})" style="border: 0; font-size: 25pt; background: 0;">
                 <span style="background: lavender; font-size: 35px; font-weight: 900;">수정</span>
              </button>
              &nbsp;
              <button type="button" onclick="location.href='deleteFood.jsp?idx=${uvo.idx}&userFoodDate=${userFoodDate}&userFoodTime=${userFoodTime}'"
                 style="border: 0; font-size: 25pt; background: 0;">
                <span style="background: #fafcd9; font-size: 25pt; font-weight: 900;">삭제</span>
-              <span style="background: lavender; font-size: 35px; font-weight: 900;">삭제</span>
            </button>
            </td>
          </tr>
@@ -259,9 +248,6 @@
          <td colspan="2" class="text-center">
             <span style="background: lavender; font-size: 30pt;">메모</span>
       <tr>
-         <td colspan="2" class="text-center">
-            <label for="memo">메모</label>
-         </td>
          <td colspan="12">
             <textarea 
                id="memo"
@@ -287,17 +273,14 @@
          </td>
       </tr>
        </table>
-       <!-- 6 -->
    </div>
-      <div align="center" style="text-align: center;">
-          <table width="1400" align="center" border="0" cellpadding="10" cellspacing="10">
-          <tr style="height: 30px;"></tr>
-           <tr>
-              <td style="height: 40px; text-align: left;">
+       <!-- 6 -->
+        <!-- 6 -->
+		    <table width="1400" align="center" border="0" cellpadding="10" cellspacing="10">
+		    <tr style="height: 30px;"></tr>
+		     <tr>
+		        <td style="height: 40px; text-align: left;">
                  <span style="background: lavender; font-size: 25pt; margin-left: 300px;"><칼로리></span>
-           <tr>
-              <td style="height: 40px;">
-                 <칼로리> 
                  <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                    <div id="kcalGraph" class="progress-bar" role="progressbar" 
                    aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
@@ -313,12 +296,6 @@
                 <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                   <div id="carbsGraph" class="progress-bar progress-bar-info" role="progressbar" 
                      aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
-            <tr>
-             <td>
-                <탄수화물>
-                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
-                  <div id="carbsGraph" class="progress-bar progress-bar-info" role="progressbar" 
-                     aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
                      
                   </div>
                 </div>
@@ -331,6 +308,7 @@
                 <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">   
                      <div id="proteinGraph" class="progress-bar progress-bar-info" role="progressbar"
                         aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
+                        
                      </div>
                 </div>
              </td>
@@ -342,45 +320,21 @@
                 <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
                      <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar"
                         aria-valuemin="0" style="width:0%; height: 40px; background: #8800ff;">
-            <tr>
-             <td>
-                  <단백질>
-                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">   
-                     <div id="proteinGraph" class="progress-bar progress-bar-info" role="progressbar"
-                        aria-valuemin="0" style="width:0%; height: 40px; font-size: 18pt; background: #8800ff;">
-                        
                      </div>
                 </div>
              </td>
-            </tr> 
-            <tr>
-             <td>
-                   <지방> 
-                <div class="progress" style="height: 40px; width: 800px; margin-left: auto; margin-right: auto;">
-                     <div id="fatGraph" class="progress-bar progress-bar-info" role="progressbar"
-                        aria-valuemin="0" style="width:0%; height: 40px; background: #8800ff;">
-                        
-                     </div>
-                </div>
-             </td>   
-          </tr>
+		    </tr>
           <!-- 8 -->
-          <tr style="height: 50px;"></tr>
           <tr>
              <td class="text-center">
                 <button type="submit" style="background: none; border: 0; cursor: pointer;">
                 	 <span style="background: #fafcd9; font-size: 30pt; font-weight: 900;">저장 하기</span>
                 </button>
-          <tr>
-             <td class="text-center">
-                <input type="button" value="식단보기" onclick="location.href='/foodary_final/JSP_diet/dietList.jsp'"/>
-                <input type="submit" value="저장"/>
              </td>
           </tr>
-         </table>
-      </div>
+     	</table>
       </form>
-      </div>
+</div>
    <div class="footer">
       <jsp:include page="./footerAfter.jsp"></jsp:include>
    </div>

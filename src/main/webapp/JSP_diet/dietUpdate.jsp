@@ -288,8 +288,8 @@
 		      </td>
 		   </tr>
 		    </table>
-		    <!-- 6 -->
 		</div>
+		    <!-- 6 -->
 		    <table width="1400" align="center" border="0" cellpadding="10" cellspacing="10">
 		    <tr style="height: 30px;"></tr>
 		     <tr>

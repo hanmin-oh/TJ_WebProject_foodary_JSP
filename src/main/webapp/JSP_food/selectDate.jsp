@@ -11,7 +11,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
 <%
 	session.removeAttribute("foodName");
 	session.removeAttribute("kcal");
@@ -20,8 +19,6 @@
 	session.removeAttribute("fat");
 	session.removeAttribute("userFoodList");
 %>
-=======
->>>>>>> 380c6b0f1cd91977b12ce67469aa21c6e4e491db
 <div class="container">
    <div class="header">
       <jsp:include page="./headerAfter.jsp"></jsp:include>
